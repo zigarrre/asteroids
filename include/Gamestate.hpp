@@ -7,7 +7,7 @@ class Gamestate {
     public:
         Gamestate() {}
         virtual ~Gamestate() {}
-        int void update(float deltaTime) = 0;
+        virtual int update(float deltaTime) = 0;
         virtual void draw(sf::RenderTarget& renderTarget) = 0;
     protected:
     private:
