@@ -40,9 +40,9 @@
 		</Compiler>
 		<Unit filename="include/Game.hpp" />
 		<Unit filename="include/Gamestate.hpp" />
-		<Unit filename="include/SingleplayerGame.hpp" />
+		<Unit filename="include/Singleplayer.hpp" />
 		<Unit filename="src/Game.cpp" />
-		<Unit filename="src/SingleplayerGame.cpp" />
+		<Unit filename="src/Singleplayer.cpp" />
 		<Unit filename="src/main.cpp" />
 		<Extensions>
 			<code_completion />
