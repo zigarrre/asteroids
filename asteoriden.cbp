@@ -38,9 +38,11 @@
 			<Add option="-fexceptions" />
 			<Add directory="./" />
 		</Compiler>
+		<Unit filename="include/Entity.hpp" />
 		<Unit filename="include/Game.hpp" />
 		<Unit filename="include/Gamestate.hpp" />
 		<Unit filename="include/Singleplayer.hpp" />
+		<Unit filename="src/Entity.cpp" />
 		<Unit filename="src/Game.cpp" />
 		<Unit filename="src/Singleplayer.cpp" />
 		<Unit filename="src/main.cpp" />
