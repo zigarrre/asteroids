@@ -1,7 +1,7 @@
 #ifndef GAME_HPP
 #define GAME_HPP
 
-#include "../include/Gamestate.hpp"
+#include "include/Gamestate.hpp"
 #include <SFML/Graphics.hpp>
 #include <vector>
 #include <algorithm>
