@@ -2,15 +2,15 @@
 
 Spaceship::Spaceship(const sf::Input& input, const sf::Image& img, const sf::Vector2f& pos) :
     input(input),
-    accelerationToSet(20)
+    accelerationToSet(1)
 {
     this->SetImage(img);
     this->SetPosition(pos);
 }
 
 void Spaceship::update(float deltaTime) {
-    velocity[0] += acceleration[0];
-    velocity[1] += acceleration[1];
+    velocity[0] += acceleration[0]*deltaTime;
+    velocity[1] += acceleration[1]*deltaTime;
     if(input.IsKeyDown(sf::Key::Right)) {
         acceleration[0] = accelerationToSet;
     } else if(input.IsKeyDown(sf::Key::Left)) {
@@ -25,4 +25,5 @@ void Spaceship::update(float deltaTime) {
     } else {
         acceleration[1] = 0;
     }
+    this->Move(velocity[0], velocity[1]);
 }

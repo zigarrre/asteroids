@@ -43,10 +43,12 @@
 		<Unit filename="include/Gamestate.hpp" />
 		<Unit filename="include/Singleplayer.hpp" />
 		<Unit filename="include/Spaceship.hpp" />
+		<Unit filename="include/Vector.hpp" />
 		<Unit filename="src/Entity.cpp" />
 		<Unit filename="src/Game.cpp" />
 		<Unit filename="src/Singleplayer.cpp" />
 		<Unit filename="src/Spaceship.cpp" />
+		<Unit filename="src/Vector.cpp" />
 		<Unit filename="src/main.cpp" />
 		<Extensions>
 			<code_completion />
