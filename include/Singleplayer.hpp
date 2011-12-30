@@ -1,9 +1,9 @@
 #ifndef SINGLEPLAYERGAME_HPP
 #define SINGLEPLAYERGAME_HPP
 
-#include "include/Gamestate.hpp"
-#include "include/Entity.hpp"
-#include "include/Spaceship.hpp"
+#include "Gamestate.hpp"
+#include "Entity.hpp"
+#include "Spaceship.hpp"
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 

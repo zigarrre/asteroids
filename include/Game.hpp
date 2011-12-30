@@ -1,8 +1,8 @@
 #ifndef GAME_HPP
 #define GAME_HPP
 
-#include "include/Gamestate.hpp"
-#include "include/Singleplayer.hpp"
+#include "Gamestate.hpp"
+#include "Singleplayer.hpp"
 #include <SFML/Graphics.hpp>
 #include <vector>
 #include <algorithm>

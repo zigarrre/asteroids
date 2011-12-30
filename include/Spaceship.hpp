@@ -1,7 +1,7 @@
 #ifndef SPACESHIP_HPP
 #define SPACESHIP_HPP
 
-#include "include/Entity.hpp"
+#include "Entity.hpp"
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 #include <vector>

@@ -1,4 +1,4 @@
-#include "include/Singleplayer.hpp"
+#include "Singleplayer.hpp"
 
 Singleplayer::Singleplayer(sf::RenderWindow& renderWindow) :
     renderWindow(renderWindow)

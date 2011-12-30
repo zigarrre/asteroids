@@ -1,4 +1,4 @@
-#include "include/Spaceship.hpp"
+#include "Spaceship.hpp"
 
 Spaceship::Spaceship(const sf::Input& input, const sf::Image& img, const sf::Vector2f& pos) :
     input(input),
