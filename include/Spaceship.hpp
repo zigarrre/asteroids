@@ -6,16 +6,16 @@
 #include <SFML/System.hpp>
 #include <vector>
 
-
 class Spaceship : public Entity
 {
     public:
-        Spaceship(const sf::Input& input, const sf::Image& img, const sf::Vector2f& pos);
+        Spaceship(const sf::Texture& tex, const sf::Vector2f& pos);
         virtual void update(float deltaTime);
     protected:
     private:
-        const sf::Input& input;
         float accelerationToSet;
+		float rotationspeed;
+		const static float PI;
 };
 
 #endif // SPACESHIP_HPP

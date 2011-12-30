@@ -24,7 +24,7 @@ void Game::startGameLoop() {
 
     while(renderWindow.IsOpened()) {
 
-        frameTime = renderWindow.GetFrameTime();
+        frameTime = renderWindow.GetFrameTime()/1000.0f;
 
         // Update
         while(frameTime > 0.0f) {
@@ -32,6 +32,8 @@ void Game::startGameLoop() {
             activeState = gamestates[0]->update(delta);
             frameTime -= delta;
         }
+
+		// Draw
         renderWindow.Clear();
         gamestates[0]->draw();
         renderWindow.Display();

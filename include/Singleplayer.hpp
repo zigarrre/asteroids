@@ -7,6 +7,8 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 
+#include <iostream>
+
 class Singleplayer : public Gamestate
 {
     public:
@@ -17,7 +19,7 @@ class Singleplayer : public Gamestate
     protected:
     private:
         sf::RenderWindow& renderWindow;
-        sf::Image spaceship;
+        sf::Texture texSpaceship;
         std::vector<Entity*> entitys;
 };
 
