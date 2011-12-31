@@ -2,11 +2,10 @@
 
 using namespace std;
 
-int Game::resolutionX = 600;
-int Game::resolutionY = 500;
+sf::Vector2i Game::resolution(600, 500);
 
 Game::Game() :
-	renderWindow(sf::VideoMode(resolutionX, resolutionY, 32), "Asteoriden"),
+	renderWindow(sf::VideoMode(resolution.x, resolution.y, 32), "Asteoriden"),
     updateTime(1.0f/120.0f),
     activeState(0)
 {
@@ -43,4 +42,8 @@ void Game::startGameLoop() {
         gamestates[0]->draw();
         renderWindow.Display();
     }
+}
+
+sf::Vector2i Game::getResolution() {
+	return resolution;
 }

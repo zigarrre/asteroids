@@ -12,14 +12,15 @@ class Game {
         Game();
         ~Game();
         void startGameLoop();
-		static int resolutionX;
-		static int resolutionY;
+		static sf::Vector2i getResolution();
     protected:
     private:
         sf::RenderWindow renderWindow;
         float updateTime;
         std::vector<Gamestate*> gamestates;
         int activeState;
+
+		static sf::Vector2i resolution;
 };
 
 #endif // GAME_HPP
