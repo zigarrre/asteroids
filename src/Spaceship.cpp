@@ -8,17 +8,19 @@ Spaceship::Spaceship(const sf::Texture& tex, const sf::Vector2f& pos) :
 {
     this->SetTexture(tex);
     this->SetPosition(pos);
-	this->SetOrigin(this->GetTexture()->GetWidth()/2.0f,this->GetTexture()->GetHeight()/2.0f);
+	this->SetOrigin(this->GetLocalBounds().Width/2.0f,this->GetLocalBounds().Height/2.0f);
 }
 
 void Spaceship::update(float deltaTime) {
 
+	// rotate
 	if(sf::Keyboard::IsKeyPressed(sf::Keyboard::Right)) {
 		this->Rotate(rotationspeed*deltaTime);
 	} else if(sf::Keyboard::IsKeyPressed(sf::Keyboard::Left)) {
 		this->Rotate(-rotationspeed*deltaTime);
 	}
 
+	// set acceleration
 	if(sf::Keyboard::IsKeyPressed(sf::Keyboard::Up)) {
 		acceleration[0] = -sin(this->GetRotation()*(PI/180)) * -accelerationToSet;
 		acceleration[1] = cos(this->GetRotation()*(PI/180)) * -accelerationToSet;
@@ -30,8 +32,11 @@ void Spaceship::update(float deltaTime) {
 		acceleration[1] = 0;
 	}
 
+	// accelerate
 	velocity[0] += acceleration[0]*deltaTime;
     velocity[1] += acceleration[1]*deltaTime;
 
+	// move
     this->Move(velocity[0], velocity[1]);
+
 }
