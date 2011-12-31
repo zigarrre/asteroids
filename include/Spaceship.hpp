@@ -2,6 +2,7 @@
 #define SPACESHIP_HPP
 
 #include "Entity.hpp"
+#include "Game.hpp"
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 #include <vector>

@@ -7,7 +7,7 @@ Spaceship::Spaceship(const sf::Texture& tex, const sf::Vector2f& pos) :
 	rotationspeed(100.0f)
 {
     this->SetTexture(tex);
-    this->SetPosition(pos);
+    this->SetPosition(0,0);
 	this->SetOrigin(this->GetLocalBounds().Width/2.0f,this->GetLocalBounds().Height/2.0f);
 }
 
@@ -38,5 +38,22 @@ void Spaceship::update(float deltaTime) {
 
 	// move
     this->Move(velocity[0], velocity[1]);
+	
+	// if the spaceship has left the field, set it to the opposite side
+	sf::Vector2f pos = this->GetPosition();
+	sf::Vector2f size;
+	size.x = this->GetGlobalBounds().Width;
+	size.y = this->GetGlobalBounds().Height;
+	sf::Vector2f origin = this->GetOrigin();
+	if((pos.x + (size.x/2)) < 0) {
+		this->SetPosition(Game::getResolution().x + (size.x/2), pos.y);
+	} else if(pos.x - (size.x/2) > Game::getResolution().x) {
+		this->SetPosition(-size.x+(size.x/2),pos.y);
+	}
+	if((pos.y + (size.y/2)) < 0) {
+		this->SetPosition(pos.x, Game::getResolution().y + (size.y/2));
+	} else if(pos.y - (size.y/2) > Game::getResolution().y) {
+		this->SetPosition(pos.x, -size.y+(size.y/2));
+	}
 
 }
