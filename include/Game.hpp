@@ -9,12 +9,14 @@
 
 class Game {
     public:
-        Game(sf::RenderWindow& renderWindow, float updateTime);
+        Game();
         ~Game();
         void startGameLoop();
+		static int resolutionX;
+		static int resolutionY;
     protected:
     private:
-        sf::RenderWindow& renderWindow;
+        sf::RenderWindow renderWindow;
         float updateTime;
         std::vector<Gamestate*> gamestates;
         int activeState;

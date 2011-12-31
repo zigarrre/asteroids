@@ -2,11 +2,16 @@
 
 using namespace std;
 
-Game::Game(sf::RenderWindow& renderWindow,float updateTime) :
-    renderWindow(renderWindow),
-    updateTime(updateTime),
+int Game::resolutionX = 600;
+int Game::resolutionY = 500;
+
+Game::Game() :
+	renderWindow(sf::VideoMode(resolutionX, resolutionY, 32), "Asteoriden"),
+    updateTime(1.0f/120.0f),
     activeState(0)
 {
+	renderWindow.EnableVerticalSync(true);
+	renderWindow.SetFramerateLimit(60);
     gamestates.push_back(new Singleplayer(renderWindow));
 }
 
