@@ -4,6 +4,7 @@
 #include "Gamestate.hpp"
 #include "Singleplayer.hpp"
 #include <SFML/Graphics.hpp>
+#include <Thor/Resources.hpp>
 #include <vector>
 #include <algorithm>
 
@@ -13,6 +14,8 @@ class Game {
         ~Game();
         void startGameLoop();
 		static sf::Vector2i getResolution();
+
+		static thor::ResourceManager<sf::Texture> resourceManager;
     protected:
     private:
         sf::RenderWindow renderWindow;

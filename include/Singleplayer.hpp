@@ -19,7 +19,6 @@ class Singleplayer : public Gamestate
     protected:
     private:
         sf::RenderWindow& renderWindow;
-        sf::Texture texSpaceship;
         std::vector<Entity*> entitys;
 };
 

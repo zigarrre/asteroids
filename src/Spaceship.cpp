@@ -2,11 +2,13 @@
 
 const float Spaceship::PI = 3.141592f;
 
-Spaceship::Spaceship(const sf::Texture& tex, const sf::Vector2f& pos) :
+Spaceship::Spaceship(const sf::Vector2f& pos) :
     accelerationToSet(1.0f),
 	rotationspeed(100.0f)
 {
-    this->SetTexture(tex);
+	thor::Resources::TextureKey key = thor::Resources::TextureKey::FromFile("res/ship.png"); //TODO needs exeption Handling
+	texture = Game::resourceManager.Acquire(key);
+    this->SetTexture(*texture);
     this->SetPosition(0,0);
 	this->SetOrigin(this->GetLocalBounds().Width/2.0f,this->GetLocalBounds().Height/2.0f);
 }

@@ -3,8 +3,7 @@
 Singleplayer::Singleplayer(sf::RenderWindow& renderWindow) :
     renderWindow(renderWindow)
 {
-    texSpaceship.LoadFromFile("ship.png");
-    entitys.push_back(new Spaceship(texSpaceship, sf::Vector2f(20.0f,20.0f)));
+    entitys.push_back(new Spaceship(sf::Vector2f(20.0f,20.0f)));
 }
 
 Singleplayer::~Singleplayer() {
