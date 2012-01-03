@@ -4,6 +4,7 @@
 #include "Gamestate.hpp"
 #include "Entity.hpp"
 #include "Spaceship.hpp"
+#include "EntityManager.hpp"
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 
@@ -13,13 +14,14 @@ class Singleplayer : public Gamestate
 {
     public:
         Singleplayer(sf::RenderWindow& renderWindow);
-        ~Singleplayer();
+        //~Singleplayer();
         virtual int update(float deltaTime);
         virtual void draw();
+
+		static EntityManager entityManager;
     protected:
     private:
         sf::RenderWindow& renderWindow;
-        std::vector<Entity*> entitys;
 };
 
 #endif // SINGLEPLAYERGAME_HPP

@@ -1,10 +1,12 @@
 #include "Spaceship.hpp"
 
-const float Spaceship::PI = 3.141592f;
+using namespace std;
 
 Spaceship::Spaceship(const sf::Vector2f& pos) :
     accelerationToSet(1.0f),
-	rotationspeed(100.0f)
+	rotationspeed(100.0f),
+	weaponCooldown(0.0f),
+	weaponCooldownToSet(0.5f)
 {
 	thor::Resources::TextureKey key = thor::Resources::TextureKey::FromFile("res/ship.png"); //TODO needs exeption Handling
 	texture = Game::resourceManager.Acquire(key);
@@ -58,4 +60,10 @@ void Spaceship::update(float deltaTime) {
 		this->SetPosition(pos.x, -size.y+(size.y/2));
 	}
 
+	// fire
+	if(sf::Keyboard::IsKeyPressed(sf::Keyboard::Space) && (weaponCooldown == 0)) {
+		Singleplayer::entityManager.add(new EnergyBullet(sf::Vector2f(this->GetPosition().x, this->GetPosition().y), this->GetRotation()));
+		weaponCooldown = weaponCooldownToSet;
+	}
+	weaponCooldown -= min(deltaTime, weaponCooldown);
 }

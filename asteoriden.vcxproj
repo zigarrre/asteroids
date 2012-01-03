@@ -82,15 +82,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="EnergyBullet.hpp" />
+    <ClInclude Include="include\EnergyBullet.hpp" />
     <ClInclude Include="include\Entity.hpp" />
+    <ClInclude Include="include\EntityManager.hpp" />
     <ClInclude Include="include\Game.hpp" />
     <ClInclude Include="include\Gamestate.hpp" />
     <ClInclude Include="include\Singleplayer.hpp" />
     <ClInclude Include="include\Spaceship.hpp" />
+    <ClInclude Include="include\utility.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\EnergyBullet.cpp" />
     <ClCompile Include="src\Entity.cpp" />
+    <ClCompile Include="src\EntityManager.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Singleplayer.cpp" />

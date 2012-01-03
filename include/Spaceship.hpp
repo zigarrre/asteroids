@@ -3,10 +3,13 @@
 
 #include "Entity.hpp"
 #include "Game.hpp"
+#include "EnergyBullet.hpp"
+#include "utility.hpp"
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 #include <Thor/Resources.hpp>
 #include <vector>
+#include <algorithm>
 
 class Spaceship : public Entity
 {
@@ -17,7 +20,8 @@ class Spaceship : public Entity
     private:
         float accelerationToSet;
 		float rotationspeed;
-		const static float PI;
+		float weaponCooldown;
+		float weaponCooldownToSet;
 		thor::ResourcePtr<sf::Texture> texture;
 };
 

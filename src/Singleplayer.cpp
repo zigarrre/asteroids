@@ -1,16 +1,11 @@
 #include "Singleplayer.hpp"
 
+EntityManager Singleplayer::entityManager(10);
+
 Singleplayer::Singleplayer(sf::RenderWindow& renderWindow) :
     renderWindow(renderWindow)
 {
-    entitys.push_back(new Spaceship(sf::Vector2f(20.0f,20.0f)));
-}
-
-Singleplayer::~Singleplayer() {
-    for(unsigned int i = 0; i < entitys.size();++i) {
-        delete entitys[i];
-        entitys.erase(entitys.begin()+i);
-    }
+	entityManager.add(new Spaceship(sf::Vector2f(20.0f,20.0f)));
 }
 
 int Singleplayer::update(float deltaTime) {
@@ -20,17 +15,11 @@ int Singleplayer::update(float deltaTime) {
         if (Event.Type == sf::Event::Closed)
             renderWindow.Close();
     }
-    for(unsigned int i = 0; i < entitys.size();++i) {
-        entitys[i]->update(deltaTime);
-		//std::cout<<"update"<<std::endl;
-    }
+	entityManager.update(deltaTime);
 
     return GAMESTATE_SINGLEPLAYER;
 }
 
 void Singleplayer::draw() {
-    for(unsigned int i = 0; i < entitys.size();++i) {
-        renderWindow.Draw(*entitys[i]);
-		//std::cout<<"draw"<<std::endl;
-    }
+	entityManager.draw(renderWindow);
 }
