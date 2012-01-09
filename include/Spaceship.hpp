@@ -22,6 +22,7 @@ class Spaceship : public Entity
 		float rotationspeed;
 		float weaponCooldown;
 		float weaponCooldownToSet;
+		float friction;
 		thor::ResourcePtr<sf::Texture> texture;
 };
 

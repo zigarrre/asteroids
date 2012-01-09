@@ -6,7 +6,8 @@ Spaceship::Spaceship(const sf::Vector2f& pos) :
     accelerationToSet(1.0f),
 	rotationspeed(100.0f),
 	weaponCooldown(0.0f),
-	weaponCooldownToSet(0.5f)
+	weaponCooldownToSet(0.5f),
+	friction(0.05f)
 {
 	thor::Resources::TextureKey key = thor::Resources::TextureKey::FromFile("res/ship.png"); //TODO needs exeption Handling
 	texture = Game::resourceManager.Acquire(key);
@@ -32,8 +33,15 @@ void Spaceship::update(float deltaTime) {
 		acceleration[0] = -sin(this->GetRotation()*(PI/180)) * accelerationToSet;
 		acceleration[1] = cos(this->GetRotation()*(PI/180)) * accelerationToSet;
 	} else {
-		acceleration[0] = 0;
-		acceleration[1] = 0;
+		// apply friction
+		if(velocity[0] > 0) 
+			acceleration[0] = -friction;
+		else
+			acceleration[0] = friction;
+		if(velocity[1] > 0)
+			acceleration[1] = -friction;
+		else
+			acceleration[1] = friction;
 	}
 
 	// accelerate
