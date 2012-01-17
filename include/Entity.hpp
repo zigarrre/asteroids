@@ -2,6 +2,7 @@
 #define ENTITY_HPP
 
 #include <SFML/Graphics.hpp>
+#include "ConvexPolygon.hpp"
 
 class Entity : public sf::Sprite
 {
@@ -16,6 +17,7 @@ class Entity : public sf::Sprite
         float velocity[2];
         float acceleration[2];
 		unsigned int id;
+		ConvexPolygon hitbox;
     private:
 };
 
