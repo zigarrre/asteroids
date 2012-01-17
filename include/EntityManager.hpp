@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Entity.hpp"
+#include "ConvexPolygon.hpp"
 #include <SFML/Graphics.hpp>
 #include <map>
 
@@ -21,6 +22,7 @@ public:
 private:
 	std::map<unsigned int,Entity*> entitys;
 	unsigned int getNewID();
+	bool testSATCollision(ConvexPolygon poly1, ConvexPolygon poly2);
 
 	unsigned int reservedSpace;
 
