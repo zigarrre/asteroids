@@ -17,7 +17,7 @@ class Entity : public sf::Sprite
         float velocity[2];
         float acceleration[2];
 		unsigned int id;
-		ConvexPolygon hitbox;
+		sf::ConvexShape hitbox;
     private:
 };
 

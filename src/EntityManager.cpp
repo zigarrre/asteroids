@@ -51,12 +51,12 @@ void EntityManager::draw(sf::RenderTarget& renderTarget) {
 	}
 }
 
-bool EntityManager::testSATCollision(ConvexPolygon poly1, ConvexPolygon poly2) {
+bool EntityManager::testSATCollision(sf::ConvexShape poly1, sf::ConvexShape poly2) {
 	// save size in variable to improve performance
-	unsigned int size1 = poly1.points.size();
-	unsigned int size2 = poly2.points.size();
+	unsigned int size1 = poly1.GetPointCount();
+	unsigned int size2 = poly2.GetPointCount();
 
-	Point side, projectionAxis;
+	sf::Vector2f side, projectionAxis;
 
 	if((size1 == 0) || (size2 == 0)) {
 		// no points defined in the polygons
@@ -66,7 +66,7 @@ bool EntityManager::testSATCollision(ConvexPolygon poly1, ConvexPolygon poly2) {
 	// for every side in poly1
 	for(unsigned int i = 0; i < size1; ++i) {
 		// calculate on side
-		side = poly1.points[i] - poly1.points[(i+1)%size1];
+		side = poly1.GetPoint(i) - poly1.GetPoint((i+1)%size1);
 
 		// create an perpendicular axis for projection from side
 		projectionAxis.x = -side.y;
@@ -85,60 +85,54 @@ bool EntityManager::testSATCollision(ConvexPolygon poly1, ConvexPolygon poly2) {
 
 		// project all points from poly1 on the projection axis and save the max and min values
 		for(unsigned int i = 0; i < size1; ++i) {
-			projection = (projectionAxis.x * (poly1.points[i].x + poly1.posX) + projectionAxis.y * (poly1.points[i].y + poly1.posY)) / (projectionAxis.x * projectionAxis.x + projectionAxis.y * projectionAxis.y);
+			projection = (projectionAxis.x * poly1.GetTransform().TransformPoint(poly1.GetPoint(i)).x + projectionAxis.y * poly1.GetTransform().TransformPoint(poly1.GetPoint(i)).y) / (projectionAxis.x * projectionAxis.x + projectionAxis.y * projectionAxis.y);
 			poly1Min = min(projection, poly1Min);
 			poly1Max = max(projection, poly1Max);
 		}
 
 		// project all points from poly2 on the projection axis and save the max and min values
-		for(unsigned int i = 0; i < size1; ++i) {
-			projection = (projectionAxis.x * (poly2.points[i].x + poly2.posX) + projectionAxis.y * (poly2.points[i].y + poly2.posY)) / (projectionAxis.x * projectionAxis.x + projectionAxis.y * projectionAxis.y);
+		for(unsigned int i = 0; i < size2; ++i) {
+			projection = (projectionAxis.x * poly2.GetTransform().TransformPoint(poly2.GetPoint(i)).x + projectionAxis.y * poly2.GetTransform().TransformPoint(poly2.GetPoint(i)).y) / (projectionAxis.x * projectionAxis.x + projectionAxis.y * projectionAxis.y);
 			poly2Min = min(projection, poly2Min);
 			poly2Max = max(projection, poly2Max);
 		}
 
 		// check if the projections of the polygons overlap
-		if(!(poly1Max >= poly2Max && poly1Min <= poly2Min))
+		if(!((poly1Min >= poly2Min && poly1Min <= poly2Max) || (poly1Max >=poly2Min && poly1Max <= poly2Max))) {
 			return false; // there is no collision and we can return now
+		}
 	}
 
-	// for every side in poly2
+	// do the same for every side in poly2
 	for(unsigned int i = 0; i < size2; ++i) {
-		// calculate on side
-		side = poly2.points[i] - poly2.points[(i+1)%size1];
+		side = poly2.GetPoint(i) - poly2.GetPoint((i+1)%size2);
 
-		// create an perpendicular axis for projection from side
 		projectionAxis.x = -side.y;
 		projectionAxis.y = side.x;
 
-		// normalize the axis
 		float axisLenght = sqrt(projectionAxis.x * projectionAxis.x + projectionAxis.y * projectionAxis.y);
 		projectionAxis.x /= axisLenght;
 		projectionAxis.y /= axisLenght;
 
-		// initialise variales with min and max values
 		float poly1Min = std::numeric_limits<float>::max(), poly1Max = -poly1Min;
 		float poly2Min = std::numeric_limits<float>::max(), poly2Max = -poly2Min;
 
 		float projection;
 
-		// project all points from poly1 on the projection axis and save the max and min values
 		for(unsigned int i = 0; i < size1; ++i) {
-			projection = (projectionAxis.x * (poly1.points[i].x + poly1.posX) + projectionAxis.y * (poly1.points[i].y + poly1.posY)) / (projectionAxis.x * projectionAxis.x + projectionAxis.y * projectionAxis.y);
+			projection = (projectionAxis.x * poly1.GetTransform().TransformPoint(poly1.GetPoint(i)).x + projectionAxis.y * poly1.GetTransform().TransformPoint(poly1.GetPoint(i)).y) / (projectionAxis.x * projectionAxis.x + projectionAxis.y * projectionAxis.y);
 			poly1Min = min(projection, poly1Min);
 			poly1Max = max(projection, poly1Max);
 		}
 
-		// project all points from poly2 on the projection axis and save the max and min values
-		for(unsigned int i = 0; i < size1; ++i) {
-			projection = (projectionAxis.x * (poly2.points[i].x + poly2.posX) + projectionAxis.y * (poly2.points[i].y + poly2.posY)) / (projectionAxis.x * projectionAxis.x + projectionAxis.y * projectionAxis.y);
+		for(unsigned int i = 0; i < size2; ++i) {
+			projection = (projectionAxis.x * poly2.GetTransform().TransformPoint(poly2.GetPoint(i)).x + projectionAxis.y * poly2.GetTransform().TransformPoint(poly2.GetPoint(i)).y) / (projectionAxis.x * projectionAxis.x + projectionAxis.y * projectionAxis.y);
 			poly2Min = min(projection, poly2Min);
 			poly2Max = max(projection, poly2Max);
 		}
 
-		// check if the projections of the polygons overlap
-		if(!(poly1Max >= poly2Max && poly1Min <= poly2Min))
-			return false; // there is no collision and we can return now
+		if(!((poly1Min >= poly2Min && poly1Min <= poly2Max) || (poly1Max >=poly2Min && poly1Max <= poly2Max)))
+			return false;
 	}
-
+	return true;
 }

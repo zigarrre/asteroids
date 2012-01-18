@@ -22,7 +22,7 @@ public:
 private:
 	std::map<unsigned int,Entity*> entitys;
 	unsigned int getNewID();
-	bool testSATCollision(ConvexPolygon poly1, ConvexPolygon poly2);
+	bool testSATCollision(sf::ConvexShape poly1, sf::ConvexShape poly2);
 
 	unsigned int reservedSpace;
 
