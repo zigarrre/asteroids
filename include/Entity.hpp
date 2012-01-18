@@ -13,6 +13,7 @@ class Entity : public sf::Sprite
 		virtual ~Entity() {}
         virtual void update(float deltaTime) = 0;
 		unsigned int getID() { return id; }
+		sf::ConvexShape getHitBox() const;
     protected:
         float velocity[2];
         float acceleration[2];
