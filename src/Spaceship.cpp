@@ -14,6 +14,11 @@ Spaceship::Spaceship(const sf::Vector2f& pos) :
     this->SetTexture(*texture);
 	this->SetPosition(Game::getResolution().x/2.0f, Game::getResolution().y/2.0f);
 	this->SetOrigin(this->GetLocalBounds().Width/2.0f,this->GetLocalBounds().Height/2.0f);
+	// define hitbox
+	hitbox.SetPointCount(3);
+	hitbox.SetPoint(0,sf::Vector2f(6.0f,41.0f));
+	hitbox.SetPoint(1,sf::Vector2f(24.0f,8.0f));
+	hitbox.SetPoint(2,sf::Vector2f(43.0f,41.0f));
 }
 
 void Spaceship::update(float deltaTime) {
