@@ -82,6 +82,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="include\Asteroid.hpp" />
     <ClInclude Include="include\ConvexPolygon.hpp" />
     <ClInclude Include="include\EnergyBullet.hpp" />
     <ClInclude Include="include\Entity.hpp" />
@@ -94,6 +95,7 @@
     <ClInclude Include="include\utility.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Asteroid.cpp" />
     <ClCompile Include="src\EnergyBullet.cpp" />
     <ClCompile Include="src\Entity.cpp" />
     <ClCompile Include="src\EntityManager.cpp" />

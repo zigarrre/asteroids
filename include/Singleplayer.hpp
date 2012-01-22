@@ -4,6 +4,7 @@
 #include "Gamestate.hpp"
 #include "Entity.hpp"
 #include "Spaceship.hpp"
+#include "Asteroid.hpp"
 #include "EntityManager.hpp"
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
