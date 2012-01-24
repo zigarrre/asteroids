@@ -1,6 +1,6 @@
-#include "Asteroid.hpp"
+#include "AsteroidMedium.hpp"
 
-Asteroid::Asteroid(const sf::Vector2f& pos, const sf::Vector2f& velocity, float rotation, float rotationVelocity) :
+AsteroidMedium::AsteroidMedium(const sf::Vector2f& pos, const sf::Vector2f& velocity, float rotation, float rotationVelocity) :
 	rotationVelocity(rotationVelocity),
 	running(true)
 {
@@ -9,23 +9,28 @@ Asteroid::Asteroid(const sf::Vector2f& pos, const sf::Vector2f& velocity, float 
 	SetRotation(rotation);
 	this->velocity[0] = velocity.x;
 	this->velocity[1] = velocity.y;
-	thor::Resources::TextureKey key = thor::Resources::TextureKey::FromFile("res/asteroid.png"); //TODO needs exeption Handling
+	thor::Resources::TextureKey key = thor::Resources::TextureKey::FromFile("res/asteroidMedium.png"); //TODO needs exeption Handling
 	texture = Game::resourceManager.Acquire(key);
     this->SetTexture(*texture);
-	hitbox.SetPointCount(7);
-	hitbox.SetPoint(0,sf::Vector2f(18.0f,64.0f));
-	hitbox.SetPoint(1,sf::Vector2f(49.0f,63.0f));
-	hitbox.SetPoint(2,sf::Vector2f(78.0f,50.0f));
-	hitbox.SetPoint(3,sf::Vector2f(79.0f,18.0f));
-	hitbox.SetPoint(4,sf::Vector2f(51.0f,5.0f));
-	hitbox.SetPoint(5,sf::Vector2f(19.4f,12.7f));
-	hitbox.SetPoint(6,sf::Vector2f(5.0f,40.0f));
+	hitbox.SetPointCount(10);
+	hitbox.SetPoint(0,sf::Vector2f(6.1f,32.5f));
+	hitbox.SetPoint(1,sf::Vector2f(3.0f,23.9f));
+	hitbox.SetPoint(2,sf::Vector2f(4.0f,14.7f));
+	hitbox.SetPoint(3,sf::Vector2f(9.3f,6.6f));
+	hitbox.SetPoint(4,sf::Vector2f(24.0f,3.1f));
+	hitbox.SetPoint(5,sf::Vector2f(34.4f,5.5f));
+	hitbox.SetPoint(6,sf::Vector2f(41.5f,12.4f));
+	hitbox.SetPoint(7,sf::Vector2f(43.7f,25.8f));
+	hitbox.SetPoint(8,sf::Vector2f(33.3f,33.6f));
+	hitbox.SetPoint(9,sf::Vector2f(16.0f,36.3f));
 }
 
-void Asteroid::update(float deltaTime) {
+void AsteroidMedium::update(float deltaTime) {
 	if(running) {
+
 		Move(velocity[0]*deltaTime, velocity[1]*deltaTime);
 		Rotate(rotationVelocity*deltaTime);
+
 		// if the astroid has left the field, set it to the opposite side
 		sf::Vector2f pos = this->GetPosition();
 		sf::Vector2f size;
@@ -45,10 +50,10 @@ void Asteroid::update(float deltaTime) {
 	}
 }
 
-void Asteroid::collide(unsigned int id) {
+void AsteroidMedium::collide(unsigned int id) {
 
 }
 
-void Asteroid::rcvMessage(unsigned int msg) {
+void AsteroidMedium::rcvMessage(unsigned int msg) {
 
 }
