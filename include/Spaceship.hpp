@@ -16,6 +16,8 @@ class Spaceship : public Entity
     public:
         Spaceship(const sf::Vector2f& pos);
         virtual void update(float deltaTime);
+		virtual void collide(unsigned int id);
+		virtual void rcvMessage(unsigned int msg);
     protected:
     private:
         float accelerationToSet;

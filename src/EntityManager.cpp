@@ -28,7 +28,7 @@ void EntityManager::add(Entity* entity, unsigned int id) {
 
 void EntityManager::remove(unsigned int id) {
 	delete entitys[id];
-	entitys.erase(id);
+	entitys[id] = 0;
 }
 
 unsigned int EntityManager::getNewID() {
@@ -39,8 +39,20 @@ unsigned int EntityManager::getNewID() {
 
 void EntityManager::update(float deltaTime) {
 	map<unsigned int,Entity*>::iterator it = entitys.begin();
+	map<unsigned int,Entity*>::iterator it2 = entitys.begin();
 	for(;it != entitys.end(); it++) {
 		it->second->update(deltaTime);
+		if(it->second != 0) {
+			it2 = entitys.begin();
+			for(;it2 != entitys.end();it2++) {
+				if(it != it2 && testSATCollision(it->second->getHitBox(),it2->second->getHitBox())) {
+					it->second->collide(it2->second->getID());
+					it2->second->collide(it->second->getID());
+				}
+			}
+		} else {
+			it = entitys.erase(it);
+		}
 	}
 }
 
@@ -135,4 +147,15 @@ bool EntityManager::testSATCollision(sf::ConvexShape poly1, sf::ConvexShape poly
 			return false;
 	}
 	return true;
+}
+
+void EntityManager::sndMessage(unsigned int id, unsigned int msg) {
+	entitys[id]->rcvMessage(msg);
+}
+
+void EntityManager::broadcastMessage(unsigned int msg) {
+	map<unsigned int,Entity*>::iterator it = entitys.begin();
+	for(;it != entitys.end(); it++) {
+		it->second->rcvMessage(msg);
+	}
 }

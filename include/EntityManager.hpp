@@ -18,6 +18,8 @@ public:
 	void add(Entity* entity, unsigned int id);
 	void remove(unsigned int id);
 	void draw(sf::RenderTarget& renderTarget);
+	void sndMessage(unsigned int id, unsigned int msg);
+	void broadcastMessage(unsigned int msg);
 
 private:
 	std::map<unsigned int,Entity*> entitys;

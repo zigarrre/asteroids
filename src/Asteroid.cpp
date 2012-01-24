@@ -44,3 +44,11 @@ void Asteroid::update(float deltaTime) {
 		}
 	}
 }
+
+void Asteroid::collide(unsigned int id) {
+
+}
+
+void Asteroid::rcvMessage(unsigned int msg) {
+
+}

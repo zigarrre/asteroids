@@ -80,3 +80,11 @@ void Spaceship::update(float deltaTime) {
 	}
 	weaponCooldown -= min(deltaTime, weaponCooldown);
 }
+
+void Spaceship::collide(unsigned int id) {
+	cout<<"collision"<<endl;
+}
+
+void Spaceship::rcvMessage(unsigned int msg) {
+
+}
