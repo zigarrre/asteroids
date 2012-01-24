@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Entity.hpp"
+#include "ConvexPolygon.hpp"
 #include <SFML/Graphics.hpp>
 #include <map>
 
@@ -17,10 +18,13 @@ public:
 	void add(Entity* entity, unsigned int id);
 	void remove(unsigned int id);
 	void draw(sf::RenderTarget& renderTarget);
+	void sndMessage(unsigned int id, unsigned int msg);
+	void broadcastMessage(unsigned int msg);
 
 private:
 	std::map<unsigned int,Entity*> entitys;
 	unsigned int getNewID();
+	bool testSATCollision(sf::ConvexShape poly1, sf::ConvexShape poly2);
 
 	unsigned int reservedSpace;
 

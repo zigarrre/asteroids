@@ -13,6 +13,8 @@ public:
 	virtual void update(float deltaTime);
 	void setRunning(bool run) { running = run; }
 	bool getRunning() { return running; }
+	virtual void collide(unsigned int id);
+	virtual void rcvMessage(unsigned int msg);
 
 private:
 	bool running;

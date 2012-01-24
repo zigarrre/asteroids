@@ -45,3 +45,11 @@ void EnergyBullet::update(float deltaTime) {
 		}
 	}
 }
+
+void EnergyBullet::collide(unsigned int id) {
+
+}
+
+void EnergyBullet::rcvMessage(unsigned int msg) {
+
+}
