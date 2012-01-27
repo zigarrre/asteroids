@@ -12,8 +12,10 @@ public:
 	void update(float deltaTime);
 	void collide(unsigned int id);
 	void rcvMessage(unsigned int msg);
+	void takeDamage(float damage);
 private:
 	bool running;
 	float rotationVelocity;
+	float hp; // Health Points
 	thor::ResourcePtr<sf::Texture> texture;
 };

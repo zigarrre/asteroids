@@ -2,7 +2,8 @@
 
 Asteroid::Asteroid(const sf::Vector2f& pos, const sf::Vector2f& velocity, float rotation, float rotationVelocity) :
 	rotationVelocity(rotationVelocity),
-	running(true)
+	running(true),
+	hp(1.0f)
 {
 	SetPosition(pos);
 	SetOrigin(GetLocalBounds().Width/2,GetLocalBounds().Height/2);
@@ -24,8 +25,16 @@ Asteroid::Asteroid(const sf::Vector2f& pos, const sf::Vector2f& velocity, float 
 
 void Asteroid::update(float deltaTime) {
 	if(running) {
+		
+		if(hp <= 0.0f) {
+			// object destroid
+			Singleplayer::entityManager.remove(getID());
+			return;
+		}
+
 		Move(velocity[0]*deltaTime, velocity[1]*deltaTime);
 		Rotate(rotationVelocity*deltaTime);
+
 		// if the astroid has left the field, set it to the opposite side
 		sf::Vector2f pos = this->GetPosition();
 		sf::Vector2f size;
@@ -51,4 +60,8 @@ void Asteroid::collide(unsigned int id) {
 
 void Asteroid::rcvMessage(unsigned int msg) {
 
+}
+
+void Asteroid::takeDamage(float damage) {
+	hp -= damage;
 }
