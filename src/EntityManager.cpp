@@ -159,3 +159,7 @@ void EntityManager::broadcastMessage(unsigned int msg) {
 		it->second->rcvMessage(msg);
 	}
 }
+
+Entity* EntityManager::getEntity(unsigned int id) {
+	return entitys[id];
+}

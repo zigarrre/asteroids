@@ -16,6 +16,7 @@ public:
 	unsigned int add(Entity* entity);
 	// add an entity with the given id
 	void add(Entity* entity, unsigned int id);
+	Entity* getEntity(unsigned int id);
 	void remove(unsigned int id);
 	void draw(sf::RenderTarget& renderTarget);
 	void sndMessage(unsigned int id, unsigned int msg);
