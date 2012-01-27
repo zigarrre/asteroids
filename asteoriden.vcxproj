@@ -89,6 +89,7 @@
     <ClInclude Include="include\EntityManager.hpp" />
     <ClInclude Include="include\Game.hpp" />
     <ClInclude Include="include\Gamestate.hpp" />
+    <ClInclude Include="include\MainMenu.hpp" />
     <ClInclude Include="include\Point.hpp" />
     <ClInclude Include="include\Singleplayer.hpp" />
     <ClInclude Include="include\Spaceship.hpp" />
@@ -101,6 +102,7 @@
     <ClCompile Include="src\EntityManager.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\MainMenu.cpp" />
     <ClCompile Include="src\Singleplayer.cpp" />
     <ClCompile Include="src\Spaceship.cpp" />
   </ItemGroup>
