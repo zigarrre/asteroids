@@ -3,6 +3,7 @@
 #include "Entity.hpp"
 #include "Game.hpp"
 #include "utility.hpp"
+#include "Asteroid.hpp"
 #include <Thor/Resources.hpp>
 #include <SFML/Graphics.hpp>
 
@@ -20,5 +21,6 @@ private:
 	bool running;
 	float speed;
 	float timeToLive;
+	bool destroyed;
 	thor::ResourcePtr<sf::Texture> texture;
 };

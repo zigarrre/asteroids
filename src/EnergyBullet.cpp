@@ -3,7 +3,8 @@
 EnergyBullet::EnergyBullet(const sf::Vector2f& pos, float angle) :
 	running(true),
 	speed(200.0f),
-	timeToLive(2.0f)
+	timeToLive(2.0f),
+	destroyed(false)
 {
 	thor::Resources::TextureKey key = thor::Resources::TextureKey::FromFile("res/bullet1.png"); //TODO needs exeption Handling
 	texture = Game::resourceManager.Acquire(key);
@@ -13,10 +14,29 @@ EnergyBullet::EnergyBullet(const sf::Vector2f& pos, float angle) :
 	this->SetRotation(angle);
 	velocity[0] = speed * sin(angle*(PI/180));
 	velocity[1] = speed * -cos(angle*(PI/180));
+	hitbox.SetPointCount(4);
+	hitbox.SetPoint(0,sf::Vector2f(7.0f,17.0f));
+	hitbox.SetPoint(1,sf::Vector2f(7.0f,2.0f));
+	hitbox.SetPoint(2,sf::Vector2f(12.0f,2.0f));
+	hitbox.SetPoint(3,sf::Vector2f(12.0f,17.0f));
 }
 
 void EnergyBullet::update(float deltaTime) {
 	if(running) {
+
+		if(destroyed) {
+			Singleplayer::entityManager.remove(getID());
+			return;
+		}
+
+		//Time to Live
+		if(timeToLive <= 0) {
+			Singleplayer::entityManager.remove(getID());
+			return;
+		} else {
+			timeToLive -= deltaTime;
+		}
+
 		//move
 		this->Move(velocity[0] * deltaTime, velocity[1] * deltaTime);
 
@@ -36,18 +56,16 @@ void EnergyBullet::update(float deltaTime) {
 		} else if(pos.y - (size.y/2) > Game::getResolution().y) {
 			this->SetPosition(pos.x, -size.y+(size.y/2));
 		}
-
-		//Time to Live
-		if(timeToLive <= 0) {
-			Singleplayer::entityManager.remove(this->getID());
-		} else {
-			timeToLive -= deltaTime;
-		}
 	}
 }
 
 void EnergyBullet::collide(unsigned int id) {
-
+	Asteroid* asteroid = dynamic_cast<Asteroid*>(Singleplayer::entityManager.getEntity(id));
+	if(asteroid) {
+		//cast ok
+		asteroid->takeDamage(1.0f);
+	}
+	destroyed = true;
 }
 
 void EnergyBullet::rcvMessage(unsigned int msg) {
