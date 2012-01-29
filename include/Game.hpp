@@ -21,7 +21,7 @@ class Game {
         sf::RenderWindow renderWindow;
         float updateTime;
         std::vector<Gamestate*> gamestates;
-        int activeState;
+        Gamestates activeState;
 
 		static sf::Vector2i resolution;
 };

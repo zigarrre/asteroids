@@ -15,13 +15,13 @@ MainMenu::MainMenu(sf::RenderWindow& renderWindow) :
 	buttons.push_back(sf::Sprite(*textures["exit"]));
 }
 
-int MainMenu::update(float deltaTime) {
+Gamestates MainMenu::update(float deltaTime) {
 	sf::Event Event;
     while (renderWindow.PollEvent(Event)) {
         if (Event.Type == sf::Event::Closed)
             renderWindow.Close();
     }
-	return 0;
+	return MAIN_MENU;
 }
 
 void MainMenu::draw() {

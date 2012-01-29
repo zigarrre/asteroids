@@ -6,10 +6,10 @@ Singleplayer::Singleplayer(sf::RenderWindow& renderWindow) :
     renderWindow(renderWindow)
 {
 	entityManager.add(new Spaceship(sf::Vector2f(20.0f,20.0f)));
-	entityManager.add(new Asteroid(sf::Vector2f(0.0f,0.0f),sf::Vector2f(20.0f,30.0f),Asteroid::Size::BIG)); //Asteroids::Size non standard warning
+	entityManager.add(new Asteroid(sf::Vector2f(0.0f,0.0f),sf::Vector2f(20.0f,30.0f),Asteroid::BIG)); //Asteroids::Size non standard warning
 }
 
-int Singleplayer::update(float deltaTime) {
+Gamestates Singleplayer::update(float deltaTime) {
 
     sf::Event Event;
     while (renderWindow.PollEvent(Event)) {
@@ -18,7 +18,7 @@ int Singleplayer::update(float deltaTime) {
     }
 	entityManager.update(deltaTime);
 
-    return GAMESTATE_SINGLEPLAYER;
+	return SINGLEPLAYER;
 }
 
 void Singleplayer::draw() {

@@ -8,7 +8,7 @@ thor::ResourceManager<sf::Texture> Game::resourceManager;
 Game::Game() :
 	renderWindow(sf::VideoMode(resolution.x, resolution.y, 32), "Asteoriden"),
     updateTime(1.0f/120.0f),
-    activeState(0)
+    activeState(SINGLEPLAYER)
 {
 	renderWindow.EnableVerticalSync(true);
 	renderWindow.SetFramerateLimit(60);
