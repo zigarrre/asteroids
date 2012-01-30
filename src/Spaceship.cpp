@@ -75,7 +75,11 @@ void Spaceship::update(float deltaTime) {
 
 	// fire
 	if(sf::Keyboard::IsKeyPressed(sf::Keyboard::Space) && (weaponCooldown <= 0)) {
-		Singleplayer::entityManager.add(new EnergyBullet(sf::Vector2f(this->GetPosition().x, this->GetPosition().y), this->GetRotation()));
+		Singleplayer::entityManager.add(new EnergyBullet(
+			sf::Vector2f(
+				this->GetPosition().x+sin(this->GetRotation()*(PI/180))*this->GetLocalBounds().Width/2, // spawn the bullet in front of the shipt instead in the middle to prevent unwanted collisions
+				this->GetPosition().y-cos(this->GetRotation()*(PI/180))*this->GetLocalBounds().Height/2),
+			this->GetRotation()));
 		weaponCooldown = weaponCooldownToSet;
 	}
 	weaponCooldown -= deltaTime;
