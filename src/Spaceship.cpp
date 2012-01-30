@@ -74,11 +74,11 @@ void Spaceship::update(float deltaTime) {
 	}
 
 	// fire
-	if(sf::Keyboard::IsKeyPressed(sf::Keyboard::Space) && (weaponCooldown == 0)) {
+	if(sf::Keyboard::IsKeyPressed(sf::Keyboard::Space) && (weaponCooldown <= 0)) {
 		Singleplayer::entityManager.add(new EnergyBullet(sf::Vector2f(this->GetPosition().x, this->GetPosition().y), this->GetRotation()));
 		weaponCooldown = weaponCooldownToSet;
 	}
-	weaponCooldown -= min(deltaTime, weaponCooldown);
+	weaponCooldown -= deltaTime;
 }
 
 void Spaceship::collide(unsigned int id) {
