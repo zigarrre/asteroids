@@ -9,6 +9,7 @@
 #include <algorithm>
 
 class Game {
+
     public:
         Game();
         ~Game();
@@ -16,12 +17,18 @@ class Game {
 		static sf::Vector2i getResolution();
 
 		static thor::ResourceManager<sf::Texture> resourceManager;
+
+		enum {
+			SINGLEPLAYER,
+			MAIN_MENU
+		};
+
     protected:
     private:
         sf::RenderWindow renderWindow;
         float updateTime;
         std::vector<Gamestate*> gamestates;
-        Gamestates activeState;
+        unsigned short activeState;
 
 		static sf::Vector2i resolution;
 };

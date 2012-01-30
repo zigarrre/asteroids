@@ -3,7 +3,8 @@
 using namespace std;
 
 MainMenu::MainMenu(sf::RenderWindow& renderWindow) :
-	renderWindow(renderWindow)
+	renderWindow(renderWindow),
+	gameStarted(false)
 {
 	// load textures
 	thor::Resources::TextureKey key = thor::Resources::TextureKey::FromFile("res/buttons/newGame.png");
@@ -15,13 +16,13 @@ MainMenu::MainMenu(sf::RenderWindow& renderWindow) :
 	buttons.push_back(sf::Sprite(*textures["exit"]));
 }
 
-Gamestates MainMenu::update(float deltaTime) {
+unsigned short MainMenu::update(float deltaTime) {
 	sf::Event Event;
     while (renderWindow.PollEvent(Event)) {
         if (Event.Type == sf::Event::Closed)
             renderWindow.Close();
     }
-	return MAIN_MENU;
+	return Game::MAIN_MENU;
 }
 
 void MainMenu::draw() {

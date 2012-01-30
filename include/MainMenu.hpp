@@ -11,7 +11,7 @@ class MainMenu : public Gamestate {
 
 public:
 	MainMenu(sf::RenderWindow& renderWindow);
-	virtual Gamestates update(float deltaTime);
+	virtual unsigned short update(float deltaTime);
 	virtual void draw();
 
 private:

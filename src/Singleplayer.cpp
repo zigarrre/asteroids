@@ -9,7 +9,7 @@ Singleplayer::Singleplayer(sf::RenderWindow& renderWindow) :
 	entityManager.add(new Asteroid(sf::Vector2f(0.0f,0.0f),sf::Vector2f(20.0f,30.0f),Asteroid::BIG));
 }
 
-Gamestates Singleplayer::update(float deltaTime) {
+unsigned short Singleplayer::update(float deltaTime) {
 
     sf::Event Event;
     while (renderWindow.PollEvent(Event)) {
@@ -18,7 +18,7 @@ Gamestates Singleplayer::update(float deltaTime) {
     }
 	entityManager.update(deltaTime);
 
-	return SINGLEPLAYER;
+	return Game::SINGLEPLAYER;
 }
 
 void Singleplayer::draw() {

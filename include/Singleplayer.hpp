@@ -16,7 +16,7 @@ class Singleplayer : public Gamestate
     public:
         Singleplayer(sf::RenderWindow& renderWindow);
         //~Singleplayer();
-        virtual Gamestates update(float deltaTime);
+        virtual unsigned short update(float deltaTime);
         virtual void draw();
 
 		static EntityManager entityManager;
