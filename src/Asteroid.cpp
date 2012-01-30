@@ -1,7 +1,7 @@
 #include "Asteroid.hpp"
 #include <iostream>
 
-Asteroid::Asteroid(const sf::Vector2f& pos, const sf::Vector2f& velocity, Size size, float rotation, float rotationVelocity) :
+Asteroid::Asteroid(const sf::Vector2f& pos, const sf::Vector2f& velocity, unsigned short size, float rotation, float rotationVelocity) :
 	rotationVelocity(rotationVelocity),
 	running(true),
 	hp(1.0f),
@@ -56,11 +56,9 @@ void Asteroid::update(float deltaTime) {
 		
 		if(hp <= 0.0f) {
 			// object destroid
-			std::cout<<size<<std::endl;
-			if(size < SMALL) {
-				// TODO enum incrementing?
-				Singleplayer::entityManager.add(new Asteroid(GetPosition(),sf::Vector2f(velocity[0]-10,velocity[1]+10),MEDIUM,GetRotation(),rotationVelocity));
-				Singleplayer::entityManager.add(new Asteroid(GetPosition(),sf::Vector2f(velocity[0]+10,velocity[1]-10),MEDIUM,GetRotation(),rotationVelocity));
+			if(size > SMALL) {
+				Singleplayer::entityManager.add(new Asteroid(GetPosition(),sf::Vector2f(velocity[0]-10,velocity[1]+10),size-1,GetRotation(),rotationVelocity));
+				Singleplayer::entityManager.add(new Asteroid(GetPosition(),sf::Vector2f(velocity[0]+10,velocity[1]-10),size-1,GetRotation(),rotationVelocity));
 			}
 			Singleplayer::entityManager.remove(getID());
 			return;
