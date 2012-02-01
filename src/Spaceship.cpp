@@ -10,7 +10,7 @@ Spaceship::Spaceship(const sf::Vector2f& pos) :
 	friction(0.05f)
 {
 	thor::Resources::TextureKey key = thor::Resources::TextureKey::FromFile("res/ship.png"); //TODO needs exeption Handling
-	texture = Game::resourceManager.Acquire(key);
+	texture = Game::textureManager.Acquire(key);
     this->SetTexture(*texture);
 	this->SetPosition(Game::getResolution().x/2.0f, Game::getResolution().y/2.0f);
 	this->SetOrigin(this->GetLocalBounds().Width/2.0f,this->GetLocalBounds().Height/2.0f);

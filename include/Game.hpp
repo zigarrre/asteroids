@@ -16,7 +16,8 @@ class Game {
         void startGameLoop();
 		static sf::Vector2i getResolution();
 
-		static thor::ResourceManager<sf::Texture> resourceManager;
+		static thor::ResourceManager<sf::Texture> textureManager;
+		static thor::ResourceManager<sf::Font> fontManager;
 
 		enum {
 			SINGLEPLAYER,

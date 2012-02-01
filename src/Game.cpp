@@ -3,7 +3,8 @@
 using namespace std;
 
 sf::Vector2i Game::resolution(600, 500);
-thor::ResourceManager<sf::Texture> Game::resourceManager;
+thor::ResourceManager<sf::Texture> Game::textureManager;
+thor::ResourceManager<sf::Font> Game::fontManager;
 
 Game::Game() :
 	renderWindow(sf::VideoMode(resolution.x, resolution.y, 32), "Asteoriden"),

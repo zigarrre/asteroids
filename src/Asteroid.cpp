@@ -25,7 +25,7 @@ Asteroid::Asteroid(const sf::Vector2f& pos, const sf::Vector2f& velocity, unsign
 		hitbox.SetPoint(4,sf::Vector2f(51.0f,5.0f));
 		hitbox.SetPoint(5,sf::Vector2f(19.4f,12.7f));
 		hitbox.SetPoint(6,sf::Vector2f(5.0f,40.0f));
-		texture = Game::resourceManager.Acquire(keyBig);
+		texture = Game::textureManager.Acquire(keyBig);
 	} else if(size == MEDIUM) {
 		hitbox.SetPointCount(10);
 		hitbox.SetPoint(0,sf::Vector2f(6.1f,32.5f));
@@ -38,7 +38,7 @@ Asteroid::Asteroid(const sf::Vector2f& pos, const sf::Vector2f& velocity, unsign
 		hitbox.SetPoint(7,sf::Vector2f(43.7f,25.8f));
 		hitbox.SetPoint(8,sf::Vector2f(33.3f,33.6f));
 		hitbox.SetPoint(9,sf::Vector2f(16.0f,36.3f));
-		texture = Game::resourceManager.Acquire(keyMedium);
+		texture = Game::textureManager.Acquire(keyMedium);
 	} else if(size == SMALL) {
 		hitbox.SetPointCount(5);
 		hitbox.SetPoint(0,sf::Vector2f(3.0f,15.7f));
@@ -46,7 +46,7 @@ Asteroid::Asteroid(const sf::Vector2f& pos, const sf::Vector2f& velocity, unsign
 		hitbox.SetPoint(2,sf::Vector2f(20.9f,3.1f));
 		hitbox.SetPoint(3,sf::Vector2f(20.9f,13.8f));
 		hitbox.SetPoint(4,sf::Vector2f(15.6f,17.7f));
-		texture = Game::resourceManager.Acquire(keySmall);
+		texture = Game::textureManager.Acquire(keySmall);
 	}
     this->SetTexture(*texture);
 }
