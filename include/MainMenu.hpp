@@ -20,9 +20,12 @@ private:
 	std::vector<Button> buttons;
 	sf::RenderWindow& renderWindow;
 	bool gameStarted;
+	thor::ResourcePtr<sf::Texture> texBackground;
+	sf::Sprite background;
 
 	unsigned short handleMouseClick(int mouseX, int mouseY);
 
 };
 
 int callbackNewGame();
+int callbackExit();

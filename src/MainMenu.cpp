@@ -6,10 +6,18 @@ MainMenu::MainMenu(sf::RenderWindow& renderWindow) :
 	renderWindow(renderWindow),
 	gameStarted(false)
 {
-	buttons.push_back(Button(sf::Vector2f(50.0f,50.0f),"New Game",&callbackNewGame));
+
+	texBackground = Game::textureManager.Acquire(thor::Resources::TextureKey::FromFile("res/menuBackground.png"));
+	background.SetTexture(*texBackground);
+	background.SetPosition(0.0f,0.0f);
+
+	buttons.push_back(Button(sf::Vector2f(340.0f,300.0f),"New Game",&callbackNewGame));
+	buttons.push_back(Button(sf::Vector2f(340.0f,400.0f),"Exit",&callbackExit));
 }
 
 unsigned short MainMenu::update(float deltaTime) {
+
+	// event handling
 	sf::Event Event;
     while (renderWindow.PollEvent(Event)) {
         if (Event.Type == sf::Event::Closed)
@@ -23,10 +31,14 @@ unsigned short MainMenu::update(float deltaTime) {
 			return handleMouseClick(Event.MouseButton.X,Event.MouseButton.Y);
 		}
     }
+
 	return Game::MAIN_MENU;
 }
 
 void MainMenu::draw() {
+
+	renderWindow.Draw(background);
+
 	// draw buttons
 	unsigned int size = buttons.size();
 	for(unsigned int i = 0; i < size; ++i) {
@@ -47,7 +59,8 @@ unsigned short MainMenu::handleMouseClick(int mouseX, int mouseY) {
 			if(rv == Game::SINGLEPLAYER) {
 				gameStarted = true;
 				return rv;
-			} else {
+			} else if(rv == -1) {
+				renderWindow.Close();
 				return Game::MAIN_MENU;
 			}
 		}
@@ -58,4 +71,8 @@ unsigned short MainMenu::handleMouseClick(int mouseX, int mouseY) {
 
 int callbackNewGame() {
 	return Game::SINGLEPLAYER;
+}
+
+int callbackExit() {
+	return -1;
 }
