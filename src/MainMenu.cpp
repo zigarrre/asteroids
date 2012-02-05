@@ -32,6 +32,15 @@ unsigned short MainMenu::update(float deltaTime) {
 		}
     }
 
+	// mouse over effect
+	for(unsigned int i = 0; i < buttons.size(); ++i) {
+		if((sf::Mouse::GetPosition(renderWindow).x > buttons[i].getPosition().x && sf::Mouse::GetPosition(renderWindow).x < (buttons[i].getPosition().x+buttons[i].getSize().x)) && (sf::Mouse::GetPosition(renderWindow).y > buttons[i].getPosition().y && sf::Mouse::GetPosition(renderWindow).y < (buttons[i].getPosition().y+buttons[i].getSize().y))) {
+			buttons[i].setActive(true);
+		} else {
+			buttons[i].setActive(false);
+		}
+	}
+
 	return Game::MAIN_MENU;
 }
 
