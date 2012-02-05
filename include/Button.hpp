@@ -1,6 +1,5 @@
 #pragma once
 
-#include "Game.hpp"
 #include <Thor/Resources.hpp>
 #include <SFML/Graphics.hpp>
 #include <string>
@@ -17,6 +16,10 @@ public:
 	/// if button is set to aktive it will change appearance (mouseover effect)
 	void setActive(bool active);
 
+	sf::Vector2f getPosition() { return background.GetPosition(); }
+
+	sf::Vector2f getSize();
+
 	int (*onClick)();
 
 private:
@@ -25,4 +28,5 @@ private:
 	thor::ResourcePtr<sf::Font> font;
 	sf::Sprite background;
 	sf::Text text;
+
 };
