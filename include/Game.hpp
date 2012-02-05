@@ -1,11 +1,13 @@
-#ifndef GAME_HPP
-#define GAME_HPP
+#pragma once
+//#ifndef GAME_HPP
+//#define GAME_HPP
 
 #include "Gamestate.hpp"
 #include "Singleplayer.hpp"
+#include "MainMenu.hpp"
 #include <SFML/Graphics.hpp>
 #include <Thor/Resources.hpp>
-#include <vector>
+#include <map>
 #include <algorithm>
 
 class Game {
@@ -28,10 +30,10 @@ class Game {
     private:
         sf::RenderWindow renderWindow;
         float updateTime;
-        std::vector<Gamestate*> gamestates;
+        std::map<unsigned short, Gamestate*> gamestates;
         unsigned short activeState;
 
 		static sf::Vector2i resolution;
 };
 
-#endif // GAME_HPP
+//#endif // GAME_HPP

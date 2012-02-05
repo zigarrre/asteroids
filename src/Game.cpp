@@ -9,17 +9,19 @@ thor::ResourceManager<sf::Font> Game::fontManager;
 Game::Game() :
 	renderWindow(sf::VideoMode(resolution.x, resolution.y, 32), "Asteoriden"),
     updateTime(1.0f/120.0f),
-    activeState(SINGLEPLAYER)
+    activeState(MAIN_MENU)
 {
 	renderWindow.EnableVerticalSync(true);
 	renderWindow.SetFramerateLimit(60);
-    gamestates.push_back(new Singleplayer(renderWindow));
+	gamestates.insert(pair<unsigned short,Gamestate*>(SINGLEPLAYER, new Singleplayer(renderWindow)));
+	gamestates.insert(pair<unsigned short,Gamestate*>(MAIN_MENU, new MainMenu(renderWindow)));
 }
 
 Game::~Game() {
-    for(unsigned int i = 0; i < gamestates.size(); ++i) {
-        delete gamestates[i];
-        gamestates.erase(gamestates.begin()+i);
+	map<unsigned short, Gamestate*>::iterator it = gamestates.begin();
+    for(; it != gamestates.end();) {
+		delete it->second;
+		it = gamestates.erase(it);
     }
 }
 
@@ -35,13 +37,13 @@ void Game::startGameLoop() {
         // Update
         while(frameTime > 0.0f) {
             delta = min(frameTime, updateTime);
-            activeState = gamestates[0]->update(delta);
+            activeState = gamestates[activeState]->update(delta);
             frameTime -= delta;
         }
 
 		// Draw
         renderWindow.Clear();
-        gamestates[0]->draw();
+		gamestates[activeState]->draw();
         renderWindow.Display();
     }
 }
