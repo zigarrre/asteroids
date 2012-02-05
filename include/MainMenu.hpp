@@ -1,7 +1,9 @@
 #pragma once
 
+#include "Button.hpp"
 #include "Gamestate.hpp"
 #include "Game.hpp"
+#include "Spaceship.hpp"
 #include <SFML/Graphics.hpp>
 #include <Thor/Resources.hpp>
 #include <vector>
@@ -15,8 +17,12 @@ public:
 	virtual void draw();
 
 private:
+	std::vector<Button> buttons;
 	sf::RenderWindow& renderWindow;
-	std::map<std::string,thor::ResourcePtr<sf::Texture>> textures;
-	std::vector<sf::Sprite> buttons;
+	bool gameStarted;
+
+	unsigned short handleMouseClick(int mouseX, int mouseY);
 
 };
+
+int callbackNewGame();
