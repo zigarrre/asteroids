@@ -1,6 +1,4 @@
 #pragma once
-//#ifndef GAME_HPP
-//#define GAME_HPP
 
 #include "Gamestate.hpp"
 #include "Singleplayer.hpp"
@@ -35,5 +33,3 @@ class Game {
 
 		static sf::Vector2i resolution;
 };
-
-//#endif // GAME_HPP

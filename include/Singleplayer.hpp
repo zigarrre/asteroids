@@ -1,5 +1,4 @@
-#ifndef SINGLEPLAYERGAME_HPP
-#define SINGLEPLAYERGAME_HPP
+#pragma once
 
 #include "Gamestate.hpp"
 #include "Entity.hpp"
@@ -24,5 +23,3 @@ class Singleplayer : public Gamestate
     private:
         sf::RenderWindow& renderWindow;
 };
-
-#endif // SINGLEPLAYERGAME_HPP

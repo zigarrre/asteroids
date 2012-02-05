@@ -1,5 +1,4 @@
-#ifndef ENTITY_HPP
-#define ENTITY_HPP
+#pragma once
 
 #include <SFML/Graphics.hpp>
 #include "ConvexPolygon.hpp"
@@ -23,5 +22,3 @@ class Entity : public sf::Sprite
 		sf::ConvexShape hitbox;
     private:
 };
-
-#endif // ENTITY_HPP

@@ -1,5 +1,4 @@
-#ifndef GAMESTATE_HPP
-#define GAMESTATE_HPP
+#pragma once
 
 #include <SFML/Graphics.hpp>
 
@@ -12,5 +11,3 @@ class Gamestate {
     protected:
     private:
 };
-
-#endif // GAMESTATE_HPP

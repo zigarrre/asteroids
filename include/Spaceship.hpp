@@ -1,5 +1,4 @@
-#ifndef SPACESHIP_HPP
-#define SPACESHIP_HPP
+#pragma once
 
 #include "Entity.hpp"
 #include "Game.hpp"
@@ -27,5 +26,3 @@ class Spaceship : public Entity
 		float friction;
 		thor::ResourcePtr<sf::Texture> texture;
 };
-
-#endif // SPACESHIP_HPP
