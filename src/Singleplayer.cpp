@@ -15,6 +15,8 @@ unsigned short Singleplayer::update(float deltaTime) {
     while (renderWindow.PollEvent(Event)) {
         if (Event.Type == sf::Event::Closed)
             renderWindow.Close();
+		else if (Event.Type == sf::Event::KeyPressed && Event.Key.Code == sf::Keyboard::Escape)
+			return Game::MAIN_MENU;
     }
 	entityManager.update(deltaTime);
 
