@@ -16,6 +16,7 @@ void MainMenu::init() {
 		background.SetTexture(*texBackground);
 		background.SetPosition(0.0f,0.0f);
 
+		buttons.push_back(Button(sf::Vector2f(340.0f,300.0f),"Resume",boost::bind(&MainMenu::callbackResume,this)));
 		buttons.push_back(Button(sf::Vector2f(340.0f,400.0f),"New Game",boost::bind(&MainMenu::callbackNewGame,this)));
 		buttons.push_back(Button(sf::Vector2f(340.0f,500.0f),"Exit",boost::bind(&MainMenu::callbackExit,this)));
 	}
@@ -87,7 +88,7 @@ int MainMenu::callbackNewGame() {
 	if(!gameStarted) {
 		gameStarted = true;
 	} else {
-		// reinit singleplayer gamestate
+		Game::gamestateManager.get(Game::SINGLEPLAYER)->reinit();
 	}
 	return Game::SINGLEPLAYER;
 }
@@ -95,4 +96,12 @@ int MainMenu::callbackNewGame() {
 int MainMenu::callbackExit() {
 	renderWindow.Close();
 	return Game::MAIN_MENU;
+}
+
+int MainMenu::callbackResume() {
+	if(gameStarted) {
+		return Game::SINGLEPLAYER;
+	} else {
+		return Game::MAIN_MENU;
+	}
 }

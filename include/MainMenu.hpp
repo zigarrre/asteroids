@@ -20,6 +20,7 @@ public:
 
 	int callbackNewGame();
 	int callbackExit();
+	int callbackResume();
 
 private:
 	std::vector<Button> buttons;
