@@ -63,6 +63,14 @@ void EntityManager::draw(sf::RenderTarget& renderTarget) {
 	}
 }
 
+void EntityManager::clear() {
+	map<unsigned int,Entity*>::iterator it = entitys.begin();
+	while(it != entitys.end()) {
+		delete it->second;
+		it = entitys.erase(it);
+	}
+}
+
 bool EntityManager::testSATCollision(sf::ConvexShape poly1, sf::ConvexShape poly2) {
 	// save size in variable to improve performance
 	unsigned int size1 = poly1.GetPointCount();

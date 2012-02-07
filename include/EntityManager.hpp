@@ -19,6 +19,7 @@ public:
 	Entity* getEntity(unsigned int id);
 	void remove(unsigned int id);
 	void draw(sf::RenderTarget& renderTarget);
+	void clear();
 	void sndMessage(unsigned int id, unsigned int msg);
 	void broadcastMessage(unsigned int msg);
 
