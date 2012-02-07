@@ -5,24 +5,18 @@ using namespace std;
 sf::Vector2i Game::resolution(1000, 750);
 thor::ResourceManager<sf::Texture> Game::textureManager;
 thor::ResourceManager<sf::Font> Game::fontManager;
+GamestateManager Game::gamestateManager;
 
 Game::Game() :
 	renderWindow(sf::VideoMode(resolution.x, resolution.y, 32), "Asteoriden"),
-    updateTime(1.0f/120.0f),
-    activeState(MAIN_MENU)
+    updateTime(1.0f/120.0f)
 {
 	renderWindow.EnableVerticalSync(true);
 	renderWindow.SetFramerateLimit(60);
-	gamestates.insert(pair<unsigned short,Gamestate*>(SINGLEPLAYER, new Singleplayer(renderWindow)));
-	gamestates.insert(pair<unsigned short,Gamestate*>(MAIN_MENU, new MainMenu(renderWindow)));
-}
 
-Game::~Game() {
-	map<unsigned short, Gamestate*>::iterator it = gamestates.begin();
-    for(; it != gamestates.end();) {
-		delete it->second;
-		it = gamestates.erase(it);
-    }
+	gamestateManager.add(new Singleplayer(renderWindow), SINGLEPLAYER);
+	gamestateManager.add(new MainMenu(renderWindow), MAIN_MENU);
+	gamestateManager.setActiveState(MAIN_MENU);
 }
 
 void Game::startGameLoop() {
@@ -37,13 +31,13 @@ void Game::startGameLoop() {
         // Update
         while(frameTime > 0.0f) {
             delta = min(frameTime, updateTime);
-            activeState = gamestates[activeState]->update(delta);
+			gamestateManager.update(delta);
             frameTime -= delta;
         }
 
 		// Draw
         renderWindow.Clear();
-		gamestates[activeState]->draw();
+		gamestateManager.getActiveState()->draw();
         renderWindow.Display();
     }
 }

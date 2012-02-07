@@ -3,6 +3,7 @@
 #include "Gamestate.hpp"
 #include "Singleplayer.hpp"
 #include "MainMenu.hpp"
+#include "GamestateManager.hpp"
 #include <SFML/Graphics.hpp>
 #include <Thor/Resources.hpp>
 #include <map>
@@ -12,12 +13,14 @@ class Game {
 
     public:
         Game();
-        ~Game();
+        //~Game();
         void startGameLoop();
 		static sf::Vector2i getResolution();
 
 		static thor::ResourceManager<sf::Texture> textureManager;
 		static thor::ResourceManager<sf::Font> fontManager;
+		
+		static GamestateManager gamestateManager;
 
 		enum {
 			SINGLEPLAYER,
@@ -28,8 +31,6 @@ class Game {
     private:
         sf::RenderWindow renderWindow;
         float updateTime;
-        std::map<unsigned short, Gamestate*> gamestates;
-        unsigned short activeState;
 
 		static sf::Vector2i resolution;
 };
