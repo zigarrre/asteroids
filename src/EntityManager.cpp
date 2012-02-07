@@ -3,6 +3,7 @@
 using namespace std;
 
 EntityManager::EntityManager(unsigned int reservedSpace) :
+	showHitBox(false),
 	reservedSpace(reservedSpace)
 {
 }
@@ -60,6 +61,8 @@ void EntityManager::draw(sf::RenderTarget& renderTarget) {
 	map<unsigned int,Entity*>::iterator it = entitys.begin();
 	for(;it != entitys.end(); it++) {
 		renderTarget.Draw(*it->second);
+		if(showHitBox)
+			renderTarget.Draw(it->second->getHitBox());
 	}
 }
 

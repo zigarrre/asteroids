@@ -23,6 +23,8 @@ public:
 	void sndMessage(unsigned int id, unsigned int msg);
 	void broadcastMessage(unsigned int msg);
 
+	bool showHitBox;
+
 private:
 	std::map<unsigned int,Entity*> entitys;
 	unsigned int getNewID();

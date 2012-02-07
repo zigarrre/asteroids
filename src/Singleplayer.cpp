@@ -30,6 +30,8 @@ unsigned short Singleplayer::update(float deltaTime) {
             renderWindow.Close();
 		else if (e.Type == sf::Event::KeyPressed && e.Key.Code == sf::Keyboard::Escape)
 			return Game::MAIN_MENU;
+		else if (e.Type == sf::Event::KeyPressed && e.Key.Code == sf::Keyboard::H)
+			entityManager.showHitBox = !entityManager.showHitBox;
     }
 	entityManager.update(deltaTime);
 
