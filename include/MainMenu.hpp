@@ -27,5 +27,7 @@ private:
 
 };
 
+// TODO move callbacks into class MainMenu to avoid ugly code in handleMouseClick()
 int callbackNewGame();
 int callbackExit();
+int callbackResume();

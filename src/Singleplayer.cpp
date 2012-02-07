@@ -11,11 +11,11 @@ Singleplayer::Singleplayer(sf::RenderWindow& renderWindow) :
 
 unsigned short Singleplayer::update(float deltaTime) {
 
-    sf::Event Event;
-    while (renderWindow.PollEvent(Event)) {
-        if (Event.Type == sf::Event::Closed)
+    sf::Event e;
+    while (renderWindow.PollEvent(e)) {
+        if (e.Type == sf::Event::Closed)
             renderWindow.Close();
-		else if (Event.Type == sf::Event::KeyPressed && Event.Key.Code == sf::Keyboard::Escape)
+		else if (e.Type == sf::Event::KeyPressed && e.Key.Code == sf::Keyboard::Escape)
 			return Game::MAIN_MENU;
     }
 	entityManager.update(deltaTime);

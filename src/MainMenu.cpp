@@ -11,8 +11,8 @@ MainMenu::MainMenu(sf::RenderWindow& renderWindow) :
 	background.SetTexture(*texBackground);
 	background.SetPosition(0.0f,0.0f);
 
-	buttons.push_back(Button(sf::Vector2f(340.0f,300.0f),"New Game",&callbackNewGame));
-	buttons.push_back(Button(sf::Vector2f(340.0f,400.0f),"Exit",&callbackExit));
+	buttons.push_back(Button(sf::Vector2f(340.0f,400.0f),"New Game",&callbackNewGame));
+	buttons.push_back(Button(sf::Vector2f(340.0f,500.0f),"Exit",&callbackExit));
 }
 
 unsigned short MainMenu::update(float deltaTime) {
@@ -65,12 +65,19 @@ unsigned short MainMenu::handleMouseClick(int mouseX, int mouseY) {
 
 		if((mouseX > posX && mouseX < (posX+width)) && (mouseY > posY && mouseY < (posY+height))) {
 			int rv = buttons[i].onClick();
-			if(rv == Game::SINGLEPLAYER) {
-				gameStarted = true;
-				return rv;
-			} else if(rv == -1) {
+			if(rv == 1) {
+				if(!gameStarted) {
+					gameStarted = true;
+					buttons.push_back(Button(sf::Vector2f(340.0f,300.0f),"Resume",&callbackResume));
+					return Game::SINGLEPLAYER;
+				} else {
+					// reinit singleplayer gamestate
+				}
+			} else if(rv == 2) {
 				renderWindow.Close();
 				return Game::MAIN_MENU;
+			} else if(rv == 3) {
+				return Game::SINGLEPLAYER;
 			}
 		}
 	}
@@ -79,9 +86,13 @@ unsigned short MainMenu::handleMouseClick(int mouseX, int mouseY) {
 }
 
 int callbackNewGame() {
-	return Game::SINGLEPLAYER;
+	return 1;
 }
 
 int callbackExit() {
-	return -1;
+	return 2;
+}
+
+int callbackResume() {
+	return 3;
 }
