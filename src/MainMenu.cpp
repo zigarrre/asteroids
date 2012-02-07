@@ -17,6 +17,7 @@ void MainMenu::init() {
 		background.SetPosition(0.0f,0.0f);
 
 		buttons.push_back(Button(sf::Vector2f(340.0f,300.0f),"Resume",boost::bind(&MainMenu::callbackResume,this)));
+		buttons[0].setEnabled(false); //TODO buttons[0] is dangerous and very obscure
 		buttons.push_back(Button(sf::Vector2f(340.0f,400.0f),"New Game",boost::bind(&MainMenu::callbackNewGame,this)));
 		buttons.push_back(Button(sf::Vector2f(340.0f,500.0f),"Exit",boost::bind(&MainMenu::callbackExit,this)));
 	}
@@ -87,6 +88,7 @@ unsigned short MainMenu::handleMouseClick(int mouseX, int mouseY) {
 int MainMenu::callbackNewGame() {
 	if(!gameStarted) {
 		gameStarted = true;
+		buttons[0].setEnabled(true); //TODO buttons[0] is dangerous and very obscure
 	} else {
 		Game::gamestateManager.get(Game::SINGLEPLAYER)->reinit();
 	}

@@ -6,6 +6,7 @@ Button::Button(const sf::Vector2f& pos, const std::string& text, boost::function
 	// load textures
 	bgNormal = Game::textureManager.Acquire(thor::Resources::TextureKey::FromFile("res/buttonNormal.png"));
 	bgActive = Game::textureManager.Acquire(thor::Resources::TextureKey::FromFile("res/buttonActive.png"));
+	bgDisabled = Game::textureManager.Acquire(thor::Resources::TextureKey::FromFile("res/buttonDisabled.png"));
 
 	// load font
 	font = Game::fontManager.Acquire(thor::Resources::FontKey::FromFile("res/font.ttf"));
@@ -28,10 +29,22 @@ void Button::draw(sf::RenderTarget& renderTarget) {
 }
 
 void Button::setActive(bool active) {
-	if(active)
-		background.SetTexture(*bgActive);
-	else
+	if(enabled)
+		if(active)
+			background.SetTexture(*bgActive);
+		else
+			background.SetTexture(*bgNormal);
+}
+
+void Button::setEnabled(bool enabled) {
+	this->enabled = enabled;
+	if(!enabled) {
+		background.SetTexture(*bgDisabled);
+		text.SetColor(sf::Color(180,180,180));
+	} else {
 		background.SetTexture(*bgNormal);
+		text.SetColor(sf::Color(255,255,255));
+	}
 }
 
 sf::Vector2f Button::getSize() {
