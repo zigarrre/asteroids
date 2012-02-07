@@ -15,7 +15,8 @@ Button::Button(const sf::Vector2f& pos, const std::string& text, int (*onClickCa
 
 	this->text.SetFont(*font);
 	this->text.SetString(text);
-	this->text.SetPosition(pos.x+10,pos.y+10);
+	this->text.SetPosition(pos.x+background.GetLocalBounds().Width/2-this->text.GetLocalBounds().Width/2,pos.y+12);
+	this->text.SetColor(sf::Color(255,255,255));
 
 	onClick = onClickCallback;
 
