@@ -13,6 +13,8 @@ class MainMenu : public Gamestate {
 
 public:
 	MainMenu(sf::RenderWindow& renderWindow);
+	virtual void init();
+	virtual void reinit();
 	virtual unsigned short update(float deltaTime);
 	virtual void draw();
 
@@ -25,6 +27,7 @@ private:
 	bool gameStarted;
 	thor::ResourcePtr<sf::Texture> texBackground;
 	sf::Sprite background;
+	bool initialized;
 
 	unsigned short handleMouseClick(int mouseX, int mouseY);
 

@@ -15,6 +15,8 @@ class Singleplayer : public Gamestate
     public:
         Singleplayer(sf::RenderWindow& renderWindow);
         //~Singleplayer();
+		virtual void init();
+		virtual void reinit();
         virtual unsigned short update(float deltaTime);
         virtual void draw();
 
@@ -22,4 +24,5 @@ class Singleplayer : public Gamestate
     protected:
     private:
         sf::RenderWindow& renderWindow;
+		bool initialized;
 };

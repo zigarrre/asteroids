@@ -4,15 +4,27 @@ using namespace std;
 
 MainMenu::MainMenu(sf::RenderWindow& renderWindow) :
 	renderWindow(renderWindow),
-	gameStarted(false)
+	gameStarted(false),
+	initialized(false)
 {
-
 	texBackground = Game::textureManager.Acquire(thor::Resources::TextureKey::FromFile("res/menuBackground.png"));
-	background.SetTexture(*texBackground);
-	background.SetPosition(0.0f,0.0f);
+	init();
+}
 
-	buttons.push_back(Button(sf::Vector2f(340.0f,400.0f),"New Game",boost::bind(&MainMenu::callbackNewGame,this)));
-	buttons.push_back(Button(sf::Vector2f(340.0f,500.0f),"Exit",boost::bind(&MainMenu::callbackExit,this)));
+void MainMenu::init() {
+	if(!initialized) {
+		background.SetTexture(*texBackground);
+		background.SetPosition(0.0f,0.0f);
+
+		buttons.push_back(Button(sf::Vector2f(340.0f,400.0f),"New Game",boost::bind(&MainMenu::callbackNewGame,this)));
+		buttons.push_back(Button(sf::Vector2f(340.0f,500.0f),"Exit",boost::bind(&MainMenu::callbackExit,this)));
+	}
+}
+
+void MainMenu::reinit() {
+	buttons.clear();
+	initialized = false;
+	init();
 }
 
 unsigned short MainMenu::update(float deltaTime) {
