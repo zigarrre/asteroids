@@ -3,12 +3,14 @@
 #include <Thor/Resources.hpp>
 #include <SFML/Graphics.hpp>
 #include <string>
+#include <boost/function.hpp>
+#include <boost/bind.hpp>
 
 class Button {
 
 public:
 
-	Button(const sf::Vector2f& pos, const std::string& text, int (*onClickCallback)());
+	Button(const sf::Vector2f& pos, const std::string& text, boost::function<int ()> onClickCallback);
 
 	/// Draws all part of the button to the given sf::RenderTarget
 	void draw(sf::RenderTarget& renderTarget);
@@ -20,7 +22,7 @@ public:
 
 	sf::Vector2f getSize();
 
-	int (*onClick)();
+	boost::function<int ()> onClick;
 
 private:
 	thor::ResourcePtr<sf::Texture> bgNormal;

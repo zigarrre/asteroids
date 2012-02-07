@@ -1,7 +1,7 @@
 #include "Button.hpp"
 #include "Game.hpp" // include here and not in header to avoid problems with headers (maybe include loop)
 
-Button::Button(const sf::Vector2f& pos, const std::string& text, int (*onClickCallback)()) {
+Button::Button(const sf::Vector2f& pos, const std::string& text, boost::function<int ()> onClickCallback) {
 
 	// load textures
 	bgNormal = Game::textureManager.Acquire(thor::Resources::TextureKey::FromFile("res/buttonNormal.png"));

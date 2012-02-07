@@ -16,6 +16,9 @@ public:
 	virtual unsigned short update(float deltaTime);
 	virtual void draw();
 
+	int callbackNewGame();
+	int callbackExit();
+
 private:
 	std::vector<Button> buttons;
 	sf::RenderWindow& renderWindow;
@@ -26,8 +29,3 @@ private:
 	unsigned short handleMouseClick(int mouseX, int mouseY);
 
 };
-
-// TODO move callbacks into class MainMenu to avoid ugly code in handleMouseClick()
-int callbackNewGame();
-int callbackExit();
-int callbackResume();
