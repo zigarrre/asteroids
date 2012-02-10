@@ -11,7 +11,7 @@ Singleplayer::Singleplayer(sf::RenderWindow& renderWindow) :
 
 void Singleplayer::init() {
 	if(!initialized) {
-		entityManager.add(new Spaceship(sf::Vector2f(20.0f,20.0f)));
+		entityManager.add(new Spaceship(sf::Vector2f(20.0f,20.0f)), SPACESHIP);
 		entityManager.add(new Asteroid(sf::Vector2f(0.0f,0.0f),sf::Vector2f(20.0f,30.0f),Asteroid::BIG));
 	}
 }
@@ -34,10 +34,12 @@ unsigned short Singleplayer::update(float deltaTime) {
 			entityManager.showHitBox = !entityManager.showHitBox;
     }
 	entityManager.update(deltaTime);
+	hud.update(deltaTime);
 
 	return Game::SINGLEPLAYER;
 }
 
 void Singleplayer::draw() {
 	entityManager.draw(renderWindow);
+	hud.draw(renderWindow);
 }

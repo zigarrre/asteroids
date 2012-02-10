@@ -1,5 +1,6 @@
 #pragma once
 
+#include "HUD.hpp"
 #include "Gamestate.hpp"
 #include "Entity.hpp"
 #include "Spaceship.hpp"
@@ -20,9 +21,13 @@ class Singleplayer : public Gamestate
         virtual unsigned short update(float deltaTime);
         virtual void draw();
 
+		enum { SPACESHIP };
+
 		static EntityManager entityManager;
+
     protected:
     private:
         sf::RenderWindow& renderWindow;
 		bool initialized;
+		HUD hud;
 };

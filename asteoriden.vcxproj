@@ -93,6 +93,7 @@
     <ClInclude Include="include\Game.hpp" />
     <ClInclude Include="include\Gamestate.hpp" />
     <ClInclude Include="include\GamestateManager.hpp" />
+    <ClInclude Include="include\HUD.hpp" />
     <ClInclude Include="include\MainMenu.hpp" />
     <ClInclude Include="include\Point.hpp" />
     <ClInclude Include="include\Singleplayer.hpp" />
@@ -107,6 +108,7 @@
     <ClCompile Include="src\EntityManager.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\GamestateManager.cpp" />
+    <ClCompile Include="src\HUD.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\MainMenu.cpp" />
     <ClCompile Include="src\Singleplayer.cpp" />
