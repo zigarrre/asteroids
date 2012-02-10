@@ -23,13 +23,13 @@ public:
 	int callbackResume();
 
 private:
-	std::vector<Button> buttons;
+	Button btnResume, btnNewGame, btnExit;
 	sf::RenderWindow& renderWindow;
 	bool gameStarted;
 	thor::ResourcePtr<sf::Texture> texBackground;
 	sf::Sprite background;
 	bool initialized;
 
-	unsigned short handleMouseClick(int mouseX, int mouseY);
+	unsigned short handleMouseClick(const sf::Vector2i& mouseCord);
 
 };

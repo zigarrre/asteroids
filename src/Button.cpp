@@ -1,7 +1,13 @@
 #include "Button.hpp"
 #include "Game.hpp" // include here and not in header to avoid problems with headers (maybe include loop)
 
-Button::Button(const sf::Vector2f& pos, const std::string& text, boost::function<int ()> onClickCallback) {
+#include <iostream>
+using namespace std;
+
+Button::Button(const sf::Vector2f& pos, const std::string& text, boost::function<int ()> onClickCallback, sf::RenderWindow &renderWindow) :
+	renderWindow(renderWindow),
+	enabled(true)
+{
 
 	// load textures
 	bgNormal = Game::textureManager.Acquire(thor::Resources::TextureKey::FromFile("res/buttonNormal.png"));
@@ -23,17 +29,29 @@ Button::Button(const sf::Vector2f& pos, const std::string& text, boost::function
 
 }
 
-void Button::draw(sf::RenderTarget& renderTarget) {
-	renderTarget.Draw(background);
-	renderTarget.Draw(text);
+void Button::update(float deltaTime) {
+
+	if(enabled) {
+		// mouse over
+		if(isOver(sf::Mouse::GetPosition(renderWindow))) {
+			background.SetTexture(*bgActive);
+		} else {
+			background.SetTexture(*bgNormal);
+		}
+	}
+
 }
 
-void Button::setActive(bool active) {
-	if(enabled)
-		if(active)
-			background.SetTexture(*bgActive);
-		else
-			background.SetTexture(*bgNormal);
+void Button::draw() {
+	renderWindow.Draw(background);
+	renderWindow.Draw(text);
+}
+
+bool Button::isOver(sf::Vector2i cord) {
+	if((cord.x > background.GetPosition().x && cord.x < (background.GetPosition().x+background.GetGlobalBounds().Width)) && (cord.y > background.GetPosition().y && cord.y < (background.GetPosition().y+background.GetGlobalBounds().Height)))
+		return true;
+	else
+		return false;
 }
 
 void Button::setEnabled(bool enabled) {

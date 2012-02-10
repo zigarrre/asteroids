@@ -10,15 +10,17 @@ class Button {
 
 public:
 
-	Button(const sf::Vector2f& pos, const std::string& text, boost::function<int ()> onClickCallback);
+	Button(const sf::Vector2f& pos, const std::string& text, boost::function<int ()> onClickCallback, sf::RenderWindow &renderWindow);
+
+	void update(float deltaTime);
 
 	/// Draws all part of the button to the given sf::RenderTarget
-	void draw(sf::RenderTarget& renderTarget);
+	void draw();
 
-	/// if button is set to aktive it will change appearance (mouseover effect)
-	void setActive(bool active);
+	/// returns true if the given coordinates are over the button
+	bool isOver(sf::Vector2i cord);
 
-	// button turn grey and doesn't react to user input anymore
+	/// button turn grey and doesn't react to user input anymore
 	void setEnabled(bool enabled);
 
 	sf::Vector2f getPosition() { return background.GetPosition(); }
@@ -35,5 +37,6 @@ private:
 	sf::Sprite background;
 	sf::Text text;
 	bool enabled;
+	sf::RenderWindow &renderWindow;
 
 };
