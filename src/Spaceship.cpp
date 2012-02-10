@@ -7,7 +7,8 @@ Spaceship::Spaceship(const sf::Vector2f& pos) :
 	rotationspeed(100.0f),
 	weaponCooldown(0.0f),
 	weaponCooldownToSet(0.5f),
-	friction(0.05f)
+	friction(0.05f),
+	lifes(3)
 {
 	thor::Resources::TextureKey key = thor::Resources::TextureKey::FromFile("res/ship.png"); //TODO needs exeption Handling
 	texture = Game::textureManager.Acquire(key);

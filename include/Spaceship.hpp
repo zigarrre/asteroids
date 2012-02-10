@@ -17,6 +17,8 @@ class Spaceship : public Entity
         virtual void update(float deltaTime);
 		virtual void collide(unsigned int id);
 		virtual void rcvMessage(unsigned int msg);
+		unsigned int getLifes() const { return lifes; }
+
     protected:
     private:
         float accelerationToSet;
@@ -24,5 +26,6 @@ class Spaceship : public Entity
 		float weaponCooldown;
 		float weaponCooldownToSet;
 		float friction;
+		unsigned int lifes;
 		thor::ResourcePtr<sf::Texture> texture;
 };
