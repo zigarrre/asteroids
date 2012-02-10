@@ -16,6 +16,7 @@ class Spaceship : public Entity
         Spaceship(const sf::Vector2f& pos);
         virtual void update(float deltaTime);
 		virtual void collide(unsigned int id);
+		void takeDamage(float damage);
 		virtual void rcvMessage(unsigned int msg);
 		unsigned int getLifes() const { return lifes; }
 
@@ -27,5 +28,6 @@ class Spaceship : public Entity
 		float weaponCooldownToSet;
 		float friction;
 		unsigned int lifes;
+		float hp;
 		thor::ResourcePtr<sf::Texture> texture;
 };

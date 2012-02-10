@@ -8,7 +8,8 @@ Spaceship::Spaceship(const sf::Vector2f& pos) :
 	weaponCooldown(0.0f),
 	weaponCooldownToSet(0.5f),
 	friction(0.05f),
-	lifes(3)
+	lifes(3),
+	hp(1.0f)
 {
 	thor::Resources::TextureKey key = thor::Resources::TextureKey::FromFile("res/ship.png"); //TODO needs exeption Handling
 	texture = Game::textureManager.Acquire(key);
@@ -84,6 +85,18 @@ void Spaceship::update(float deltaTime) {
 		weaponCooldown = weaponCooldownToSet;
 	}
 	weaponCooldown -= deltaTime;
+}
+
+void Spaceship::takeDamage(float damage) {
+	hp -= damage;
+	if(hp <= 0) {
+		// TODO destruction animation and respawn
+		if(lifes > 0) {
+			--lifes;
+		} else {
+			// TODO Game over
+		}
+	}
 }
 
 void Spaceship::collide(unsigned int id) {

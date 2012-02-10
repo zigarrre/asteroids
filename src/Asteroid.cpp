@@ -1,4 +1,6 @@
 #include "Asteroid.hpp"
+#include "Spaceship.hpp"
+#include "Singleplayer.hpp"
 #include <iostream>
 
 Asteroid::Asteroid(const sf::Vector2f& pos, const sf::Vector2f& velocity, unsigned short size, float rotation, float rotationVelocity) :
@@ -87,7 +89,10 @@ void Asteroid::update(float deltaTime) {
 }
 
 void Asteroid::collide(unsigned int id) {
-
+	Spaceship* spaceship = dynamic_cast<Spaceship*>(Singleplayer::entityManager.getEntity(id));
+	if(spaceship) {
+		spaceship->takeDamage(1.0f);
+	}
 }
 
 void Asteroid::rcvMessage(unsigned int msg) {
