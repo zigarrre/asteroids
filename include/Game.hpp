@@ -4,6 +4,7 @@
 #include "Singleplayer.hpp"
 #include "MainMenu.hpp"
 #include "GamestateManager.hpp"
+#include "GameOver.hpp"
 #include <SFML/Graphics.hpp>
 #include <Thor/Resources.hpp>
 #include <map>
@@ -24,7 +25,8 @@ class Game {
 
 		enum {
 			SINGLEPLAYER,
-			MAIN_MENU
+			MAIN_MENU,
+			GAME_OVER
 		};
 
     protected:

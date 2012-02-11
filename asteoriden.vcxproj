@@ -91,6 +91,7 @@
     <ClInclude Include="include\Entity.hpp" />
     <ClInclude Include="include\EntityManager.hpp" />
     <ClInclude Include="include\Game.hpp" />
+    <ClInclude Include="include\GameOver.hpp" />
     <ClInclude Include="include\Gamestate.hpp" />
     <ClInclude Include="include\GamestateManager.hpp" />
     <ClInclude Include="include\HUD.hpp" />
@@ -107,6 +108,7 @@
     <ClCompile Include="src\Entity.cpp" />
     <ClCompile Include="src\EntityManager.cpp" />
     <ClCompile Include="src\Game.cpp" />
+    <ClCompile Include="src\GameOver.cpp" />
     <ClCompile Include="src\GamestateManager.cpp" />
     <ClCompile Include="src\HUD.cpp" />
     <ClCompile Include="src\main.cpp" />

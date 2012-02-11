@@ -43,7 +43,16 @@ unsigned short Singleplayer::update(float deltaTime) {
 
 	if(Asteroid::getAsteroidCount() <= 0) {
 		++level;
+		entityManager.getEntity(SPACESHIP)->SetPosition(Game::getResolution().x/2.0f,Game::getResolution().y/2.0f);
+		entityManager.getEntity(SPACESHIP)->SetRotation(0.0f);
 		spawnAsteroids(level);
+	}
+
+	Spaceship* spaceship = dynamic_cast<Spaceship*>(Singleplayer::entityManager.getEntity(Singleplayer::SPACESHIP));
+	if(spaceship) {
+		if(spaceship->getLifes() <= 0) {
+			return Game::GAME_OVER;
+		}
 	}
 
 	return Game::SINGLEPLAYER;
