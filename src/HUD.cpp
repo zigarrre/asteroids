@@ -2,12 +2,18 @@
 #include "Singleplayer.hpp"
 #include "Game.hpp"
 #include "Spaceship.hpp"
+#include "utility.hpp"
 
-HUD::HUD()
+HUD::HUD(const Singleplayer& singleplayer) :
+	singleplayer(singleplayer)
 {
 
 	texLife = Game::textureManager.Acquire(thor::Resources::TextureKey::FromFile("res/life.png"));
-
+	font = Game::fontManager.Acquire(thor::Resources::FontKey::FromFile("res/font.ttf"));
+	currentLevel.SetFont(*font);
+	currentLevel.SetPosition(Game::getResolution().x - 150.0f, 10.0f);
+	currentLevel.SetCharacterSize(15);
+	currentLevel.SetColor(sf::Color::White);
 }
 
 void HUD::update(float deltaTime) {
@@ -21,10 +27,12 @@ void HUD::update(float deltaTime) {
 			lifes.push_back(life);
 		}
 	}
+	currentLevel.SetString("Level   " + rrr::toString(singleplayer.getLevel()));
 }
 
 void HUD::draw(sf::RenderTarget& renderTarget) {
 	for(unsigned int i = 0; i < lifes.size(); ++i) {
 		renderTarget.Draw(*lifes[i]);
 	}
+	renderTarget.Draw(currentLevel);
 }

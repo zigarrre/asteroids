@@ -11,8 +11,6 @@
 #include <Thor/Resources.hpp>
 #include <Thor/Math.hpp>
 
-#include <iostream>
-
 class Singleplayer : public Gamestate
 {
     public:
@@ -22,6 +20,7 @@ class Singleplayer : public Gamestate
 		virtual void reinit();
         virtual unsigned short update(float deltaTime);
         virtual void draw();
+		int getLevel() const { return level; }
 
 		enum { SPACESHIP };
 

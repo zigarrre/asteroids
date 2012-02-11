@@ -5,6 +5,7 @@ EntityManager Singleplayer::entityManager(10);
 Singleplayer::Singleplayer(sf::RenderWindow& renderWindow) :
     renderWindow(renderWindow),
 	initialized(false),
+	hud(*this),
 	saveZone(Game::getResolution().x/2-200.0f,Game::getResolution().y-200.0f,200.0f,200.0f),
 	level(1)
 {

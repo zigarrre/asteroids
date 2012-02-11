@@ -4,11 +4,13 @@
 #include <Thor/Resources.hpp>
 #include <vector>
 
+class Singleplayer;
+
 class HUD {
 
 public:
 
-	HUD();
+	HUD(const Singleplayer& singleplayer);
 
 	void update(float deltaTime);
 
@@ -16,8 +18,10 @@ public:
 
 private:
 
-	std::vector<sf::Sprite*> lifes;
-
 	thor::ResourcePtr<sf::Texture> texLife;
+	thor::ResourcePtr<sf::Font> font;
+	std::vector<sf::Sprite*> lifes;
+	sf::Text currentLevel;
+	const Singleplayer& singleplayer;
 
 };
