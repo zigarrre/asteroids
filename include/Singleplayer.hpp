@@ -8,6 +8,7 @@
 #include "EntityManager.hpp"
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
+#include <Thor/Resources.hpp>
 
 #include <iostream>
 
@@ -30,4 +31,6 @@ class Singleplayer : public Gamestate
         sf::RenderWindow& renderWindow;
 		bool initialized;
 		HUD hud;
+		thor::ResourcePtr<sf::Texture> texBackground;
+		sf::Sprite background;
 };

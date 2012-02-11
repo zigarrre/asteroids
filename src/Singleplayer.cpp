@@ -6,6 +6,8 @@ Singleplayer::Singleplayer(sf::RenderWindow& renderWindow) :
     renderWindow(renderWindow),
 	initialized(false)
 {
+	texBackground = Game::textureManager.Acquire(thor::Resources::TextureKey::FromFile("res/background.png"));
+	background.SetTexture(*texBackground);
 	init();
 }
 
@@ -40,6 +42,7 @@ unsigned short Singleplayer::update(float deltaTime) {
 }
 
 void Singleplayer::draw() {
+	renderWindow.Draw(background);
 	entityManager.draw(renderWindow);
 	hud.draw(renderWindow);
 }
