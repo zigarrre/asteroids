@@ -65,12 +65,29 @@ void Singleplayer::draw() {
 }
 
 void Singleplayer::spawnAsteroids(int lvl) {
+
 	for(int i = 0; i < lvl; ++i) {
+
+		// choose a random position
 		sf::Vector2f pos;
 		do {
 			pos.x = thor::Random(0.0f,float(Game::getResolution().x));
 			pos.y = thor::Random(0.0f,float(Game::getResolution().y));
-		} while(saveZone.Contains(pos));
-		entityManager.add(new Asteroid(pos,sf::Vector2f(20.0f,30.0f),Asteroid::BIG));
+		} while(saveZone.Contains(pos)); // make sure the pos is not in the save zone
+
+		// choose a random velocity
+		sf::Vector2f speed;
+		if(thor::Random(0,1) == 1) {
+			speed.x = thor::Random(25.0f,50.0f);
+		} else {
+			speed.x = thor::Random(-25.0f,-50.0f);
+		}
+		if(thor::Random(0,1) == 1) {
+			speed.y = thor::Random(25.0f,50.0f);
+		} else {
+			speed.y = thor::Random(-25.0f,-50.0f);
+		}
+
+		entityManager.add(new Asteroid(pos,speed,Asteroid::BIG, thor::Random(0.0f,360.0f)));
 	}
 }
