@@ -28,6 +28,7 @@ void Spaceship::update(float deltaTime) {
 
 	if(spawnMode > 0.0f) {
 		
+		// move
 		if(sf::Keyboard::IsKeyPressed(sf::Keyboard::Down))
 			this->Move(0,200.0f*deltaTime);
 		else if(sf::Keyboard::IsKeyPressed(sf::Keyboard::Up))
@@ -37,7 +38,17 @@ void Spaceship::update(float deltaTime) {
 		else if(sf::Keyboard::IsKeyPressed(sf::Keyboard::Left))
 			this->Move(200.0f*-deltaTime,0);
 
-		spawnMode -= deltaTime;
+		spawnMode -= deltaTime; // reduce remaining time in spawn mode
+
+		// blink to indicate spawn mode
+		sf::Color color = this->GetColor();
+		if(spawnMode > 0.0f) {
+			color.a -= int(400*deltaTime);
+		} else {
+			color.a = 255; // make sure that the spaceship is intransparent after spawn mode
+		}
+		this->SetColor(color);
+		
 
 	} else {
 
