@@ -76,16 +76,17 @@ void Singleplayer::spawnAsteroids(int lvl) {
 		} while(saveZone.Contains(pos)); // make sure the pos is not in the save zone
 
 		// choose a random velocity
+		float min = 25.0f, max = 100.0f;
 		sf::Vector2f speed;
 		if(thor::Random(0,1) == 1) {
-			speed.x = thor::Random(25.0f,50.0f);
+			speed.x = thor::Random(min,max);
 		} else {
-			speed.x = thor::Random(-25.0f,-50.0f);
+			speed.x = thor::Random(-min,-max);
 		}
 		if(thor::Random(0,1) == 1) {
-			speed.y = thor::Random(25.0f,50.0f);
+			speed.y = thor::Random(min,max);
 		} else {
-			speed.y = thor::Random(-25.0f,-50.0f);
+			speed.y = thor::Random(-min,-max);
 		}
 
 		entityManager.add(new Asteroid(pos,speed,Asteroid::BIG, thor::Random(0.0f,360.0f)));
