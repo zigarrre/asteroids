@@ -16,10 +16,13 @@ public:
 	void collide(unsigned int id);
 	void rcvMessage(unsigned int msg);
 	void takeDamage(float damage);
+	static int getAsteroidCount() { return asteroidCount; }
 private:
 	bool running;
 	float rotationVelocity;
 	float hp; // Health Points
 	short size;
 	thor::ResourcePtr<sf::Texture> texture;
+
+	static int asteroidCount;
 };

@@ -9,6 +9,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 #include <Thor/Resources.hpp>
+#include <Thor/Math.hpp>
 
 #include <iostream>
 
@@ -33,4 +34,8 @@ class Singleplayer : public Gamestate
 		HUD hud;
 		thor::ResourcePtr<sf::Texture> texBackground;
 		sf::Sprite background;
+		sf::FloatRect saveZone;
+		int level;
+
+		void spawnAsteroids(int lvl);
 };
