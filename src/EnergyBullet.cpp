@@ -3,7 +3,7 @@
 EnergyBullet::EnergyBullet(const sf::Vector2f& pos, float angle) :
 	running(true),
 	speed(200.0f),
-	timeToLive(2.0f),
+	timeToLive(3.0f),
 	destroyed(false)
 {
 	thor::Resources::TextureKey key = thor::Resources::TextureKey::FromFile("res/bullet1.png"); //TODO needs exeption Handling
