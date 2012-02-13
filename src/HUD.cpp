@@ -21,10 +21,12 @@ void HUD::update(float deltaTime) {
 	if(spaceship) {
 		// TODO needs better solution
 		lifes.clear();
-		for(unsigned int i = 0; i < spaceship->getLifes(); ++i) {
-			sf::Sprite* life = new sf::Sprite(*texLife);
-			life->SetPosition(10.0f+life->GetGlobalBounds().Width*i+10,10.0f);
-			lifes.push_back(life);
+		if(spaceship->getLifes() > 1) {
+			for(unsigned int i = 0; i < spaceship->getLifes() -1; ++i) {
+				sf::Sprite* life = new sf::Sprite(*texLife);
+				life->SetPosition(10.0f+life->GetGlobalBounds().Width*i+10,10.0f);
+				lifes.push_back(life);
+			}
 		}
 	}
 	currentLevel.SetString("Level   " + rrr::toString(singleplayer.getLevel()));
