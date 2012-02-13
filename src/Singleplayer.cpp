@@ -16,6 +16,7 @@ Singleplayer::Singleplayer(sf::RenderWindow& renderWindow) :
 
 void Singleplayer::init() {
 	if(!initialized) {
+		level = 1;
 		spawnAsteroids(level);
 		entityManager.add(new Spaceship(sf::Vector2f(20.0f,20.0f)), SPACESHIP);
 	}
