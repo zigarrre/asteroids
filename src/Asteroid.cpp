@@ -64,7 +64,6 @@ void Asteroid::update(float deltaTime) {
 				Singleplayer::entityManager.add(new Asteroid(GetPosition(),sf::Vector2f(velocity[0]-10,velocity[1]+10),size-1,GetRotation(),rotationVelocity));
 				Singleplayer::entityManager.add(new Asteroid(GetPosition(),sf::Vector2f(velocity[0]+10,velocity[1]-10),size-1,GetRotation(),rotationVelocity));
 			}
-			--asteroidCount;
 			Singleplayer::entityManager.remove(getID());
 			return;
 		}
