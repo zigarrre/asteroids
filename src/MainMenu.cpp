@@ -10,6 +10,7 @@ MainMenu::MainMenu(sf::RenderWindow& renderWindow) :
 
 {
 	texBackground = Game::textureManager.Acquire(thor::Resources::TextureKey::FromFile("res/menuBackground.png"));
+	font = Game::fontManager.Acquire(thor::Resources::FontKey::FromFile("res/font.ttf"));
 	init();
 }
 
@@ -20,6 +21,12 @@ void MainMenu::init() {
 
 		background.SetTexture(*texBackground);
 		background.SetPosition(0.0f,0.0f);
+
+		version.SetString("vO.1 alpha"); // 'O' because it looks much better than real '0' in the used game font
+		version.SetFont(*font);
+		version.SetCharacterSize(10);
+		version.SetColor(sf::Color::White);
+		version.SetPosition(Game::getResolution().x - version.GetLocalBounds().Width - 20, Game::getResolution().y - version.GetLocalBounds().Height - 20);
 
 		btnResume.setEnabled(false);
 
@@ -58,6 +65,7 @@ unsigned short MainMenu::update(float deltaTime) {
 void MainMenu::draw() {
 
 	renderWindow.Draw(background);
+	renderWindow.Draw(version);
 
 	btnResume.draw();
 	btnNewGame.draw();

@@ -28,6 +28,8 @@ private:
 	bool gameStarted;
 	thor::ResourcePtr<sf::Texture> texBackground;
 	sf::Sprite background;
+	thor::ResourcePtr<sf::Font> font;
+	sf::Text version;
 	bool initialized;
 
 	unsigned short handleMouseClick(const sf::Vector2i& mouseCord);
