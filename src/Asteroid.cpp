@@ -61,8 +61,8 @@ void Asteroid::update(float deltaTime) {
 		if(hp <= 0.0f) {
 			// object destroid
 			if(size > SMALL) {
-				Singleplayer::entityManager.add(new Asteroid(GetPosition(),sf::Vector2f(velocity[0]-10,velocity[1]+10),size-1,GetRotation(),rotationVelocity));
-				Singleplayer::entityManager.add(new Asteroid(GetPosition(),sf::Vector2f(velocity[0]+10,velocity[1]-10),size-1,GetRotation(),rotationVelocity));
+				Singleplayer::entityManager.add(new Asteroid(GetPosition(),sf::Vector2f(velocity[0]-20,velocity[1]+20),size-1,GetRotation(),rotationVelocity));
+				Singleplayer::entityManager.add(new Asteroid(GetPosition(),sf::Vector2f(velocity[0]+20,velocity[1]-20),size-1,GetRotation(),rotationVelocity));
 			}
 			Singleplayer::entityManager.remove(getID());
 			return;

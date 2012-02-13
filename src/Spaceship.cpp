@@ -3,11 +3,11 @@
 using namespace std;
 
 Spaceship::Spaceship(const sf::Vector2f& pos) :
-    accelerationToSet(1.0f),
-	rotationspeed(100.0f),
+    accelerationToSet(1.5f),
+	rotationspeed(200.0f),
 	weaponCooldown(0.0f),
 	weaponCooldownToSet(0.5f),
-	friction(0.05f),
+	friction(0.2f),
 	lifes(3),
 	hp(1.0f),
 	spawnMode(0.0f)
