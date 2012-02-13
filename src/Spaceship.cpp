@@ -141,3 +141,10 @@ void Spaceship::collide(unsigned int id) {
 void Spaceship::rcvMessage(unsigned int msg) {
 
 }
+
+void Spaceship::reset() {
+	velocity[1] = 0;
+	velocity[0] = 0;
+	SetPosition(Game::getResolution().x/2.0f,Game::getResolution().y/2.0f);
+	SetRotation(0.0f);
+}

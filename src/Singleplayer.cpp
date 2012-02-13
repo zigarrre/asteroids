@@ -44,8 +44,7 @@ unsigned short Singleplayer::update(float deltaTime) {
 
 	if(Asteroid::getAsteroidCount() <= 0) {
 		++level;
-		entityManager.getEntity(SPACESHIP)->SetPosition(Game::getResolution().x/2.0f,Game::getResolution().y/2.0f);
-		entityManager.getEntity(SPACESHIP)->SetRotation(0.0f);
+		entityManager.getEntity(SPACESHIP)->reset();
 		spawnAsteroids(level);
 	}
 

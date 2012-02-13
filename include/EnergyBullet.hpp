@@ -16,6 +16,7 @@ public:
 	bool getRunning() { return running; }
 	virtual void collide(unsigned int id);
 	virtual void rcvMessage(unsigned int msg);
+	virtual void reset() {}
 
 private:
 	bool running;

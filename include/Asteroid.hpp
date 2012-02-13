@@ -18,6 +18,7 @@ public:
 	void rcvMessage(unsigned int msg);
 	void takeDamage(float damage);
 	static int getAsteroidCount() { return asteroidCount; }
+	void reset() {}
 private:
 	bool running;
 	float rotationVelocity;

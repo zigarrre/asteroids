@@ -19,6 +19,7 @@ class Spaceship : public Entity
 		void takeDamage(float damage);
 		virtual void rcvMessage(unsigned int msg);
 		unsigned int getLifes() const { return lifes; }
+		virtual void reset();
 
     protected:
     private:
