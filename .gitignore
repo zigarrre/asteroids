@@ -9,3 +9,5 @@ asteoriden.suo
 Debug/*
 ipch/*
 Release/*
+
+release_noConsole
