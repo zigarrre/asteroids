@@ -61,6 +61,7 @@ unsigned short GameOver::handleMouseClick(const sf::Vector2i& mouseCord) {
 }
 
 int GameOver::callbackMenu() {
+	Game::gamestateManager.get(Game::MAIN_MENU)->reinit();
 	return Game::MAIN_MENU;
 }
 

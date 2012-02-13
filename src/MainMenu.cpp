@@ -15,10 +15,14 @@ MainMenu::MainMenu(sf::RenderWindow& renderWindow) :
 
 void MainMenu::init() {
 	if(!initialized) {
+
+		gameStarted = false;
+
 		background.SetTexture(*texBackground);
 		background.SetPosition(0.0f,0.0f);
 
 		btnResume.setEnabled(false);
+
 	}
 }
 
@@ -76,9 +80,8 @@ int MainMenu::callbackNewGame() {
 	if(!gameStarted) {
 		gameStarted = true;
 		btnResume.setEnabled(true);
-	} else {
-		Game::gamestateManager.get(Game::SINGLEPLAYER)->reinit();
 	}
+	Game::gamestateManager.get(Game::SINGLEPLAYER)->reinit();
 	return Game::SINGLEPLAYER;
 }
 
