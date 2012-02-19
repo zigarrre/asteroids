@@ -41,7 +41,7 @@ unsigned int EntityManager::getNewID() {
 void EntityManager::update(float deltaTime) {
 	map<unsigned int,Entity*>::iterator it = entitys.begin();
 	map<unsigned int,Entity*>::iterator it2 = entitys.begin();
-	for(;it != entitys.end(); it++) {
+	while(it != entitys.end()) {
 		it->second->update(deltaTime);
 		if(it->second != 0) {
 			it2 = entitys.begin();
@@ -51,6 +51,7 @@ void EntityManager::update(float deltaTime) {
 					it2->second->collide(it->second->getID());
 				}
 			}
+			++it;
 		} else {
 			it = entitys.erase(it);
 		}
