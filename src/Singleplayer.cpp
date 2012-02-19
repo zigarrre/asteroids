@@ -81,12 +81,12 @@ void Singleplayer::spawnAsteroids(int lvl) {
 		if(thor::Random(0,1) == 1) {
 			speed.x = thor::Random(min,max);
 		} else {
-			speed.x = thor::Random(-min,-max);
+			speed.x = thor::Random(-max,-min);
 		}
 		if(thor::Random(0,1) == 1) {
 			speed.y = thor::Random(min,max);
 		} else {
-			speed.y = thor::Random(-min,-max);
+			speed.y = thor::Random(-max,-min);
 		}
 
 		entityManager.add(new Asteroid(pos,speed,Asteroid::BIG, thor::Random(0.0f,360.0f)));
