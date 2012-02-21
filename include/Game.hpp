@@ -9,6 +9,8 @@
 #include <Thor/Resources.hpp>
 #include <map>
 #include <algorithm>
+#include <boost/program_options.hpp>
+#include <fstream>
 
 class Game {
 
@@ -22,6 +24,8 @@ class Game {
 		static thor::ResourceManager<sf::Font> fontManager;
 		
 		static GamestateManager gamestateManager;
+
+		static boost::program_options::variables_map config;
 
 		enum {
 			SINGLEPLAYER,

@@ -3,15 +3,16 @@
 using namespace std;
 
 Spaceship::Spaceship(const sf::Vector2f& pos) :
-    accelerationToSet(1.5f),
-	rotationspeed(200.0f),
 	weaponCooldown(0.0f),
-	weaponCooldownToSet(0.5f),
-	friction(0.2f),
-	lifes(3),
-	hp(1.0f),
 	spawnMode(0.0f)
 {
+	accelerationToSet = Game::config["spaceship.acceleration"].as<float>();
+	rotationspeed = Game::config["spaceship.rotationSpeed"].as<float>();
+	weaponCooldownToSet = Game::config["spaceship.weaponCooldown"].as<float>();
+	friction = Game::config["spaceship.friction"].as<float>();
+	lifes = Game::config["spaceship.lifes"].as<unsigned int>();
+	hp = Game::config["spaceship.hp"].as<float>();
+
 	thor::Resources::TextureKey key = thor::Resources::TextureKey::FromFile("res/ship.png"); //TODO needs exeption Handling
 	texture = Game::textureManager.Acquire(key);
     this->SetTexture(*texture);

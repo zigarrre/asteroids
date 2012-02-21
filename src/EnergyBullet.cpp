@@ -6,6 +6,10 @@ EnergyBullet::EnergyBullet(const sf::Vector2f& pos, float angle) :
 	timeToLive(3.0f),
 	destroyed(false)
 {
+	speed = Game::config["energyBullet.speed"].as<float>();
+	timeToLive = Game::config["energyBullet.timeToLive"].as<float>();
+	damage = Game::config["energyBullet.damage"].as<float>();
+
 	thor::Resources::TextureKey key = thor::Resources::TextureKey::FromFile("res/bullet1.png"); //TODO needs exeption Handling
 	texture = Game::textureManager.Acquire(key);
     this->SetTexture(*texture);
@@ -63,7 +67,7 @@ void EnergyBullet::collide(unsigned int id) {
 	Asteroid* asteroid = dynamic_cast<Asteroid*>(Singleplayer::entityManager.getEntity(id));
 	if(asteroid) {
 		//cast ok
-		asteroid->takeDamage(1.0f);
+		asteroid->takeDamage(damage);
 	}
 	destroyed = true;
 }

@@ -53,17 +53,17 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>E:\zigarrre\libs\boost\include;E:\zigarrre\libs\thor\include;$(IncludePath);include;E:\zigarrre\libs\sfml2\include</IncludePath>
-    <LibraryPath>E:\zigarrre\libs\thor\lib;E:\zigarrre\libs\sfml2\lib;$(LibraryPath)</LibraryPath>
+    <LibraryPath>E:\zigarrre\libs\boost\lib;E:\zigarrre\libs\thor\lib;E:\zigarrre\libs\sfml2\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>E:\zigarrre\libs\boost\include;E:\zigarrre\libs\thor\include;$(IncludePath);include;E:\zigarrre\libs\sfml2\include</IncludePath>
-    <LibraryPath>E:\zigarrre\libs\thor\lib;E:\zigarrre\libs\sfml2\lib;$(LibraryPath)</LibraryPath>
+    <LibraryPath>E:\zigarrre\libs\boost\lib;E:\zigarrre\libs\thor\lib;E:\zigarrre\libs\sfml2\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='release_noConsole|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>E:\zigarrre\libs\boost\include;E:\zigarrre\libs\thor\include;$(IncludePath);include;E:\zigarrre\libs\sfml2\include</IncludePath>
-    <LibraryPath>E:\zigarrre\libs\thor\lib;E:\zigarrre\libs\sfml2\lib;$(LibraryPath)</LibraryPath>
+    <LibraryPath>E:\zigarrre\libs\boost\lib;E:\zigarrre\libs\thor\lib;E:\zigarrre\libs\sfml2\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

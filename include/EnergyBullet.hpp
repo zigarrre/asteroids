@@ -23,5 +23,6 @@ private:
 	float speed;
 	float timeToLive;
 	bool destroyed;
+	float damage;
 	thor::ResourcePtr<sf::Texture> texture;
 };

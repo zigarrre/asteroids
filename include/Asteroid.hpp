@@ -24,6 +24,7 @@ private:
 	float rotationVelocity;
 	float hp; // Health Points
 	short size;
+	float spread;
 	thor::ResourcePtr<sf::Texture> texture;
 
 	static int asteroidCount;
