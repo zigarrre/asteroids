@@ -5,6 +5,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 #include <Thor/Resources.hpp>
+#include <cmath>
 
 class Asteroid : public Entity {
 public:

@@ -12,6 +12,7 @@ Asteroid::Asteroid(const sf::Vector2f& pos, const sf::Vector2f& velocity, unsign
 {
 	hp = Game::config["asteroid.hp"].as<float>();
 	spread = Game::config["asteroid.spread"].as<float>();
+	spread *= (PI/180); // convert degree to radian
 
 	SetPosition(pos);
 	SetOrigin(GetLocalBounds().Width/2,GetLocalBounds().Height/2);
@@ -64,8 +65,13 @@ void Asteroid::update(float deltaTime) {
 		if(hp <= 0.0f) {
 			// object destroid
 			if(size > SMALL) {
-				Singleplayer::entityManager.add(new Asteroid(GetPosition(),sf::Vector2f(velocity[0]-spread,velocity[1]+spread),size-1,GetRotation(),rotationVelocity));
-				Singleplayer::entityManager.add(new Asteroid(GetPosition(),sf::Vector2f(velocity[0]+spread,velocity[1]-spread),size-1,GetRotation(),rotationVelocity));
+				sf::Vector2f newVelocity;
+				newVelocity.x = velocity[0] * cos(spread) - velocity[1] * sin(spread);
+				newVelocity.y = velocity[1] * cos(spread) + velocity[0] * sin(spread);
+				Singleplayer::entityManager.add(new Asteroid(GetPosition(),newVelocity,size-1,GetRotation(),rotationVelocity));
+				newVelocity.x = velocity[0] * cos(spread) + velocity[1] * sin(spread);
+				newVelocity.y = velocity[1] * cos(spread) - velocity[0] * sin(spread);
+				Singleplayer::entityManager.add(new Asteroid(GetPosition(),newVelocity,size-1,GetRotation(),rotationVelocity));
 			}
 			Singleplayer::entityManager.remove(getID());
 			return;

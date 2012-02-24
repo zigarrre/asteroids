@@ -28,7 +28,7 @@ Game::Game() :
 		("energyBullet.damage", po::value<float>()->default_value(1.0f))
 
 		("asteroid.hp", po::value<float>()->default_value(1.0f))
-		("asteroid.spread", po::value<float>()->default_value(20.0f))
+		("asteroid.spread", po::value<float>()->default_value(25.0f))
 	;
 	
 	ifstream file;
