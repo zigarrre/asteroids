@@ -14,12 +14,6 @@ Asteroid::Asteroid(const sf::Vector2f& pos, const sf::Vector2f& velocity, unsign
 	spread = Game::config["asteroid.spread"].as<float>();
 	spread *= (PI/180); // convert degree to radian
 
-	SetPosition(pos);
-	SetOrigin(GetLocalBounds().Width/2,GetLocalBounds().Height/2);
-	SetRotation(rotation);
-	this->velocity[0] = velocity.x;
-	this->velocity[1] = velocity.y;
-
 	if(size == BIG) {
 		hitbox.SetPointCount(7);
 		hitbox.SetPoint(0,sf::Vector2f(18.0f,64.0f));
@@ -53,6 +47,13 @@ Asteroid::Asteroid(const sf::Vector2f& pos, const sf::Vector2f& velocity, unsign
 		texture = Game::textureManager.Acquire(thor::Resources::TextureKey::FromFile("res/asteroidSmall.png"));
 	}
     this->SetTexture(*texture);
+
+	SetOrigin(GetLocalBounds().Width/2,GetLocalBounds().Height/2);
+	SetPosition(pos);
+	SetRotation(rotation);
+	this->velocity[0] = velocity.x;
+	this->velocity[1] = velocity.y;
+
 	++asteroidCount;
 }
 
