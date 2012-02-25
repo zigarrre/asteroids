@@ -1,12 +1,15 @@
 #include "Singleplayer.hpp"
 
+#include <iostream>
+using namespace std;
+
 EntityManager Singleplayer::entityManager(10);
 
 Singleplayer::Singleplayer(sf::RenderWindow& renderWindow) :
     renderWindow(renderWindow),
 	initialized(false),
 	hud(*this),
-	saveZone(Game::getResolution().x/2-200.0f,Game::getResolution().y-200.0f,200.0f,200.0f),
+	saveZone(Game::getResolution().x / 2 - 200.0f,Game::getResolution().y / 2 - 200.0f, 400.0f, 400.0f),
 	level(1)
 {
 	texBackground = Game::textureManager.Acquire(thor::Resources::TextureKey::FromFile("res/background.png"));
