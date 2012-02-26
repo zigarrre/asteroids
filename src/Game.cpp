@@ -16,21 +16,21 @@ Game::Game() :
 
 	po::options_description confDesc("Config");
 	confDesc.add_options()
-		("spaceship.acceleration", po::value<float>()->default_value(1.5f))
-		("spaceship.rotationSpeed", po::value<float>()->default_value(200.0f))
-		("spaceship.weaponCooldown", po::value<float>()->default_value(0.5f))
+		("spaceship.acceleration", po::value<float>()->default_value(2.0f))
+		("spaceship.rotationSpeed", po::value<float>()->default_value(300.0f))
+		("spaceship.weaponCooldown", po::value<float>()->default_value(0.2f))
 		("spaceship.friction", po::value<float>()->default_value(0.2f))
 		("spaceship.lifes", po::value<unsigned int>()->default_value(3))
 		("spaceship.hp", po::value<float>()->default_value(1.0f))
 
-		("energyBullet.speed", po::value<float>()->default_value(200.0f))
-		("energyBullet.timeToLive", po::value<float>()->default_value(3.0f))
+		("energyBullet.speed", po::value<float>()->default_value(400.0f))
+		("energyBullet.timeToLive", po::value<float>()->default_value(1.3f))
 		("energyBullet.damage", po::value<float>()->default_value(1.0f))
 
 		("asteroid.hp", po::value<float>()->default_value(1.0f))
 		("asteroid.spread", po::value<float>()->default_value(25.0f))
-		("asteroid.minSpeed", po::value<float>()->default_value(25.0f))
-		("asteroid.maxSpeed", po::value<float>()->default_value(100.0f))
+		("asteroid.minSpeed", po::value<float>()->default_value(50.0f))
+		("asteroid.maxSpeed", po::value<float>()->default_value(150.0f))
 	;
 	
 	ifstream file;
