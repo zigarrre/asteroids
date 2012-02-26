@@ -79,7 +79,8 @@ void Singleplayer::spawnAsteroids(int lvl) {
 		} while(saveZone.Contains(pos)); // make sure the pos is not in the save zone
 
 		// choose a random velocity
-		float min = 25.0f, max = 100.0f;
+		float min = Game::config["asteroid.minSpeed"].as<float>();
+		float max = Game::config["asteroid.maxSpeed"].as<float>();
 		sf::Vector2f speed;
 		if(thor::Random(0,1) == 1) {
 			speed.x = thor::Random(min,max);
