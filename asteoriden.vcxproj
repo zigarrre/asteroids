@@ -153,6 +153,7 @@
     <ClCompile Include="src\MainMenu.cpp" />
     <ClCompile Include="src\Singleplayer.cpp" />
     <ClCompile Include="src\Spaceship.cpp" />
+    <ClCompile Include="src\utility.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

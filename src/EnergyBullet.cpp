@@ -18,11 +18,8 @@ EnergyBullet::EnergyBullet(const sf::Vector2f& pos, float angle) :
 	this->SetRotation(angle);
 	velocity[0] = speed * sin(angle*(PI/180));
 	velocity[1] = speed * -cos(angle*(PI/180));
-	hitbox.SetPointCount(4);
-	hitbox.SetPoint(0,sf::Vector2f(7.0f,17.0f));
-	hitbox.SetPoint(1,sf::Vector2f(7.0f,2.0f));
-	hitbox.SetPoint(2,sf::Vector2f(12.0f,2.0f));
-	hitbox.SetPoint(3,sf::Vector2f(12.0f,17.0f));
+	
+	hitbox = rrr::loadHitbox("res/bullet1.col");
 }
 
 void EnergyBullet::update(float deltaTime) {

@@ -2,6 +2,7 @@
 
 #include "Entity.hpp"
 #include "Game.hpp"
+#include "utility.hpp"
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 #include <Thor/Resources.hpp>
