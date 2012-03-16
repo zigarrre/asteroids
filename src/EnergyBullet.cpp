@@ -1,3 +1,9 @@
+/**
+* Copyright (c) 2012, Jens Mölzer
+* This file is part of the asteroids project and is realeased under the BSD 2-Clause License.
+* For more Details on licensing, see 'LICENCE.txt'.
+**/
+
 #include "EnergyBullet.hpp"
 
 EnergyBullet::EnergyBullet(const sf::Vector2f& pos, float angle) :

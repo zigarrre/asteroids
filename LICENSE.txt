@@ -1,0 +1,48 @@
+asteroids
+---------
+
+Copyright (c) 2012, Jens Mölzer
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without modification,
+are permitted provided that the following conditions are met:
+
+1. Redistributions of source code must retain the above copyright notice,
+   this list of conditions and the following disclaimer.
+
+2. Redistributions in binary form must reproduce the above copyright notice,
+   this list of conditions and the following disclaimer in the documentation
+   and/or other materials provided with the distribution.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR
+ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+
+
+External libraries used by asteroids:
+-------------------------------------
+
+* SFML (sfml-dev.org) is under the zlib/png license
+* Thor (bromeon.ch/libraries/thor) is under the zlib/png license
+* Boost (boost.org) is under the Boost Software License
+
+
+3rd-party Graphics/Fonts used by asteroids:
+-------------------------------------------
+
+* res/background.png a modification of 3 photos by NASA, ESA and Orsola De Marco (Macquarie University)
+  under the Creatives Commons Attribution 2.0 License
+* res/buttonActive.png and res/buttonNormal.png by ironstarmedia.co.uk under the Creative Commons Attribution Licence
+* the original of res/menuBackground.png and res/gameOverBackground.png by psdGraphics.com as non-profit freeware (text added by me)
+* res/font.ttf ("Gunship") by Iconian Fonts (iconian.com) as noncommercial freeware
+
+
+All other Graphics are my own work, and released under the Creativ Commons Attribution 3.0 License (http://creativecommons.org/licenses/by/3.0/).
