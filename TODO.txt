@@ -1,4 +1,0 @@
-- new System for managing Entitys (map?)
-- spielfeld
-- weapon, bullets
-- astroids
