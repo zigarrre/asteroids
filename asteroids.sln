@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "asteoriden", "asteoriden.vcxproj", "{1AEB78E4-7839-4E46-B06C-5778D9CA15E4}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "asteroids", "asteroids.vcxproj", "{1AEB78E4-7839-4E46-B06C-5778D9CA15E4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

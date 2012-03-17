@@ -1,13 +1,15 @@
 
-asteoriden.layout
-asteoriden.depend
-asteoriden.vcxproj.filters
-asteoriden.vcxproj.user
-asteoriden.sdf
-asteoriden.opensdf
-asteoriden.suo
+*.layout
+*.depend
+*.vcxproj.filters
+*.vcxproj.user
+*.sdf
+*.opensdf
+*.suo
 Debug/*
 ipch/*
 Release/*
 
 release_noConsole
+*.filters
+*.user
