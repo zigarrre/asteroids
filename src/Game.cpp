@@ -22,9 +22,9 @@ Game::Game() :
 
 	po::options_description confDesc("Config");
 	confDesc.add_options()
-		("spaceship.acceleration", po::value<float>()->default_value(2.0f))
+		("spaceship.acceleration", po::value<float>()->default_value(300.0f))
 		("spaceship.rotationSpeed", po::value<float>()->default_value(300.0f))
-		("spaceship.weaponCooldown", po::value<float>()->default_value(0.2f))
+		("spaceship.weaponCooldown", po::value<float>()->default_value(100.0f))
 		("spaceship.friction", po::value<float>()->default_value(0.2f))
 		("spaceship.lifes", po::value<unsigned int>()->default_value(3))
 		("spaceship.hp", po::value<float>()->default_value(1.0f))

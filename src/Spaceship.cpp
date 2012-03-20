@@ -6,8 +6,6 @@
 
 #include "Spaceship.hpp"
 
-using namespace std;
-
 Spaceship::Spaceship(const sf::Vector2f& pos) :
 	weaponCooldown(0.0f),
 	spawnMode(0.0f)
@@ -18,6 +16,7 @@ Spaceship::Spaceship(const sf::Vector2f& pos) :
 	friction = Game::config["spaceship.friction"].as<float>();
 	lifes = Game::config["spaceship.lifes"].as<unsigned int>();
 	hp = Game::config["spaceship.hp"].as<float>();
+	bulletSpeed = Game::config["energyBullet.speed"].as<float>();
 
 	thor::Resources::TextureKey key = thor::Resources::TextureKey::FromFile("res/ship.png"); //TODO needs exeption Handling
 	texture = Game::textureManager.Acquire(key);
@@ -87,7 +86,7 @@ void Spaceship::update(float deltaTime) {
 		velocity[1] += acceleration[1]*deltaTime;
 
 		// move
-		this->Move(velocity[0], velocity[1]);
+		this->Move(velocity[0]*deltaTime, velocity[1]*deltaTime);
 	
 		// if the spaceship has left the field, set it to the opposite side
 		sf::Vector2f pos = this->GetPosition();
@@ -112,6 +111,7 @@ void Spaceship::update(float deltaTime) {
 				sf::Vector2f(
 					this->GetPosition().x+sin(this->GetRotation()*(PI/180))*this->GetLocalBounds().Width/2, // spawn the bullet in front of the shipt instead in the middle to prevent unwanted collisions
 					this->GetPosition().y-cos(this->GetRotation()*(PI/180))*this->GetLocalBounds().Height/2),
+				sqrt((velocity[0]*velocity[0])+(velocity[1]*velocity[1])) + bulletSpeed,
 				this->GetRotation()));
 			weaponCooldown = weaponCooldownToSet;
 		}
