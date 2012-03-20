@@ -22,19 +22,19 @@ Asteroid::Asteroid(const sf::Vector2f& pos, const sf::Vector2f& velocity, unsign
 
 	if(size == BIG) {
 		hitbox = rrr::loadHitbox("res/asteroid.col");
-		texture = Game::textureManager.Acquire(thor::Resources::TextureKey::FromFile("res/asteroid.png"));
+		texture = Game::textureManager.acquire(thor::Resources::TextureKey::fromFile("res/asteroid.png"));
 	} else if(size == MEDIUM) {
 		hitbox = rrr::loadHitbox("res/asteroidMedium.col");
-		texture = Game::textureManager.Acquire(thor::Resources::TextureKey::FromFile("res/asteroidMedium.png"));
+		texture = Game::textureManager.acquire(thor::Resources::TextureKey::fromFile("res/asteroidMedium.png"));
 	} else if(size == SMALL) {
 		hitbox = rrr::loadHitbox("res/asteroidSmall.col");
-		texture = Game::textureManager.Acquire(thor::Resources::TextureKey::FromFile("res/asteroidSmall.png"));
+		texture = Game::textureManager.acquire(thor::Resources::TextureKey::fromFile("res/asteroidSmall.png"));
 	}
-    this->SetTexture(*texture);
+    this->setTexture(*texture);
 
-	SetOrigin(GetLocalBounds().Width/2,GetLocalBounds().Height/2);
-	SetPosition(pos);
-	SetRotation(rotation);
+	setOrigin(getLocalBounds().width/2,getLocalBounds().height/2);
+	setPosition(pos);
+	setRotation(rotation);
 	this->velocity[0] = velocity.x;
 	this->velocity[1] = velocity.y;
 
@@ -50,33 +50,33 @@ void Asteroid::update(float deltaTime) {
 				sf::Vector2f newVelocity;
 				newVelocity.x = velocity[0] * cos(spread) - velocity[1] * sin(spread);
 				newVelocity.y = velocity[1] * cos(spread) + velocity[0] * sin(spread);
-				Singleplayer::entityManager.add(new Asteroid(GetPosition(),newVelocity,size-1,GetRotation(),rotationVelocity));
+				Singleplayer::entityManager.add(new Asteroid(getPosition(),newVelocity,size-1,getRotation(),rotationVelocity));
 				newVelocity.x = velocity[0] * cos(spread) + velocity[1] * sin(spread);
 				newVelocity.y = velocity[1] * cos(spread) - velocity[0] * sin(spread);
-				Singleplayer::entityManager.add(new Asteroid(GetPosition(),newVelocity,size-1,GetRotation(),rotationVelocity));
+				Singleplayer::entityManager.add(new Asteroid(getPosition(),newVelocity,size-1,getRotation(),rotationVelocity));
 			}
 			Singleplayer::entityManager.remove(getID());
 			return;
 		}
 
-		Move(velocity[0]*deltaTime, velocity[1]*deltaTime);
-		Rotate(rotationVelocity*deltaTime);
+		move(velocity[0]*deltaTime, velocity[1]*deltaTime);
+		rotate(rotationVelocity*deltaTime);
 
 		// if the astroid has left the field, set it to the opposite side
-		sf::Vector2f pos = this->GetPosition();
+		sf::Vector2f pos = this->getPosition();
 		sf::Vector2f size;
-		size.x = this->GetGlobalBounds().Width;
-		size.y = this->GetGlobalBounds().Height;
-		sf::Vector2f origin = this->GetOrigin();
+		size.x = this->getGlobalBounds().width;
+		size.y = this->getGlobalBounds().height;
+		sf::Vector2f origin = this->getOrigin();
 		if((pos.x + (size.x/2)) < 0) {
-			this->SetPosition(Game::getResolution().x + (size.x/2), pos.y);
+			this->setPosition(Game::getResolution().x + (size.x/2), pos.y);
 		} else if(pos.x - (size.x/2) > Game::getResolution().x) {
-			this->SetPosition(-size.x+(size.x/2),pos.y);
+			this->setPosition(-size.x+(size.x/2),pos.y);
 		}
 		if((pos.y + (size.y/2)) < 0) {
-			this->SetPosition(pos.x, Game::getResolution().y + (size.y/2));
+			this->setPosition(pos.x, Game::getResolution().y + (size.y/2));
 		} else if(pos.y - (size.y/2) > Game::getResolution().y) {
-			this->SetPosition(pos.x, -size.y+(size.y/2));
+			this->setPosition(pos.x, -size.y+(size.y/2));
 		}
 	}
 }

@@ -29,7 +29,7 @@ public:
 	/// button turn grey and doesn't react to user input anymore
 	void setEnabled(bool enabled);
 
-	sf::Vector2f getPosition() { return background.GetPosition(); }
+	sf::Vector2f getPosition() { return background.getPosition(); }
 
 	sf::Vector2f getSize();
 

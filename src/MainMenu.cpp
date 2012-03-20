@@ -15,8 +15,8 @@ MainMenu::MainMenu(sf::RenderWindow& renderWindow) :
 	btnExit(sf::Vector2f(340.0f,500.0f),"Exit",boost::bind(&MainMenu::callbackExit,this),renderWindow)
 
 {
-	texBackground = Game::textureManager.Acquire(thor::Resources::TextureKey::FromFile("res/menuBackground.png"));
-	font = Game::fontManager.Acquire(thor::Resources::FontKey::FromFile("res/font.ttf"));
+	texBackground = Game::textureManager.acquire(thor::Resources::TextureKey::fromFile("res/menuBackground.png"));
+	font = Game::fontManager.acquire(thor::Resources::FontKey::fromFile("res/font.ttf"));
 	init();
 }
 
@@ -25,14 +25,14 @@ void MainMenu::init() {
 
 		gameStarted = false;
 
-		background.SetTexture(*texBackground);
-		background.SetPosition(0.0f,0.0f);
+		background.setTexture(*texBackground);
+		background.setPosition(0.0f,0.0f);
 
-		version.SetString("vO.1 alpha"); // 'O' because it looks much better than real '0' in the used game font
-		version.SetFont(*font);
-		version.SetCharacterSize(10);
-		version.SetColor(sf::Color::White);
-		version.SetPosition(Game::getResolution().x - version.GetLocalBounds().Width - 20, Game::getResolution().y - version.GetLocalBounds().Height - 20);
+		version.setString("vO.1 alpha"); // 'O' because it looks much better than real '0' in the used game font
+		version.setFont(*font);
+		version.setCharacterSize(10);
+		version.setColor(sf::Color::White);
+		version.setPosition(Game::getResolution().x - version.getLocalBounds().width - 20, Game::getResolution().y - version.getLocalBounds().height - 20);
 
 		btnResume.setEnabled(false);
 
@@ -48,16 +48,16 @@ unsigned short MainMenu::update(float deltaTime) {
 
 	// event handling
 	sf::Event Event;
-    while (renderWindow.PollEvent(Event)) {
-        if (Event.Type == sf::Event::Closed)
-            renderWindow.Close();
-		else if (Event.Type == sf::Event::KeyPressed && Event.Key.Code == sf::Keyboard::Escape)
+    while (renderWindow.pollEvent(Event)) {
+        if (Event.type == sf::Event::Closed)
+            renderWindow.close();
+		else if (Event.type == sf::Event::KeyPressed && Event.key.code == sf::Keyboard::Escape)
 			if(gameStarted)
 				return Game::SINGLEPLAYER;
 			else
-				renderWindow.Close();
-		else if (Event.Type == sf::Event::MouseButtonReleased && Event.MouseButton.Button == sf::Mouse::Left) {
-			return handleMouseClick(sf::Vector2i(Event.MouseButton.X,Event.MouseButton.Y));
+				renderWindow.close();
+		else if (Event.type == sf::Event::MouseButtonReleased && Event.mouseButton.button == sf::Mouse::Left) {
+			return handleMouseClick(sf::Vector2i(Event.mouseButton.y,Event.mouseButton.y));
 		}
     }
 
@@ -70,8 +70,8 @@ unsigned short MainMenu::update(float deltaTime) {
 
 void MainMenu::draw() {
 
-	renderWindow.Draw(background);
-	renderWindow.Draw(version);
+	renderWindow.draw(background);
+	renderWindow.draw(version);
 
 	btnResume.draw();
 	btnNewGame.draw();
@@ -100,7 +100,7 @@ int MainMenu::callbackNewGame() {
 }
 
 int MainMenu::callbackExit() {
-	renderWindow.Close();
+	renderWindow.close();
 	return Game::MAIN_MENU;
 }
 

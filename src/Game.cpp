@@ -46,8 +46,8 @@ Game::Game() :
 	file.close();
     po::notify(config);
 
-	renderWindow.EnableVerticalSync(true);
-	renderWindow.SetFramerateLimit(60);
+	renderWindow.setVerticalSyncEnabled(true);
+	renderWindow.setFramerateLimit(60);
 
 	gamestateManager.add(new Singleplayer(renderWindow), SINGLEPLAYER);
 	gamestateManager.add(new MainMenu(renderWindow), MAIN_MENU);
@@ -59,10 +59,13 @@ void Game::startGameLoop() {
 
     float frameTime;
     float delta;
+    sf::Clock frameClock;
 
-    while(renderWindow.IsOpened()) {
+    while(renderWindow.isOpen()) {
 
-        frameTime = renderWindow.GetFrameTime()/1000.0f;
+        frameTime = frameClock.getElapsedTime().asSeconds();
+        frameClock.restart();
+        
 
         // Update
         while(frameTime > 0.0f) {
@@ -72,9 +75,9 @@ void Game::startGameLoop() {
         }
 
 		// Draw
-        renderWindow.Clear();
+        renderWindow.clear();
 		gamestateManager.getActiveState()->draw();
-        renderWindow.Display();
+        renderWindow.display();
     }
 }
 

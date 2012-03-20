@@ -13,14 +13,14 @@ GameOver::GameOver(sf::RenderWindow& renderWindow) :
 	btnMenu(sf::Vector2f(340.0f,500.0f),"Menu",boost::bind(&GameOver::callbackMenu,this),renderWindow)
 
 {
-	texBackground = Game::textureManager.Acquire(thor::Resources::TextureKey::FromFile("res/gameOverBackground.png"));
+	texBackground = Game::textureManager.acquire(thor::Resources::TextureKey::fromFile("res/gameOverBackground.png"));
 	init();
 }
 
 void GameOver::init() {
 	if(!initialized) {
-		background.SetTexture(*texBackground);
-		background.SetPosition(0.0f,0.0f);
+		background.setTexture(*texBackground);
+		background.setPosition(0.0f,0.0f);
 	}
 }
 
@@ -33,11 +33,11 @@ unsigned short GameOver::update(float deltaTime) {
 
 	// event handling
 	sf::Event Event;
-    while (renderWindow.PollEvent(Event)) {
-        if (Event.Type == sf::Event::Closed)
-            renderWindow.Close();
-		else if (Event.Type == sf::Event::MouseButtonReleased && Event.MouseButton.Button == sf::Mouse::Left) {
-			return handleMouseClick(sf::Vector2i(Event.MouseButton.X,Event.MouseButton.Y));
+    while (renderWindow.pollEvent(Event)) {
+        if (Event.type == sf::Event::Closed)
+            renderWindow.close();
+		else if (Event.type == sf::Event::MouseButtonReleased && Event.mouseButton.button == sf::Mouse::Left) {
+			return handleMouseClick(sf::Vector2i(Event.mouseButton.x,Event.mouseButton.y));
 		}
     }
 
@@ -49,7 +49,7 @@ unsigned short GameOver::update(float deltaTime) {
 
 void GameOver::draw() {
 
-	renderWindow.Draw(background);
+	renderWindow.draw(background);
 
 	btnRestart.draw();
 	btnMenu.draw();

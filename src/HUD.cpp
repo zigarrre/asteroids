@@ -14,12 +14,12 @@ HUD::HUD(const Singleplayer& singleplayer) :
 	singleplayer(singleplayer)
 {
 
-	texLife = Game::textureManager.Acquire(thor::Resources::TextureKey::FromFile("res/life.png"));
-	font = Game::fontManager.Acquire(thor::Resources::FontKey::FromFile("res/font.ttf"));
-	currentLevel.SetFont(*font);
-	currentLevel.SetPosition(Game::getResolution().x - 150.0f, 10.0f);
-	currentLevel.SetCharacterSize(15);
-	currentLevel.SetColor(sf::Color::White);
+	texLife = Game::textureManager.acquire(thor::Resources::TextureKey::fromFile("res/life.png"));
+	font = Game::fontManager.acquire(thor::Resources::FontKey::fromFile("res/font.ttf"));
+	currentLevel.setFont(*font);
+	currentLevel.setPosition(Game::getResolution().x - 150.0f, 10.0f);
+	currentLevel.setCharacterSize(15);
+	currentLevel.setColor(sf::Color::White);
 }
 
 void HUD::update(float deltaTime) {
@@ -30,17 +30,17 @@ void HUD::update(float deltaTime) {
 		if(spaceship->getLifes() > 1) {
 			for(unsigned int i = 0; i < spaceship->getLifes() -1; ++i) {
 				sf::Sprite* life = new sf::Sprite(*texLife);
-				life->SetPosition(10.0f+life->GetGlobalBounds().Width*i+10,10.0f);
+				life->setPosition(10.0f+life->getGlobalBounds().width*i+10,10.0f);
 				lifes.push_back(life);
 			}
 		}
 	}
-	currentLevel.SetString("Level   " + rrr::toString(singleplayer.getLevel()));
+	currentLevel.setString("Level   " + rrr::toString(singleplayer.getLevel()));
 }
 
 void HUD::draw(sf::RenderTarget& renderTarget) {
 	for(unsigned int i = 0; i < lifes.size(); ++i) {
-		renderTarget.Draw(*lifes[i]);
+		renderTarget.draw(*lifes[i]);
 	}
-	renderTarget.Draw(currentLevel);
+	renderTarget.draw(currentLevel);
 }

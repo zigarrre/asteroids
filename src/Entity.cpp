@@ -16,8 +16,8 @@ Entity::Entity()
 
 sf::ConvexShape Entity::getHitBox() const {
 	sf::ConvexShape rv = hitbox;
-	rv.SetOrigin(GetOrigin());
-	rv.SetRotation(GetRotation());
-	rv.SetPosition(GetPosition());
+	rv.setOrigin(getOrigin());
+	rv.setRotation(getRotation());
+	rv.setPosition(getPosition());
 	return rv;
 }

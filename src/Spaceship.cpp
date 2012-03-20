@@ -18,11 +18,11 @@ Spaceship::Spaceship(const sf::Vector2f& pos) :
 	hp = Game::config["spaceship.hp"].as<float>();
 	bulletSpeed = Game::config["energyBullet.speed"].as<float>();
 
-	thor::Resources::TextureKey key = thor::Resources::TextureKey::FromFile("res/ship.png"); //TODO needs exeption Handling
-	texture = Game::textureManager.Acquire(key);
-    this->SetTexture(*texture);
-	this->SetPosition(Game::getResolution().x/2.0f, Game::getResolution().y/2.0f);
-	this->SetOrigin(this->GetLocalBounds().Width/2.0f,this->GetLocalBounds().Height/2.0f);
+	thor::Resources::TextureKey key = thor::Resources::TextureKey::fromFile("res/ship.png"); //TODO needs exeption Handling
+	texture = Game::textureManager.acquire(key);
+    this->setTexture(*texture);
+	this->setPosition(Game::getResolution().x/2.0f, Game::getResolution().y/2.0f);
+	this->setOrigin(this->getLocalBounds().width/2.0f,this->getLocalBounds().height/2.0f);
 
 	hitbox = rrr::loadHitbox("res/ship.col");
 }
@@ -32,43 +32,43 @@ void Spaceship::update(float deltaTime) {
 	if(spawnMode > 0.0f) {
 		
 		// move
-		if(sf::Keyboard::IsKeyPressed(sf::Keyboard::Down))
-			this->Move(0,200.0f*deltaTime);
-		else if(sf::Keyboard::IsKeyPressed(sf::Keyboard::Up))
-			this->Move(0,200.0f*-deltaTime);
-		if(sf::Keyboard::IsKeyPressed(sf::Keyboard::Right))
-			this->Move(200.0f*deltaTime,0);
-		else if(sf::Keyboard::IsKeyPressed(sf::Keyboard::Left))
-			this->Move(200.0f*-deltaTime,0);
+		if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+			this->move(0,200.0f*deltaTime);
+		else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+			this->move(0,200.0f*-deltaTime);
+		if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+			this->move(200.0f*deltaTime,0);
+		else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+			this->move(200.0f*-deltaTime,0);
 
 		spawnMode -= deltaTime; // reduce remaining time in spawn mode
 
 		// blink to indicate spawn mode
-		sf::Color color = this->GetColor();
+		sf::Color color = this->getColor();
 		if(spawnMode > 0.0f) {
 			color.a -= int(400*deltaTime);
 		} else {
 			color.a = 255; // make sure that the spaceship is intransparent after spawn mode
 		}
-		this->SetColor(color);
+		this->setColor(color);
 		
 
 	} else {
 
 		// rotate
-		if(sf::Keyboard::IsKeyPressed(sf::Keyboard::Right)) {
-			this->Rotate(rotationspeed*deltaTime);
-		} else if(sf::Keyboard::IsKeyPressed(sf::Keyboard::Left)) {
-			this->Rotate(-rotationspeed*deltaTime);
+		if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
+			this->rotate(rotationspeed*deltaTime);
+		} else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
+			this->rotate(-rotationspeed*deltaTime);
 		}
 
 		// set acceleration
-		if(sf::Keyboard::IsKeyPressed(sf::Keyboard::Up)) {
-			acceleration[0] = -sin(this->GetRotation()*(PI/180)) * -accelerationToSet;
-			acceleration[1] = cos(this->GetRotation()*(PI/180)) * -accelerationToSet;
-		} else if(sf::Keyboard::IsKeyPressed(sf::Keyboard::Down)) {
-			acceleration[0] = -sin(this->GetRotation()*(PI/180)) * accelerationToSet;
-			acceleration[1] = cos(this->GetRotation()*(PI/180)) * accelerationToSet;
+		if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+			acceleration[0] = -sin(this->getRotation()*(PI/180)) * -accelerationToSet;
+			acceleration[1] = cos(this->getRotation()*(PI/180)) * -accelerationToSet;
+		} else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
+			acceleration[0] = -sin(this->getRotation()*(PI/180)) * accelerationToSet;
+			acceleration[1] = cos(this->getRotation()*(PI/180)) * accelerationToSet;
 		} else {
 			// apply friction
 			if(velocity[0] > 0) 
@@ -86,33 +86,33 @@ void Spaceship::update(float deltaTime) {
 		velocity[1] += acceleration[1]*deltaTime;
 
 		// move
-		this->Move(velocity[0]*deltaTime, velocity[1]*deltaTime);
+		this->move(velocity[0]*deltaTime, velocity[1]*deltaTime);
 	
 		// if the spaceship has left the field, set it to the opposite side
-		sf::Vector2f pos = this->GetPosition();
+		sf::Vector2f pos = this->getPosition();
 		sf::Vector2f size;
-		size.x = this->GetGlobalBounds().Width;
-		size.y = this->GetGlobalBounds().Height;
-		sf::Vector2f origin = this->GetOrigin();
+		size.x = this->getGlobalBounds().width;
+		size.y = this->getGlobalBounds().height;
+		sf::Vector2f origin = this->getOrigin();
 		if((pos.x + (size.x/2)) < 0) {
-			this->SetPosition(Game::getResolution().x + (size.x/2), pos.y);
+			this->setPosition(Game::getResolution().x + (size.x/2), pos.y);
 		} else if(pos.x - (size.x/2) > Game::getResolution().x) {
-			this->SetPosition(-size.x+(size.x/2),pos.y);
+			this->setPosition(-size.x+(size.x/2),pos.y);
 		}
 		if((pos.y + (size.y/2)) < 0) {
-			this->SetPosition(pos.x, Game::getResolution().y + (size.y/2));
+			this->setPosition(pos.x, Game::getResolution().y + (size.y/2));
 		} else if(pos.y - (size.y/2) > Game::getResolution().y) {
-			this->SetPosition(pos.x, -size.y+(size.y/2));
+			this->setPosition(pos.x, -size.y+(size.y/2));
 		}
 
 		// fire
-		if(sf::Keyboard::IsKeyPressed(sf::Keyboard::Space) && (weaponCooldown <= 0)) {
+		if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && (weaponCooldown <= 0)) {
 			Singleplayer::entityManager.add(new EnergyBullet(
 				sf::Vector2f(
-					this->GetPosition().x+sin(this->GetRotation()*(PI/180))*this->GetLocalBounds().Width/2, // spawn the bullet in front of the shipt instead in the middle to prevent unwanted collisions
-					this->GetPosition().y-cos(this->GetRotation()*(PI/180))*this->GetLocalBounds().Height/2),
+					this->getPosition().x+sin(this->getRotation()*(PI/180))*this->getLocalBounds().width/2, // spawn the bullet in front of the shipt instead in the middle to prevent unwanted collisions
+					this->getPosition().y-cos(this->getRotation()*(PI/180))*this->getLocalBounds().height/2),
 				sqrt((velocity[0]*velocity[0])+(velocity[1]*velocity[1])) + bulletSpeed,
-				this->GetRotation()));
+				this->getRotation()));
 			weaponCooldown = weaponCooldownToSet;
 		}
 		weaponCooldown -= deltaTime;
@@ -125,10 +125,10 @@ void Spaceship::takeDamage(float damage) {
 		if(hp <= 0) {
 			// TODO destruction animation and respawn
 			spawnMode = 2.0f;
-			SetRotation(0.0f);
+			setRotation(0.0f);
 			velocity[0] = 0.0f;
 			velocity[1] = 0.0f;
-			SetPosition(Game::getResolution().x/2.0f,Game::getResolution().y/2.0f);
+			setPosition(Game::getResolution().x/2.0f,Game::getResolution().y/2.0f);
 			if(lifes > 0) {
 				--lifes;
 			} else {
@@ -149,6 +149,6 @@ void Spaceship::rcvMessage(unsigned int msg) {
 void Spaceship::reset() {
 	velocity[1] = 0;
 	velocity[0] = 0;
-	SetPosition(Game::getResolution().x/2.0f,Game::getResolution().y/2.0f);
-	SetRotation(0.0f);
+	setPosition(Game::getResolution().x/2.0f,Game::getResolution().y/2.0f);
+	setRotation(0.0f);
 }

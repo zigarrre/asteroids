@@ -27,12 +27,12 @@ namespace rrr {
 		file.open(path);
 
 		sf::ConvexShape hitbox;
-		hitbox.SetPointCount(lines);
+		hitbox.setPointCount(lines);
 
 		for(unsigned int i = 0; i < lines; ++i) {
 			sf::Vector2f point;
 			file>>point.x>>point.y;
-			hitbox.SetPoint(i,point);
+			hitbox.setPoint(i,point);
 		}
 
 		file.close();

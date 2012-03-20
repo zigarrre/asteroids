@@ -16,20 +16,20 @@ Button::Button(const sf::Vector2f& pos, const std::string& text, boost::function
 {
 
 	// load textures
-	bgNormal = Game::textureManager.Acquire(thor::Resources::TextureKey::FromFile("res/buttonNormal.png"));
-	bgActive = Game::textureManager.Acquire(thor::Resources::TextureKey::FromFile("res/buttonActive.png"));
-	bgDisabled = Game::textureManager.Acquire(thor::Resources::TextureKey::FromFile("res/buttonDisabled.png"));
+	bgNormal = Game::textureManager.acquire(thor::Resources::TextureKey::fromFile("res/buttonNormal.png"));
+	bgActive = Game::textureManager.acquire(thor::Resources::TextureKey::fromFile("res/buttonActive.png"));
+	bgDisabled = Game::textureManager.acquire(thor::Resources::TextureKey::fromFile("res/buttonDisabled.png"));
 
 	// load font
-	font = Game::fontManager.Acquire(thor::Resources::FontKey::FromFile("res/font.ttf"));
+	font = Game::fontManager.acquire(thor::Resources::FontKey::fromFile("res/font.ttf"));
 
-	background.SetTexture(*bgNormal);
-	background.SetPosition(pos);
+	background.setTexture(*bgNormal);
+	background.setPosition(pos);
 
-	this->text.SetFont(*font);
-	this->text.SetString(text);
-	this->text.SetPosition(pos.x+background.GetLocalBounds().Width/2-this->text.GetLocalBounds().Width/2,pos.y+12);
-	this->text.SetColor(sf::Color(255,255,255));
+	this->text.setFont(*font);
+	this->text.setString(text);
+	this->text.setPosition(pos.x+background.getLocalBounds().width/2-this->text.getLocalBounds().width/2,pos.y+12);
+	this->text.setColor(sf::Color(255,255,255));
 
 	onClick = onClickCallback;
 
@@ -39,22 +39,22 @@ void Button::update(float deltaTime) {
 
 	if(enabled) {
 		// mouse over
-		if(isOver(sf::Mouse::GetPosition(renderWindow))) {
-			background.SetTexture(*bgActive);
+		if(isOver(sf::Mouse::getPosition(renderWindow))) {
+			background.setTexture(*bgActive);
 		} else {
-			background.SetTexture(*bgNormal);
+			background.setTexture(*bgNormal);
 		}
 	}
 
 }
 
 void Button::draw() {
-	renderWindow.Draw(background);
-	renderWindow.Draw(text);
+	renderWindow.draw(background);
+	renderWindow.draw(text);
 }
 
 bool Button::isOver(sf::Vector2i cord) {
-	if((cord.x > background.GetPosition().x && cord.x < (background.GetPosition().x+background.GetGlobalBounds().Width)) && (cord.y > background.GetPosition().y && cord.y < (background.GetPosition().y+background.GetGlobalBounds().Height)))
+	if((cord.x > background.getPosition().x && cord.x < (background.getPosition().x+background.getGlobalBounds().width)) && (cord.y > background.getPosition().y && cord.y < (background.getPosition().y+background.getGlobalBounds().height)))
 		return true;
 	else
 		return false;
@@ -63,17 +63,17 @@ bool Button::isOver(sf::Vector2i cord) {
 void Button::setEnabled(bool enabled) {
 	this->enabled = enabled;
 	if(!enabled) {
-		background.SetTexture(*bgDisabled);
-		text.SetColor(sf::Color(180,180,180));
+		background.setTexture(*bgDisabled);
+		text.setColor(sf::Color(180,180,180));
 	} else {
-		background.SetTexture(*bgNormal);
-		text.SetColor(sf::Color(255,255,255));
+		background.setTexture(*bgNormal);
+		text.setColor(sf::Color(255,255,255));
 	}
 }
 
 sf::Vector2f Button::getSize() {
 	sf::Vector2f rv;
-	rv.x = background.GetGlobalBounds().Width;
-	rv.y = background.GetGlobalBounds().Height;
+	rv.x = background.getGlobalBounds().width;
+	rv.y = background.getGlobalBounds().height;
 	return rv;
 }

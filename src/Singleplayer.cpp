@@ -18,8 +18,8 @@ Singleplayer::Singleplayer(sf::RenderWindow& renderWindow) :
 	saveZone(Game::getResolution().x / 2 - 200.0f,Game::getResolution().y / 2 - 200.0f, 400.0f, 400.0f),
 	level(1)
 {
-	texBackground = Game::textureManager.Acquire(thor::Resources::TextureKey::FromFile("res/background.png"));
-	background.SetTexture(*texBackground);
+	texBackground = Game::textureManager.acquire(thor::Resources::TextureKey::fromFile("res/background.png"));
+	background.setTexture(*texBackground);
 	init();
 }
 
@@ -40,12 +40,12 @@ void Singleplayer::reinit() {
 unsigned short Singleplayer::update(float deltaTime) {
 
     sf::Event e;
-    while (renderWindow.PollEvent(e)) {
-        if (e.Type == sf::Event::Closed)
-            renderWindow.Close();
-		else if (e.Type == sf::Event::KeyPressed && e.Key.Code == sf::Keyboard::Escape)
+    while (renderWindow.pollEvent(e)) {
+        if (e.type == sf::Event::Closed)
+            renderWindow.close();
+		else if (e.type == sf::Event::KeyPressed && e.key.code == sf::Keyboard::Escape)
 			return Game::MAIN_MENU;
-		else if (e.Type == sf::Event::KeyPressed && e.Key.Code == sf::Keyboard::H)
+		else if (e.type == sf::Event::KeyPressed && e.key.code == sf::Keyboard::H)
 			entityManager.showHitBox = !entityManager.showHitBox;
     }
 	entityManager.update(deltaTime);
@@ -68,7 +68,7 @@ unsigned short Singleplayer::update(float deltaTime) {
 }
 
 void Singleplayer::draw() {
-	renderWindow.Draw(background);
+	renderWindow.draw(background);
 	entityManager.draw(renderWindow);
 	hud.draw(renderWindow);
 }
@@ -80,25 +80,25 @@ void Singleplayer::spawnAsteroids(int lvl) {
 		// choose a random position
 		sf::Vector2f pos;
 		do {
-			pos.x = thor::Random(0.0f,float(Game::getResolution().x));
-			pos.y = thor::Random(0.0f,float(Game::getResolution().y));
-		} while(saveZone.Contains(pos)); // make sure the pos is not in the save zone
+			pos.x = thor::random(0.0f,float(Game::getResolution().x));
+			pos.y = thor::random(0.0f,float(Game::getResolution().y));
+		} while(saveZone.contains(pos)); // make sure the pos is not in the save zone
 
 		// choose a random velocity
 		float min = Game::config["asteroid.minSpeed"].as<float>();
 		float max = Game::config["asteroid.maxSpeed"].as<float>();
 		sf::Vector2f speed;
-		if(thor::Random(0,1) == 1) {
-			speed.x = thor::Random(min,max);
+		if(thor::random(0,1) == 1) {
+			speed.x = thor::random(min,max);
 		} else {
-			speed.x = thor::Random(-max,-min);
+			speed.x = thor::random(-max,-min);
 		}
-		if(thor::Random(0,1) == 1) {
-			speed.y = thor::Random(min,max);
+		if(thor::random(0,1) == 1) {
+			speed.y = thor::random(min,max);
 		} else {
-			speed.y = thor::Random(-max,-min);
+			speed.y = thor::random(-max,-min);
 		}
 
-		entityManager.add(new Asteroid(pos,speed,Asteroid::BIG, thor::Random(0.0f,360.0f)));
+		entityManager.add(new Asteroid(pos,speed,Asteroid::BIG, thor::random(0.0f,360.0f)));
 	}
 }

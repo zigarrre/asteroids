@@ -67,9 +67,9 @@ void EntityManager::update(float deltaTime) {
 void EntityManager::draw(sf::RenderTarget& renderTarget) {
 	map<unsigned int,Entity*>::iterator it = entitys.begin();
 	for(;it != entitys.end(); it++) {
-		renderTarget.Draw(*it->second);
+		renderTarget.draw(*it->second);
 		if(showHitBox)
-			renderTarget.Draw(it->second->getHitBox());
+			renderTarget.draw(it->second->getHitBox());
 	}
 }
 
@@ -83,8 +83,8 @@ void EntityManager::clear() {
 
 bool EntityManager::testSATCollision(sf::ConvexShape poly1, sf::ConvexShape poly2) {
 	// save size in variable to improve performance
-	unsigned int size1 = poly1.GetPointCount();
-	unsigned int size2 = poly2.GetPointCount();
+	unsigned int size1 = poly1.getPointCount();
+	unsigned int size2 = poly2.getPointCount();
 
 	sf::Vector2f side, projectionAxis;
 
@@ -96,7 +96,7 @@ bool EntityManager::testSATCollision(sf::ConvexShape poly1, sf::ConvexShape poly
 	// for every side in poly1
 	for(unsigned int i = 0; i < size1; ++i) {
 		// calculate on side
-		side = poly1.GetPoint(i) - poly1.GetPoint((i+1)%size1);
+		side = poly1.getPoint(i) - poly1.getPoint((i+1)%size1);
 
 		// create an perpendicular axis for projection from side
 		projectionAxis.x = -side.y;
@@ -115,14 +115,14 @@ bool EntityManager::testSATCollision(sf::ConvexShape poly1, sf::ConvexShape poly
 
 		// project all points from poly1 on the projection axis and save the max and min values
 		for(unsigned int i = 0; i < size1; ++i) {
-			projection = (projectionAxis.x * poly1.GetTransform().TransformPoint(poly1.GetPoint(i)).x + projectionAxis.y * poly1.GetTransform().TransformPoint(poly1.GetPoint(i)).y) / (projectionAxis.x * projectionAxis.x + projectionAxis.y * projectionAxis.y);
+			projection = (projectionAxis.x * poly1.getTransform().transformPoint(poly1.getPoint(i)).x + projectionAxis.y * poly1.getTransform().transformPoint(poly1.getPoint(i)).y) / (projectionAxis.x * projectionAxis.x + projectionAxis.y * projectionAxis.y);
 			poly1Min = min(projection, poly1Min);
 			poly1Max = max(projection, poly1Max);
 		}
 
 		// project all points from poly2 on the projection axis and save the max and min values
 		for(unsigned int i = 0; i < size2; ++i) {
-			projection = (projectionAxis.x * poly2.GetTransform().TransformPoint(poly2.GetPoint(i)).x + projectionAxis.y * poly2.GetTransform().TransformPoint(poly2.GetPoint(i)).y) / (projectionAxis.x * projectionAxis.x + projectionAxis.y * projectionAxis.y);
+			projection = (projectionAxis.x * poly2.getTransform().transformPoint(poly2.getPoint(i)).x + projectionAxis.y * poly2.getTransform().transformPoint(poly2.getPoint(i)).y) / (projectionAxis.x * projectionAxis.x + projectionAxis.y * projectionAxis.y);
 			poly2Min = min(projection, poly2Min);
 			poly2Max = max(projection, poly2Max);
 		}
@@ -135,7 +135,7 @@ bool EntityManager::testSATCollision(sf::ConvexShape poly1, sf::ConvexShape poly
 
 	// do the same for every side in poly2
 	for(unsigned int i = 0; i < size2; ++i) {
-		side = poly2.GetPoint(i) - poly2.GetPoint((i+1)%size2);
+		side = poly2.getPoint(i) - poly2.getPoint((i+1)%size2);
 
 		projectionAxis.x = -side.y;
 		projectionAxis.y = side.x;
@@ -150,13 +150,13 @@ bool EntityManager::testSATCollision(sf::ConvexShape poly1, sf::ConvexShape poly
 		float projection;
 
 		for(unsigned int i = 0; i < size1; ++i) {
-			projection = (projectionAxis.x * poly1.GetTransform().TransformPoint(poly1.GetPoint(i)).x + projectionAxis.y * poly1.GetTransform().TransformPoint(poly1.GetPoint(i)).y) / (projectionAxis.x * projectionAxis.x + projectionAxis.y * projectionAxis.y);
+			projection = (projectionAxis.x * poly1.getTransform().transformPoint(poly1.getPoint(i)).x + projectionAxis.y * poly1.getTransform().transformPoint(poly1.getPoint(i)).y) / (projectionAxis.x * projectionAxis.x + projectionAxis.y * projectionAxis.y);
 			poly1Min = min(projection, poly1Min);
 			poly1Max = max(projection, poly1Max);
 		}
 
 		for(unsigned int i = 0; i < size2; ++i) {
-			projection = (projectionAxis.x * poly2.GetTransform().TransformPoint(poly2.GetPoint(i)).x + projectionAxis.y * poly2.GetTransform().TransformPoint(poly2.GetPoint(i)).y) / (projectionAxis.x * projectionAxis.x + projectionAxis.y * projectionAxis.y);
+			projection = (projectionAxis.x * poly2.getTransform().transformPoint(poly2.getPoint(i)).x + projectionAxis.y * poly2.getTransform().transformPoint(poly2.getPoint(i)).y) / (projectionAxis.x * projectionAxis.x + projectionAxis.y * projectionAxis.y);
 			poly2Min = min(projection, poly2Min);
 			poly2Max = max(projection, poly2Max);
 		}
