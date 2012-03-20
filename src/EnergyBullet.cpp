@@ -6,13 +6,12 @@
 
 #include "EnergyBullet.hpp"
 
-EnergyBullet::EnergyBullet(const sf::Vector2f& pos, float angle) :
+EnergyBullet::EnergyBullet(const sf::Vector2f& pos, float velocity, float angle) :
 	running(true),
-	speed(200.0f),
 	timeToLive(3.0f),
 	destroyed(false)
 {
-	speed = Game::config["energyBullet.speed"].as<float>();
+	
 	timeToLive = Game::config["energyBullet.timeToLive"].as<float>();
 	damage = Game::config["energyBullet.damage"].as<float>();
 
@@ -22,8 +21,8 @@ EnergyBullet::EnergyBullet(const sf::Vector2f& pos, float angle) :
 	this->SetOrigin(this->GetLocalBounds().Width/2.0f,this->GetLocalBounds().Height/2.0f);
 	this->SetPosition(pos);
 	this->SetRotation(angle);
-	velocity[0] = speed * sin(angle*(PI/180));
-	velocity[1] = speed * -cos(angle*(PI/180));
+	this->velocity[0] = velocity * sin(angle*(PI/180));
+	this->velocity[1] = velocity * -cos(angle*(PI/180));
 	
 	hitbox = rrr::loadHitbox("res/bullet1.col");
 }
