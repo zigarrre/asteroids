@@ -120,16 +120,22 @@ bool EntityManager::sat(const sf::ConvexShape& poly1, const sf::ConvexShape& pol
 		float poly1Min = std::numeric_limits<float>::max(), poly1Max = -poly1Min;
 		float poly2Min = std::numeric_limits<float>::max(), poly2Max = -poly2Min;
 
+        sf::Transform transform = poly1.getTransform();
+
 		// project all points from poly1 on the projection axis and save the max and min values
 		for(unsigned int j = 0; j < size1; ++j) {
-			float projection = (projectionAxis.x * poly1.getTransform().transformPoint(poly1.getPoint(j)).x + projectionAxis.y * poly1.getTransform().transformPoint(poly1.getPoint(j)).y) / (projectionAxis.x * projectionAxis.x + projectionAxis.y * projectionAxis.y);
+            sf::Vector2f transPoint = transform.transformPoint(poly1.getPoint(j));
+            float projection = (projectionAxis.x * transPoint.x + projectionAxis.y * transPoint.y) / (projectionAxis.x * projectionAxis.x + projectionAxis.y * projectionAxis.y);
 			poly1Min = min(projection, poly1Min);
 			poly1Max = max(projection, poly1Max);
 		}
 
+        transform = poly2.getTransform();
+
 		// project all points from poly2 on the projection axis and save the max and min values
 		for(unsigned int j = 0; j < size2; ++j) {
-			float projection = (projectionAxis.x * poly2.getTransform().transformPoint(poly2.getPoint(j)).x + projectionAxis.y * poly2.getTransform().transformPoint(poly2.getPoint(j)).y) / (projectionAxis.x * projectionAxis.x + projectionAxis.y * projectionAxis.y);
+            sf::Vector2f transPoint = transform.transformPoint(poly2.getPoint(j));
+            float projection = (projectionAxis.x * transPoint.x + projectionAxis.y * transPoint.y) / (projectionAxis.x * projectionAxis.x + projectionAxis.y * projectionAxis.y);
 			poly2Min = min(projection, poly2Min);
 			poly2Max = max(projection, poly2Max);
 		}
