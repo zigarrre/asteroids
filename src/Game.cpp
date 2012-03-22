@@ -24,13 +24,13 @@ Game::Game() :
 	confDesc.add_options()
 		("spaceship.acceleration", po::value<float>()->default_value(300.0f))
 		("spaceship.rotationSpeed", po::value<float>()->default_value(300.0f))
-		("spaceship.weaponCooldown", po::value<float>()->default_value(100.0f))
-		("spaceship.friction", po::value<float>()->default_value(0.2f))
+		("spaceship.weaponCooldown", po::value<float>()->default_value(0.17f))
+		("spaceship.friction", po::value<float>()->default_value(100.0f))
 		("spaceship.lifes", po::value<unsigned int>()->default_value(3))
 		("spaceship.hp", po::value<float>()->default_value(1.0f))
 
 		("energyBullet.speed", po::value<float>()->default_value(400.0f))
-		("energyBullet.timeToLive", po::value<float>()->default_value(1.3f))
+		("energyBullet.timeToLive", po::value<float>()->default_value(0.85f))
 		("energyBullet.damage", po::value<float>()->default_value(1.0f))
 
 		("asteroid.hp", po::value<float>()->default_value(1.0f))

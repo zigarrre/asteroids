@@ -28,7 +28,7 @@ void MainMenu::init() {
 		background.setTexture(*texBackground);
 		background.setPosition(0.0f,0.0f);
 
-		version.setString("vO.1 alpha"); // 'O' because it looks much better than real '0' in the used game font
+		version.setString("vO.1.5 alpha"); // 'O' because it looks much better than a real '0' in the used game font
 		version.setFont(*font);
 		version.setCharacterSize(10);
 		version.setColor(sf::Color::White);
