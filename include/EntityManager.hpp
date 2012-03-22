@@ -34,7 +34,13 @@ public:
 private:
 	std::map<unsigned int,Entity*> entitys;
 	unsigned int getNewID();
-	bool testSATCollision(sf::ConvexShape poly1, sf::ConvexShape poly2);
+	bool testSATCollision(const sf::ConvexShape& poly1, const sf::ConvexShape& poly2);
+
+	/**
+	* Helper function for testSATCollision. Tests the sides of one convex polygon for Collisions
+	* Has to be call two times with the same polygons in inverted order to be sure that there is a collision
+	**/
+	bool sat(const sf::ConvexShape& poly1, const sf::ConvexShape& poly2);
 
 	unsigned int reservedSpace;
 
