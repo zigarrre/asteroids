@@ -5,6 +5,7 @@ This is a remake of the game 'asteroids' in C++.
 
 http://github.com/zigarrre/asteroids
 
+Please report any bugs to the issue tracker on the project page! Feature requests and improvements are also welcome!
 
 Compiling
 ---------
