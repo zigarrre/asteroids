@@ -16,7 +16,7 @@
 
 class Asteroid : public Entity {
 public:
-	static enum Size {SMALL,MEDIUM,BIG};
+	enum Size {SMALL,MEDIUM,BIG};
 
 	Asteroid() {}
 	Asteroid(const sf::Vector2f& pos, const sf::Vector2f& velocity, unsigned short size, float rotation = 0.0f, float rotationVelocity = 0.0f);
