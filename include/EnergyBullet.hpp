@@ -23,6 +23,7 @@ public:
 	virtual void collide(unsigned int id);
 	virtual void rcvMessage(unsigned int msg);
 	virtual void reset() {}
+    unsigned int getType() const { return EntityTypes::ENERGY_BULLET; }
 
 private:
 	bool running;

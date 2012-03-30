@@ -22,6 +22,7 @@ class Entity : public sf::Sprite
 		virtual void collide(unsigned int id) = 0;
 		virtual void rcvMessage(unsigned int msg) = 0;
 		virtual void reset() = 0;
+        virtual unsigned int getType() const = 0;
     protected:
         float velocity[2];
         float acceleration[2];

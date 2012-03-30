@@ -26,6 +26,7 @@ class Spaceship : public Entity
 		virtual void rcvMessage(unsigned int msg);
 		unsigned int getLifes() const { return lifes; }
 		virtual void reset();
+        unsigned int getType() const { return EntityTypes::SPACESHIP; }
 
     protected:
     private:

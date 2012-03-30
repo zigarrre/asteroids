@@ -27,6 +27,7 @@ public:
 	void takeDamage(float damage);
 	static int getAsteroidCount() { return asteroidCount; }
 	void reset() {}
+    unsigned int getType() const { return EntityTypes::ASTEROID; }
 private:
 	bool running;
 	float rotationVelocity;
