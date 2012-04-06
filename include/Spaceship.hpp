@@ -10,6 +10,7 @@
 #include "Game.hpp"
 #include "EnergyBullet.hpp"
 #include "utility.hpp"
+#include "EntityTypes.hpp"
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 #include <Thor/Resources.hpp>

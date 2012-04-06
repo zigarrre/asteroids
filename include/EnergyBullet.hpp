@@ -10,6 +10,7 @@
 #include "Game.hpp"
 #include "utility.hpp"
 #include "Asteroid.hpp"
+#include "EntityTypes.hpp"
 #include <Thor/Resources.hpp>
 #include <SFML/Graphics.hpp>
 
