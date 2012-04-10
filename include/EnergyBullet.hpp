@@ -17,7 +17,8 @@
 class EnergyBullet : public Entity {
 
 public:
-	EnergyBullet(const sf::Vector2f& pos, float velocity, float angle);
+    EnergyBullet(EntityManager& manager) : Entity(manager) {}
+	EnergyBullet(EntityManager& manager, const sf::Vector2f& pos, float velocity, float angle);
 	virtual void update(float deltaTime);
 	void setRunning(bool run) { running = run; }
 	bool getRunning() { return running; }

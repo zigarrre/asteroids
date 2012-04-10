@@ -6,9 +6,10 @@
 
 #include "Spaceship.hpp"
 
-Spaceship::Spaceship(const sf::Vector2f& pos) :
+Spaceship::Spaceship(EntityManager& manager, const sf::Vector2f& pos) :
 	weaponCooldown(0.0f),
-	spawnMode(0.0f)
+	spawnMode(0.0f),
+    Entity(manager)
 {
 	accelerationToSet = Game::config["spaceship.acceleration"].as<float>();
 	rotationspeed = Game::config["spaceship.rotationSpeed"].as<float>();
@@ -108,6 +109,7 @@ void Spaceship::update(float deltaTime) {
 		// fire
 		if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && (weaponCooldown <= 0)) {
 			Singleplayer::entityManager.add(new EnergyBullet(
+                manager,
 				sf::Vector2f(
 					this->getPosition().x+sin(this->getRotation()*(PI/180))*this->getLocalBounds().width/2, // spawn the bullet in front of the shipt instead in the middle to prevent unwanted collisions
 					this->getPosition().y-cos(this->getRotation()*(PI/180))*this->getLocalBounds().height/2),

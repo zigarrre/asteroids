@@ -6,7 +6,8 @@
 
 #include "Entity.hpp"
 
-Entity::Entity()
+Entity::Entity(EntityManager& manager) :
+    manager(manager)
 {
     velocity[0] = 0;
     velocity[1] = 0;

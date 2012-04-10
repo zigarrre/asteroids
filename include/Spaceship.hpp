@@ -20,7 +20,8 @@
 class Spaceship : public Entity
 {
     public:
-        Spaceship(const sf::Vector2f& pos);
+        Spaceship(EntityManager& manager) : Entity(manager) {}
+        Spaceship(EntityManager& manager, const sf::Vector2f& pos);
         virtual void update(float deltaTime);
 		virtual void collide(unsigned int id);
 		void takeDamage(float damage);

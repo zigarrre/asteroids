@@ -10,11 +10,12 @@
 
 int Asteroid::asteroidCount = 0;
 
-Asteroid::Asteroid(const sf::Vector2f& pos, const sf::Vector2f& velocity, unsigned short size, float rotation, float rotationVelocity) :
+Asteroid::Asteroid(EntityManager& manager, const sf::Vector2f& pos, const sf::Vector2f& velocity, unsigned short size, float rotation, float rotationVelocity) :
 	rotationVelocity(rotationVelocity),
 	running(true),
 	hp(1.0f),
-	size(size)
+	size(size),
+    Entity(manager)
 {
 	hp = Game::config["asteroid.hp"].as<float>();
 	spread = Game::config["asteroid.spread"].as<float>();
@@ -50,10 +51,10 @@ void Asteroid::update(float deltaTime) {
 				sf::Vector2f newVelocity;
 				newVelocity.x = velocity[0] * cos(spread) - velocity[1] * sin(spread);
 				newVelocity.y = velocity[1] * cos(spread) + velocity[0] * sin(spread);
-				Singleplayer::entityManager.add(new Asteroid(getPosition(),newVelocity,size-1,getRotation(),rotationVelocity));
+				Singleplayer::entityManager.add(new Asteroid(manager, getPosition(),newVelocity,size-1,getRotation(),rotationVelocity));
 				newVelocity.x = velocity[0] * cos(spread) + velocity[1] * sin(spread);
 				newVelocity.y = velocity[1] * cos(spread) - velocity[0] * sin(spread);
-				Singleplayer::entityManager.add(new Asteroid(getPosition(),newVelocity,size-1,getRotation(),rotationVelocity));
+				Singleplayer::entityManager.add(new Asteroid(manager, getPosition(),newVelocity,size-1,getRotation(),rotationVelocity));
 			}
 			Singleplayer::entityManager.remove(getID());
 			return;

@@ -27,7 +27,7 @@ void Singleplayer::init() {
 	if(!initialized) {
 		level = 1;
 		spawnAsteroids(level);
-		entityManager.add(new Spaceship(sf::Vector2f(20.0f,20.0f)), SPACESHIP);
+        entityManager.add(new Spaceship(entityManager,sf::Vector2f(20.0f,20.0f)), SPACESHIP);
 	}
 }
 
@@ -99,6 +99,6 @@ void Singleplayer::spawnAsteroids(int lvl) {
 			speed.y = thor::random(-max,-min);
 		}
 
-		entityManager.add(new Asteroid(pos,speed,Asteroid::BIG, thor::random(0.0f,360.0f)));
+        entityManager.add(new Asteroid(entityManager, pos, speed, Asteroid::BIG, thor::random(0.0f,360.0f)));
 	}
 }

@@ -14,7 +14,7 @@ class Entity : public sf::Sprite
 	friend class EntityManager;
 
     public:
-        Entity();
+        Entity(EntityManager& manager);
 		virtual ~Entity() {}
         virtual void update(float deltaTime) = 0;
 		unsigned int getID() { return id; }
@@ -23,10 +23,13 @@ class Entity : public sf::Sprite
 		virtual void rcvMessage(unsigned int msg) = 0;
 		virtual void reset() = 0;
         virtual unsigned int getType() const = 0;
+
     protected:
         float velocity[2];
         float acceleration[2];
 		unsigned int id;
 		sf::ConvexShape hitbox;
+        EntityManager& manager;
+
     private:
 };
