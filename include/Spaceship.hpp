@@ -38,7 +38,7 @@ class Spaceship : public Entity
 		float weaponCooldownToSet;
 		float friction;
 		unsigned int lifes;
-		float hp; // health points
+		int hp; // health points
 		float spawnMode; // remaining time in spawnMode
 		float bulletSpeed;
 		thor::ResourcePtr<sf::Texture> texture;

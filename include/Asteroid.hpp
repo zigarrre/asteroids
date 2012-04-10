@@ -32,7 +32,7 @@ public:
 private:
 	bool running;
 	float rotationVelocity;
-	float hp; // Health Points
+	int hp; // Health Points
 	short size;
 	float spread;
 	thor::ResourcePtr<sf::Texture> texture;

@@ -13,11 +13,11 @@ int Asteroid::asteroidCount = 0;
 Asteroid::Asteroid(EntityManager& manager, const sf::Vector2f& pos, const sf::Vector2f& velocity, unsigned short size, float rotation, float rotationVelocity) :
 	rotationVelocity(rotationVelocity),
 	running(true),
-	hp(1.0f),
+	hp(1),
 	size(size),
     Entity(manager)
 {
-	hp = Game::config["asteroid.hp"].as<float>();
+	hp = Game::config["asteroid.hp"].as<int>();
 	spread = Game::config["asteroid.spread"].as<float>();
 	spread *= (PI/180); // convert degree to radian
 
@@ -45,7 +45,7 @@ Asteroid::Asteroid(EntityManager& manager, const sf::Vector2f& pos, const sf::Ve
 void Asteroid::update(float deltaTime) {
 	if(running) {
 		
-		if(hp <= 0.0f) {
+		if(hp <= 0) {
 			// object destroid
 			if(size > SMALL) {
 				sf::Vector2f newVelocity;

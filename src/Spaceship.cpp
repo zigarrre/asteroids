@@ -16,7 +16,7 @@ Spaceship::Spaceship(EntityManager& manager, const sf::Vector2f& pos) :
 	weaponCooldownToSet = Game::config["spaceship.weaponCooldown"].as<float>();
 	friction = Game::config["spaceship.friction"].as<float>();
 	lifes = Game::config["spaceship.lifes"].as<unsigned int>();
-	hp = Game::config["spaceship.hp"].as<float>();
+	hp = Game::config["spaceship.hp"].as<int>();
 	bulletSpeed = Game::config["energyBullet.speed"].as<float>();
 
 	thor::Resources::TextureKey key = thor::Resources::TextureKey::fromFile("res/ship.png"); //TODO needs exeption Handling
