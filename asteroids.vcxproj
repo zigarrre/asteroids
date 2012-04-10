@@ -135,6 +135,7 @@
     <ClInclude Include="include\GamestateManager.hpp" />
     <ClInclude Include="include\HUD.hpp" />
     <ClInclude Include="include\MainMenu.hpp" />
+	<ClInclude Include="include\Messages.hpp" />
     <ClInclude Include="include\Point.hpp" />
     <ClInclude Include="include\Singleplayer.hpp" />
     <ClInclude Include="include\Spaceship.hpp" />
