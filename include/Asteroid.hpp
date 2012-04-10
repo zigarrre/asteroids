@@ -23,7 +23,7 @@ public:
 	Asteroid(EntityManager& manager, const sf::Vector2f& pos, const sf::Vector2f& velocity, unsigned short size, float rotation = 0.0f, float rotationVelocity = 0.0f);
 	~Asteroid() { --asteroidCount; }
 	void update(float deltaTime);
-	void collide(unsigned int id);
+	void collide(unsigned int id, unsigned int type);
 	void rcvMessage(unsigned int msg, const std::vector<boost::any>& params = std::vector<boost::any>());
 	void takeDamage(float damage);
 	static int getAsteroidCount() { return asteroidCount; }

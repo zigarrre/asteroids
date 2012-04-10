@@ -82,7 +82,7 @@ void Asteroid::update(float deltaTime) {
 	}
 }
 
-void Asteroid::collide(unsigned int id) {
+void Asteroid::collide(unsigned int id, unsigned int type) {
 	Spaceship* spaceship = dynamic_cast<Spaceship*>(Singleplayer::entityManager.getEntity(id));
 	if(spaceship) {
 		spaceship->takeDamage(1.0f);

@@ -140,7 +140,7 @@ void Spaceship::takeDamage(float damage) {
 	}
 }
 
-void Spaceship::collide(unsigned int id) {
+void Spaceship::collide(unsigned int id, unsigned int type) {
 	
 }
 

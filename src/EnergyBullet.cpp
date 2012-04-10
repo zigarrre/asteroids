@@ -65,7 +65,7 @@ void EnergyBullet::update(float deltaTime) {
 	}
 }
 
-void EnergyBullet::collide(unsigned int id) {
+void EnergyBullet::collide(unsigned int id, unsigned int type) {
 	Asteroid* asteroid = dynamic_cast<Asteroid*>(Singleplayer::entityManager.getEntity(id));
 	if(asteroid) {
 		//cast ok

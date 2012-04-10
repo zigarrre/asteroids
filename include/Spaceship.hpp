@@ -23,7 +23,7 @@ class Spaceship : public Entity
         Spaceship(EntityManager& manager) : Entity(manager) {}
         Spaceship(EntityManager& manager, const sf::Vector2f& pos);
         virtual void update(float deltaTime);
-		virtual void collide(unsigned int id);
+		virtual void collide(unsigned int id, unsigned int type);
 		void takeDamage(float damage);
 		virtual void rcvMessage(unsigned int msg, const std::vector<boost::any>& params = std::vector<boost::any>());
 		unsigned int getLifes() const { return lifes; }

@@ -64,8 +64,8 @@ void EntityManager::update(float deltaTime) {
 		++it2;
 		for(;it2 != entitys.end();++it2) {
 			if(it != it2 && testSATCollision(it2->second->getHitBox(),it->second->getHitBox())) {
-				it->second->collide(it2->second->getID());
-				it2->second->collide(it->second->getID());
+                it->second->collide(it2->second->getID(),it2->second->getType());
+                it2->second->collide(it->second->getID(),it->second->getType());
 			}
 		}
 	}
