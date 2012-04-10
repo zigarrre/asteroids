@@ -6,8 +6,10 @@
 
 #pragma once
 
-#include <SFML/Graphics.hpp>
 #include "ConvexPolygon.hpp"
+#include <SFML/Graphics.hpp>
+#include <boost/any.hpp>
+#include <vector>
 
 class Entity : public sf::Sprite
 {
@@ -20,7 +22,7 @@ class Entity : public sf::Sprite
 		unsigned int getID() { return id; }
 		sf::ConvexShape getHitBox() const;
 		virtual void collide(unsigned int id) = 0;
-		virtual void rcvMessage(unsigned int msg) = 0;
+        virtual void rcvMessage(unsigned int msg, const std::vector<boost::any>& params = std::vector<boost::any>()) = 0;
 		virtual void reset() = 0;
         virtual unsigned int getType() const = 0;
 

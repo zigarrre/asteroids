@@ -23,7 +23,7 @@ public:
 	void setRunning(bool run) { running = run; }
 	bool getRunning() { return running; }
 	virtual void collide(unsigned int id);
-	virtual void rcvMessage(unsigned int msg);
+	virtual void rcvMessage(unsigned int msg, const std::vector<boost::any>& params = std::vector<boost::any>());
 	virtual void reset() {}
     unsigned int getType() const { return EntityTypes::ENERGY_BULLET; }
 

@@ -25,7 +25,7 @@ class Spaceship : public Entity
         virtual void update(float deltaTime);
 		virtual void collide(unsigned int id);
 		void takeDamage(float damage);
-		virtual void rcvMessage(unsigned int msg);
+		virtual void rcvMessage(unsigned int msg, const std::vector<boost::any>& params = std::vector<boost::any>());
 		unsigned int getLifes() const { return lifes; }
 		virtual void reset();
         unsigned int getType() const { return EntityTypes::SPACESHIP; }

@@ -10,6 +10,8 @@
 #include "ConvexPolygon.hpp"
 #include <SFML/Graphics.hpp>
 #include <map>
+#include <vector>
+#include <boost/any.hpp>
 
 class EntityManager {
 
@@ -26,8 +28,8 @@ public:
 	void remove(unsigned int id);
 	void draw(sf::RenderTarget& renderTarget);
 	void clear();
-	void sndMessage(unsigned int id, unsigned int msg);
-	void broadcastMessage(unsigned int msg);
+	void sndMessage(unsigned int id, unsigned int msg, const std::vector<boost::any>& params = std::vector<boost::any>());
+	void broadcastMessage(unsigned int msg, const std::vector<boost::any>& params = std::vector<boost::any>());
 
 	bool showHitBox;
 

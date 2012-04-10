@@ -74,6 +74,6 @@ void EnergyBullet::collide(unsigned int id) {
 	destroyed = true;
 }
 
-void EnergyBullet::rcvMessage(unsigned int msg) {
+void EnergyBullet::rcvMessage(unsigned int msg, const std::vector<boost::any>& params) {
 
 }

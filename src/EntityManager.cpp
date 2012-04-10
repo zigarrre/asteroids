@@ -149,14 +149,14 @@ bool EntityManager::sat(const sf::ConvexShape& poly1, const sf::ConvexShape& pol
     return true; // all projections overlap, there is a collision
 }
 
-void EntityManager::sndMessage(unsigned int id, unsigned int msg) {
-	entitys[id]->rcvMessage(msg);
+void EntityManager::sndMessage(unsigned int id, unsigned int msg, const std::vector<boost::any>& params) {
+	entitys[id]->rcvMessage(msg, params);
 }
 
-void EntityManager::broadcastMessage(unsigned int msg) {
+void EntityManager::broadcastMessage(unsigned int msg, const std::vector<boost::any>& params) {
 	map<unsigned int,Entity*>::iterator it = entitys.begin();
 	for(;it != entitys.end(); it++) {
-		it->second->rcvMessage(msg);
+		it->second->rcvMessage(msg, params);
 	}
 }
 

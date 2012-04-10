@@ -24,7 +24,7 @@ public:
 	~Asteroid() { --asteroidCount; }
 	void update(float deltaTime);
 	void collide(unsigned int id);
-	void rcvMessage(unsigned int msg);
+	void rcvMessage(unsigned int msg, const std::vector<boost::any>& params = std::vector<boost::any>());
 	void takeDamage(float damage);
 	static int getAsteroidCount() { return asteroidCount; }
 	void reset() {}

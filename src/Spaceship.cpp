@@ -144,7 +144,7 @@ void Spaceship::collide(unsigned int id) {
 	
 }
 
-void Spaceship::rcvMessage(unsigned int msg) {
+void Spaceship::rcvMessage(unsigned int msg, const std::vector<boost::any>& params) {
 
 }
 

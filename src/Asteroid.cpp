@@ -89,8 +89,8 @@ void Asteroid::collide(unsigned int id) {
 	}
 }
 
-void Asteroid::rcvMessage(unsigned int msg) {
 
+void Asteroid::rcvMessage(unsigned int msg, const std::vector<boost::any>& params) {
 }
 
 void Asteroid::takeDamage(float damage) {
