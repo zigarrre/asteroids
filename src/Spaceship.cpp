@@ -5,6 +5,7 @@
 **/
 
 #include "Spaceship.hpp"
+#include "Messages.hpp"
 
 Spaceship::Spaceship(EntityManager& manager, const sf::Vector2f& pos) :
 	weaponCooldown(0.0f),
@@ -29,6 +30,19 @@ Spaceship::Spaceship(EntityManager& manager, const sf::Vector2f& pos) :
 }
 
 void Spaceship::update(float deltaTime) {
+
+    if(hp <= 0) {
+	    // TODO destruction animation
+        hp = Game::config["spaceship.hp"].as<int>();
+		spawnMode = 2.0f;
+		setRotation(0.0f);
+		velocity[0] = 0.0f;
+		velocity[1] = 0.0f;
+		setPosition(Game::getResolution().x/2.0f,Game::getResolution().y/2.0f);
+		if(lifes > 0) {
+			--lifes;
+		}
+	}
 
 	if(spawnMode > 0.0f) {
 		
@@ -121,31 +135,14 @@ void Spaceship::update(float deltaTime) {
 	}
 }
 
-void Spaceship::takeDamage(float damage) {
-	if(spawnMode <= 0.0f) { // not in spawn mode
-		hp -= damage;
-		if(hp <= 0) {
-			// TODO destruction animation and respawn
-			spawnMode = 2.0f;
-			setRotation(0.0f);
-			velocity[0] = 0.0f;
-			velocity[1] = 0.0f;
-			setPosition(Game::getResolution().x/2.0f,Game::getResolution().y/2.0f);
-			if(lifes > 0) {
-				--lifes;
-			} else {
-				// TODO Game over
-			}
-		}
-	}
-}
-
 void Spaceship::collide(unsigned int id, unsigned int type) {
 	
 }
 
 void Spaceship::rcvMessage(unsigned int msg, const std::vector<boost::any>& params) {
-
+     if((msg == Messages::TAKE_DAMAGE) && (spawnMode <= 0.0f)) {
+        hp -= boost::any_cast<int>(params[0]);
+    }
 }
 
 void Spaceship::reset() {

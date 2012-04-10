@@ -5,6 +5,9 @@
 **/
 
 #include "EnergyBullet.hpp"
+#include "Messages.hpp"
+
+using namespace std;
 
 EnergyBullet::EnergyBullet(EntityManager& manager, const sf::Vector2f& pos, float velocity, float angle) :
 	running(true),
@@ -66,11 +69,11 @@ void EnergyBullet::update(float deltaTime) {
 }
 
 void EnergyBullet::collide(unsigned int id, unsigned int type) {
-	Asteroid* asteroid = dynamic_cast<Asteroid*>(Singleplayer::entityManager.getEntity(id));
-	if(asteroid) {
-		//cast ok
-		asteroid->takeDamage(damage);
-	}
+    if(type == EntityTypes::ASTEROID) {
+        vector<boost::any> params;
+        params.push_back(boost::any(int(1)));
+        manager.sndMessage(id, Messages::TAKE_DAMAGE, params);
+    }
 	destroyed = true;
 }
 

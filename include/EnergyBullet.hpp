@@ -13,6 +13,8 @@
 #include "EntityTypes.hpp"
 #include <Thor/Resources.hpp>
 #include <SFML/Graphics.hpp>
+#include <boost/any.hpp>
+#include <vector>
 
 class EnergyBullet : public Entity {
 

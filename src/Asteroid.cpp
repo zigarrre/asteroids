@@ -7,6 +7,9 @@
 #include "Asteroid.hpp"
 #include "Spaceship.hpp"
 #include "Singleplayer.hpp"
+#include "Messages.hpp"
+
+using namespace std;
 
 int Asteroid::asteroidCount = 0;
 
@@ -83,16 +86,15 @@ void Asteroid::update(float deltaTime) {
 }
 
 void Asteroid::collide(unsigned int id, unsigned int type) {
-	Spaceship* spaceship = dynamic_cast<Spaceship*>(Singleplayer::entityManager.getEntity(id));
-	if(spaceship) {
-		spaceship->takeDamage(1.0f);
-	}
+    if(type == EntityTypes::SPACESHIP) {
+        vector<boost::any> params;
+        params.push_back(boost::any(int(1)));
+        manager.sndMessage(id, Messages::TAKE_DAMAGE, params);
+    }
 }
-
 
 void Asteroid::rcvMessage(unsigned int msg, const std::vector<boost::any>& params) {
-}
-
-void Asteroid::takeDamage(float damage) {
-	hp -= damage;
+    if(msg == Messages::TAKE_DAMAGE) {
+        hp -= boost::any_cast<int>(params[0]);
+    }
 }

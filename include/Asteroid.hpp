@@ -14,6 +14,7 @@
 #include <SFML/System.hpp>
 #include <Thor/Resources.hpp>
 #include <cmath>
+#include <boost/any.hpp>
 
 class Asteroid : public Entity {
 public:
@@ -25,7 +26,6 @@ public:
 	void update(float deltaTime);
 	void collide(unsigned int id, unsigned int type);
 	void rcvMessage(unsigned int msg, const std::vector<boost::any>& params = std::vector<boost::any>());
-	void takeDamage(float damage);
 	static int getAsteroidCount() { return asteroidCount; }
 	void reset() {}
     unsigned int getType() const { return EntityTypes::ASTEROID; }
