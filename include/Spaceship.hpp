@@ -25,7 +25,6 @@ class Spaceship : public Entity
         virtual void update(float deltaTime);
 		virtual void collide(unsigned int id, unsigned int type);
 		virtual void rcvMessage(unsigned int msg, const std::vector<boost::any>& params = std::vector<boost::any>());
-		unsigned int getLifes() const { return lifes; }
 		virtual void reset();
         unsigned int getType() const { return EntityTypes::SPACESHIP; }
 
@@ -36,7 +35,6 @@ class Spaceship : public Entity
 		float weaponCooldown;
 		float weaponCooldownToSet;
 		float friction;
-		unsigned int lifes;
 		int hp; // health points
 		float spawnMode; // remaining time in spawnMode
 		float bulletSpeed;

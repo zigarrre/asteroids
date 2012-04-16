@@ -23,16 +23,13 @@ HUD::HUD(const Singleplayer& singleplayer) :
 }
 
 void HUD::update(float deltaTime) {
-	Spaceship* spaceship = dynamic_cast<Spaceship*>(Singleplayer::entityManager.getEntity(Singleplayer::SPACESHIP));
-	if(spaceship) {
-		// TODO needs better solution
-		lifes.clear();
-		if(spaceship->getLifes() > 1) {
-			for(unsigned int i = 0; i < spaceship->getLifes() -1; ++i) {
-				sf::Sprite* life = new sf::Sprite(*texLife);
-				life->setPosition(10.0f+life->getGlobalBounds().width*i+10,10.0f);
-				lifes.push_back(life);
-			}
+	// TODO needs better solution
+	lifes.clear();
+	if(singleplayer.getLifes() > 1) {
+		for(unsigned int i = 0; i < singleplayer.getLifes() -1; ++i) {
+			sf::Sprite* life = new sf::Sprite(*texLife);
+			life->setPosition(10.0f+life->getGlobalBounds().width*i+10,10.0f);
+			lifes.push_back(life);
 		}
 	}
 	currentLevel.setString("Level   " + rrr::toString(singleplayer.getLevel()));

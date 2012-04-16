@@ -12,12 +12,13 @@
 #include "Spaceship.hpp"
 #include "Asteroid.hpp"
 #include "EntityManager.hpp"
+#include "MessageReceiver.hpp"
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 #include <Thor/Resources.hpp>
 #include <Thor/Math.hpp>
 
-class Singleplayer : public Gamestate
+class Singleplayer : public Gamestate, public MessageReceiver
 {
     public:
         Singleplayer(sf::RenderWindow& renderWindow);
@@ -27,6 +28,8 @@ class Singleplayer : public Gamestate
         virtual unsigned short update(float deltaTime);
         virtual void draw();
 		int getLevel() const { return level; }
+		unsigned int getLifes() const { return lifes; }
+		virtual void receiveMessage(unsigned int msg, const std::vector<boost::any>& params);
 
 		enum { SPACESHIP };
 
@@ -41,6 +44,7 @@ class Singleplayer : public Gamestate
 		sf::Sprite background;
 		sf::FloatRect saveZone;
 		int level;
+		unsigned int lifes;
 
 		void spawnAsteroids(int lvl);
 };

@@ -6,6 +6,7 @@
 
 #include "Spaceship.hpp"
 #include "Messages.hpp"
+#include "MessageSystem.hpp"
 
 Spaceship::Spaceship(EntityManager& manager, const sf::Vector2f& pos) :
 	weaponCooldown(0.0f),
@@ -16,7 +17,6 @@ Spaceship::Spaceship(EntityManager& manager, const sf::Vector2f& pos) :
 	rotationspeed = Game::config["spaceship.rotationSpeed"].as<float>();
 	weaponCooldownToSet = Game::config["spaceship.weaponCooldown"].as<float>();
 	friction = Game::config["spaceship.friction"].as<float>();
-	lifes = Game::config["spaceship.lifes"].as<unsigned int>();
 	hp = Game::config["spaceship.hp"].as<int>();
 	bulletSpeed = Game::config["energyBullet.speed"].as<float>();
 
@@ -33,15 +33,14 @@ void Spaceship::update(float deltaTime) {
 
     if(hp <= 0) {
 	    // TODO destruction animation
+		MessageSystem::getHandle().sendMessage(EngineMessages::PLAYER_DIED);
+
         hp = Game::config["spaceship.hp"].as<int>();
 		spawnMode = 2.0f;
 		setRotation(0.0f);
 		velocity[0] = 0.0f;
 		velocity[1] = 0.0f;
 		setPosition(Game::getResolution().x/2.0f,Game::getResolution().y/2.0f);
-		if(lifes > 0) {
-			--lifes;
-		}
 	}
 
 	if(spawnMode > 0.0f) {

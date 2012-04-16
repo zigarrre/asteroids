@@ -5,6 +5,8 @@
 **/
 
 #include "Singleplayer.hpp"
+#include "Messages.hpp"
+#include "MessageSystem.hpp"
 
 #include <iostream>
 using namespace std;
@@ -26,6 +28,8 @@ Singleplayer::Singleplayer(sf::RenderWindow& renderWindow) :
 void Singleplayer::init() {
 	if(!initialized) {
 		level = 1;
+		lifes = Game::config["spaceship.lifes"].as<unsigned int>();
+		MessageSystem::getHandle().registerReceiver(this);
 		spawnAsteroids(level);
         entityManager.add(new Spaceship(entityManager,sf::Vector2f(20.0f,20.0f)), SPACESHIP);
 	}
@@ -51,17 +55,14 @@ unsigned short Singleplayer::update(float deltaTime) {
 	entityManager.update(deltaTime);
 	hud.update(deltaTime);
 
+	if(lifes <= 0) {
+		return Game::GAME_OVER;
+	}
+
 	if(Asteroid::getAsteroidCount() <= 0) {
 		++level;
 		entityManager.getEntity(SPACESHIP)->reset();
 		spawnAsteroids(level);
-	}
-
-	Spaceship* spaceship = dynamic_cast<Spaceship*>(Singleplayer::entityManager.getEntity(Singleplayer::SPACESHIP));
-	if(spaceship) {
-		if(spaceship->getLifes() <= 0) {
-			return Game::GAME_OVER;
-		}
 	}
 
 	return Game::SINGLEPLAYER;
@@ -100,5 +101,11 @@ void Singleplayer::spawnAsteroids(int lvl) {
 		}
 
         entityManager.add(new Asteroid(entityManager, pos, speed, Asteroid::BIG, thor::random(0.0f,360.0f)));
+	}
+}
+
+void Singleplayer::receiveMessage(unsigned int msg, const std::vector<boost::any>& params) {
+	if(msg == EngineMessages::PLAYER_DIED) {
+		--lifes;
 	}
 }
