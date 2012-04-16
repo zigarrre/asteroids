@@ -135,7 +135,9 @@
     <ClInclude Include="include\GamestateManager.hpp" />
     <ClInclude Include="include\HUD.hpp" />
     <ClInclude Include="include\MainMenu.hpp" />
-	<ClInclude Include="include\Messages.hpp" />
+    <ClInclude Include="include\MessageReceiver.hpp" />
+    <ClInclude Include="include\Messages.hpp" />
+    <ClInclude Include="include\MessageSystem.hpp" />
     <ClInclude Include="include\Point.hpp" />
     <ClInclude Include="include\Singleplayer.hpp" />
     <ClInclude Include="include\Spaceship.hpp" />
@@ -153,6 +155,7 @@
     <ClCompile Include="src\HUD.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\MainMenu.cpp" />
+    <ClCompile Include="src\MessageSystem.cpp" />
     <ClCompile Include="src\Singleplayer.cpp" />
     <ClCompile Include="src\Spaceship.cpp" />
     <ClCompile Include="src\utility.cpp" />
