@@ -23,15 +23,20 @@ HUD::HUD(const Singleplayer& singleplayer) :
 }
 
 void HUD::update(float deltaTime) {
-	// TODO needs better solution
-	lifes.clear();
-	if(singleplayer.getLifes() > 1) {
-		for(unsigned int i = 0; i < singleplayer.getLifes() -1; ++i) {
-			sf::Sprite* life = new sf::Sprite(*texLife);
-			life->setPosition(10.0f+life->getGlobalBounds().width*i+10,10.0f);
-			lifes.push_back(life);
+
+	if(singleplayer.getLifes() > 0) {
+		if(lifes.size() < (singleplayer.getLifes() - 1)) {
+			for(unsigned int i = lifes.size(); i < singleplayer.getLifes() - 1; ++i) {
+				sf::Sprite* life = new sf::Sprite(*texLife);
+				life->setPosition(10.0f+life->getGlobalBounds().width*i+10,10.0f);
+				lifes.push_back(life);
+			}
+		} else {
+			while(lifes.size() > (singleplayer.getLifes() - 1))
+				lifes.pop_back();
 		}
 	}
+
 	currentLevel.setString("Level   " + rrr::toString(singleplayer.getLevel()));
 }
 
