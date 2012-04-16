@@ -28,7 +28,22 @@ public:
 	void remove(unsigned int id);
 	void draw(sf::RenderTarget& renderTarget);
 	void clear();
+
+	/**
+	* Sends a message to the specified entity
+	*
+	* id: the ID of the entity which should receive the message
+	* msg: the type of the message (see Messages.hpp for definition of Message Types)
+	* params: the parameters needed to process the message. For details about which messages have which parameters, see definition in Messages.hpp.
+	**/
 	void sndMessage(unsigned int id, unsigned int msg, const std::vector<boost::any>& params = std::vector<boost::any>());
+
+	/**
+	* Sends a message to all entities
+	*
+	* msg: the type of the message (see Messages.hpp for definition of Message Types)
+	* params: the parameters needed to process the message. For details about which messages have which parameters, see definition in Messages.hpp.
+	**/
 	void broadcastMessage(unsigned int msg, const std::vector<boost::any>& params = std::vector<boost::any>());
 
 	bool showHitBox;
