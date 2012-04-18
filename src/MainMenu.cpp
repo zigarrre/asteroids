@@ -46,6 +46,8 @@ void MainMenu::reinit() {
 
 unsigned short MainMenu::update(float deltaTime) {
 
+	newState = Game::MAIN_MENU;
+
 	// event handling
 	sf::Event Event;
     while (renderWindow.pollEvent(Event)) {
@@ -53,19 +55,16 @@ unsigned short MainMenu::update(float deltaTime) {
             renderWindow.close();
 		else if (Event.type == sf::Event::KeyPressed && Event.key.code == sf::Keyboard::Escape)
 			if(gameStarted)
-				return Game::SINGLEPLAYER;
+				newState = Game::SINGLEPLAYER;
 			else
 				renderWindow.close();
-		else if (Event.type == sf::Event::MouseButtonReleased && Event.mouseButton.button == sf::Mouse::Left) {
-			return handleMouseClick(sf::Vector2i(Event.mouseButton.y,Event.mouseButton.y));
-		}
     }
 
 	btnResume.update(deltaTime);
 	btnNewGame.update(deltaTime);
 	btnExit.update(deltaTime);
 
-	return Game::MAIN_MENU;
+	return newState;
 }
 
 void MainMenu::draw() {
@@ -78,36 +77,20 @@ void MainMenu::draw() {
 	btnExit.draw();
 }
 
-unsigned short MainMenu::handleMouseClick(const sf::Vector2i& mouseCord) {
-
-	if(btnResume.isOver(mouseCord))
-		return btnResume.onClick();
-	else if(btnNewGame.isOver(mouseCord))
-		return btnNewGame.onClick();
-	else if(btnExit.isOver(mouseCord))
-		return btnExit.onClick();
-	else
-		return Game::MAIN_MENU;
-}
-
-int MainMenu::callbackNewGame() {
+void MainMenu::callbackNewGame() {
 	if(!gameStarted) {
 		gameStarted = true;
 		btnResume.setEnabled(true);
 	}
 	Game::gamestateManager.get(Game::SINGLEPLAYER)->reinit();
-	return Game::SINGLEPLAYER;
+	newState = Game::SINGLEPLAYER;
 }
 
-int MainMenu::callbackExit() {
+void MainMenu::callbackExit() {
 	renderWindow.close();
-	return Game::MAIN_MENU;
 }
 
-int MainMenu::callbackResume() {
-	if(gameStarted) {
-		return Game::SINGLEPLAYER;
-	} else {
-		return Game::MAIN_MENU;
-	}
+void MainMenu::callbackResume() {
+	if(gameStarted)
+		newState = Game::SINGLEPLAYER;
 }

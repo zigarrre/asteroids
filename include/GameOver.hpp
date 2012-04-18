@@ -24,8 +24,8 @@ public:
 	virtual unsigned short update(float deltaTime);
 	virtual void draw();
 
-	int callbackRestart();
-	int callbackMenu();
+	void callbackRestart();
+	void callbackMenu();
 
 private:
 	Button btnRestart, btnMenu;
@@ -33,7 +33,6 @@ private:
 	thor::ResourcePtr<sf::Texture> texBackground;
 	sf::Sprite background;
 	bool initialized;
-
-	unsigned short handleMouseClick(const sf::Vector2i& mouseCord);
+	unsigned short newState;
 
 };

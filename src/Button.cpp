@@ -10,9 +10,10 @@
 #include <iostream>
 using namespace std;
 
-Button::Button(const sf::Vector2f& pos, const std::string& text, boost::function<int ()> onClickCallback, sf::RenderWindow &renderWindow) :
+Button::Button(const sf::Vector2f& pos, const std::string& text, boost::function<void ()> onClickCallback, sf::RenderWindow &renderWindow) :
 	renderWindow(renderWindow),
-	enabled(true)
+	enabled(true),
+    mouseWasPressed(false)
 {
 
 	// load textures
@@ -38,12 +39,20 @@ Button::Button(const sf::Vector2f& pos, const std::string& text, boost::function
 void Button::update(float deltaTime) {
 
 	if(enabled) {
+
+        // clicked?
+        // only react on button release (check if button was pressed last frame but not this frame)
+        if(mouseWasPressed && !sf::Mouse::isButtonPressed(sf::Mouse::Left) && this->isOver(sf::Mouse::getPosition(renderWindow)))
+			onClick();
+        mouseWasPressed = sf::Mouse::isButtonPressed(sf::Mouse::Left);
+
 		// mouse over
 		if(isOver(sf::Mouse::getPosition(renderWindow))) {
 			background.setTexture(*bgActive);
 		} else {
 			background.setTexture(*bgNormal);
 		}
+
 	}
 
 }

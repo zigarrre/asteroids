@@ -24,9 +24,9 @@ public:
 	virtual unsigned short update(float deltaTime);
 	virtual void draw();
 
-	int callbackNewGame();
-	int callbackExit();
-	int callbackResume();
+	void callbackNewGame();
+	void callbackExit();
+	void callbackResume();
 
 private:
 	Button btnResume, btnNewGame, btnExit;
@@ -37,7 +37,6 @@ private:
 	thor::ResourcePtr<sf::Font> font;
 	sf::Text version;
 	bool initialized;
-
-	unsigned short handleMouseClick(const sf::Vector2i& mouseCord);
+	unsigned short newState;
 
 };

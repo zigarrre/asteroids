@@ -16,7 +16,7 @@ class Button {
 
 public:
 
-	Button(const sf::Vector2f& pos, const std::string& text, boost::function<int ()> onClickCallback, sf::RenderWindow &renderWindow);
+	Button(const sf::Vector2f& pos, const std::string& text, boost::function<void ()> onClickCallback, sf::RenderWindow &renderWindow);
 
 	void update(float deltaTime);
 
@@ -33,8 +33,6 @@ public:
 
 	sf::Vector2f getSize();
 
-	boost::function<int ()> onClick;
-
 private:
 	thor::ResourcePtr<sf::Texture> bgNormal;
 	thor::ResourcePtr<sf::Texture> bgActive;
@@ -44,5 +42,8 @@ private:
 	sf::Text text;
 	bool enabled;
 	sf::RenderWindow &renderWindow;
+    bool mouseWasPressed; // state of the left mouse button in the last frame
+
+	boost::function<void ()> onClick;
 
 };

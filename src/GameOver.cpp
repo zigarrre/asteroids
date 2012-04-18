@@ -31,20 +31,19 @@ void GameOver::reinit() {
 
 unsigned short GameOver::update(float deltaTime) {
 
+	newState = Game::GAME_OVER;
+
 	// event handling
 	sf::Event Event;
     while (renderWindow.pollEvent(Event)) {
         if (Event.type == sf::Event::Closed)
             renderWindow.close();
-		else if (Event.type == sf::Event::MouseButtonReleased && Event.mouseButton.button == sf::Mouse::Left) {
-			return handleMouseClick(sf::Vector2i(Event.mouseButton.x,Event.mouseButton.y));
-		}
     }
 
 	btnRestart.update(deltaTime);
 	btnMenu.update(deltaTime);
 
-	return Game::GAME_OVER;
+	return newState;
 }
 
 void GameOver::draw() {
@@ -56,22 +55,12 @@ void GameOver::draw() {
 
 }
 
-unsigned short GameOver::handleMouseClick(const sf::Vector2i& mouseCord) {
-
-	if(btnRestart.isOver(mouseCord))
-		return btnRestart.onClick();
-	else if(btnMenu.isOver(mouseCord))
-		return btnMenu.onClick();
-	else
-		return Game::MAIN_MENU;
-}
-
-int GameOver::callbackMenu() {
+void GameOver::callbackMenu() {
 	Game::gamestateManager.get(Game::MAIN_MENU)->reinit();
-	return Game::MAIN_MENU;
+	newState = Game::MAIN_MENU;
 }
 
-int GameOver::callbackRestart() {
+void GameOver::callbackRestart() {
 	Game::gamestateManager.get(Game::SINGLEPLAYER)->reinit();
-	return Game::SINGLEPLAYER;
+	newState = Game::SINGLEPLAYER;
 }
