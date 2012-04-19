@@ -23,20 +23,20 @@ class Spaceship : public Entity
         Spaceship(EntityManager& manager) : Entity(manager) {}
         Spaceship(EntityManager& manager, const sf::Vector2f& pos);
         virtual void update(float deltaTime);
-		virtual void collide(unsigned int id, unsigned int type);
-		virtual void rcvMessage(unsigned int msg, const std::vector<boost::any>& params = std::vector<boost::any>());
-		virtual void reset();
+        virtual void collide(unsigned int id, unsigned int type);
+        virtual void rcvMessage(unsigned int msg, const std::vector<boost::any>& params = std::vector<boost::any>());
+        virtual void reset();
         unsigned int getType() const { return EntityTypes::SPACESHIP; }
 
     protected:
     private:
         float accelerationToSet;
-		float rotationspeed;
-		float weaponCooldown;
-		float weaponCooldownToSet;
-		float friction;
-		int hp; // health points
-		float spawnMode; // remaining time in spawnMode
-		float bulletSpeed;
-		thor::ResourcePtr<sf::Texture> texture;
+        float rotationspeed;
+        float weaponCooldown;
+        float weaponCooldownToSet;
+        float friction;
+        int hp; // health points
+        float spawnMode; // remaining time in spawnMode
+        float bulletSpeed;
+        thor::ResourcePtr<sf::Texture> texture;
 };

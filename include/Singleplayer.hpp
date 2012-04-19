@@ -23,28 +23,28 @@ class Singleplayer : public Gamestate, public MessageReceiver
     public:
         Singleplayer(sf::RenderWindow& renderWindow);
         //~Singleplayer();
-		virtual void init();
-		virtual void reinit();
+        virtual void init();
+        virtual void reinit();
         virtual unsigned short update(float deltaTime);
         virtual void draw();
-		int getLevel() const { return level; }
-		unsigned int getLifes() const { return lifes; }
-		virtual void receiveMessage(unsigned int msg, const std::vector<boost::any>& params);
+        int getLevel() const { return level; }
+        unsigned int getLifes() const { return lifes; }
+        virtual void receiveMessage(unsigned int msg, const std::vector<boost::any>& params);
 
-		enum { SPACESHIP };
+        enum { SPACESHIP };
 
-		static EntityManager entityManager;
+        static EntityManager entityManager;
 
     protected:
     private:
         sf::RenderWindow& renderWindow;
-		bool initialized;
-		HUD hud;
-		thor::ResourcePtr<sf::Texture> texBackground;
-		sf::Sprite background;
-		sf::FloatRect saveZone;
-		int level;
-		unsigned int lifes;
+        bool initialized;
+        HUD hud;
+        thor::ResourcePtr<sf::Texture> texBackground;
+        sf::Sprite background;
+        sf::FloatRect saveZone;
+        int level;
+        unsigned int lifes;
 
-		void spawnAsteroids(int lvl);
+        void spawnAsteroids(int lvl);
 };

@@ -16,9 +16,9 @@ Entity::Entity(EntityManager& manager) :
 }
 
 sf::ConvexShape Entity::getHitBox() const {
-	sf::ConvexShape rv = hitbox;
-	rv.setOrigin(getOrigin());
-	rv.setRotation(getRotation());
-	rv.setPosition(getPosition());
-	return rv;
+    sf::ConvexShape rv = hitbox;
+    rv.setOrigin(getOrigin());
+    rv.setRotation(getRotation());
+    rv.setPosition(getPosition());
+    return rv;
 }

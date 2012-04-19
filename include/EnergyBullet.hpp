@@ -20,19 +20,19 @@ class EnergyBullet : public Entity {
 
 public:
     EnergyBullet(EntityManager& manager) : Entity(manager) {}
-	EnergyBullet(EntityManager& manager, const sf::Vector2f& pos, float velocity, float angle);
-	virtual void update(float deltaTime);
-	void setRunning(bool run) { running = run; }
-	bool getRunning() { return running; }
-	virtual void collide(unsigned int id, unsigned int type);
-	virtual void rcvMessage(unsigned int msg, const std::vector<boost::any>& params = std::vector<boost::any>());
-	virtual void reset() {}
+    EnergyBullet(EntityManager& manager, const sf::Vector2f& pos, float velocity, float angle);
+    virtual void update(float deltaTime);
+    void setRunning(bool run) { running = run; }
+    bool getRunning() { return running; }
+    virtual void collide(unsigned int id, unsigned int type);
+    virtual void rcvMessage(unsigned int msg, const std::vector<boost::any>& params = std::vector<boost::any>());
+    virtual void reset() {}
     unsigned int getType() const { return EntityTypes::ENERGY_BULLET; }
 
 private:
-	bool running;
-	float timeToLive;
-	bool destroyed;
-	float damage;
-	thor::ResourcePtr<sf::Texture> texture;
+    bool running;
+    float timeToLive;
+    bool destroyed;
+    float damage;
+    thor::ResourcePtr<sf::Texture> texture;
 };

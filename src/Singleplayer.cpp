@@ -15,30 +15,30 @@ EntityManager Singleplayer::entityManager(10);
 
 Singleplayer::Singleplayer(sf::RenderWindow& renderWindow) :
     renderWindow(renderWindow),
-	initialized(false),
-	hud(*this),
-	saveZone(Game::getResolution().x / 2 - 200.0f,Game::getResolution().y / 2 - 200.0f, 400.0f, 400.0f),
-	level(1)
+    initialized(false),
+    hud(*this),
+    saveZone(Game::getResolution().x / 2 - 200.0f,Game::getResolution().y / 2 - 200.0f, 400.0f, 400.0f),
+    level(1)
 {
-	texBackground = Game::textureManager.acquire(thor::Resources::TextureKey::fromFile("res/background.png"));
-	background.setTexture(*texBackground);
-	init();
+    texBackground = Game::textureManager.acquire(thor::Resources::TextureKey::fromFile("res/background.png"));
+    background.setTexture(*texBackground);
+    init();
 }
 
 void Singleplayer::init() {
-	if(!initialized) {
-		level = 1;
-		lifes = Game::config["spaceship.lifes"].as<unsigned int>();
-		MessageSystem::getHandle().registerReceiver(this);
-		spawnAsteroids(level);
+    if(!initialized) {
+        level = 1;
+        lifes = Game::config["spaceship.lifes"].as<unsigned int>();
+        MessageSystem::getHandle().registerReceiver(this);
+        spawnAsteroids(level);
         entityManager.add(new Spaceship(entityManager,sf::Vector2f(20.0f,20.0f)), SPACESHIP);
-	}
+    }
 }
 
 void Singleplayer::reinit() {
-	entityManager.clear();
-	initialized = false;
-	init();
+    entityManager.clear();
+    initialized = false;
+    init();
 }
 
 unsigned short Singleplayer::update(float deltaTime) {
@@ -47,65 +47,65 @@ unsigned short Singleplayer::update(float deltaTime) {
     while (renderWindow.pollEvent(e)) {
         if (e.type == sf::Event::Closed)
             renderWindow.close();
-		else if (e.type == sf::Event::KeyPressed && e.key.code == sf::Keyboard::Escape)
-			return Game::MAIN_MENU;
-		else if (e.type == sf::Event::KeyPressed && e.key.code == sf::Keyboard::H)
-			entityManager.showHitBox = !entityManager.showHitBox;
+        else if (e.type == sf::Event::KeyPressed && e.key.code == sf::Keyboard::Escape)
+            return Game::MAIN_MENU;
+        else if (e.type == sf::Event::KeyPressed && e.key.code == sf::Keyboard::H)
+            entityManager.showHitBox = !entityManager.showHitBox;
     }
-	entityManager.update(deltaTime);
-	hud.update(deltaTime);
+    entityManager.update(deltaTime);
+    hud.update(deltaTime);
 
-	if(lifes <= 0) {
-		return Game::GAME_OVER;
-	}
+    if(lifes <= 0) {
+        return Game::GAME_OVER;
+    }
 
-	if(Asteroid::getAsteroidCount() <= 0) {
-		++level;
-		entityManager.getEntity(SPACESHIP)->reset();
-		spawnAsteroids(level);
-	}
+    if(Asteroid::getAsteroidCount() <= 0) {
+        ++level;
+        entityManager.getEntity(SPACESHIP)->reset();
+        spawnAsteroids(level);
+    }
 
-	return Game::SINGLEPLAYER;
+    return Game::SINGLEPLAYER;
 }
 
 void Singleplayer::draw() {
-	renderWindow.draw(background);
-	entityManager.draw(renderWindow);
-	hud.draw(renderWindow);
+    renderWindow.draw(background);
+    entityManager.draw(renderWindow);
+    hud.draw(renderWindow);
 }
 
 void Singleplayer::spawnAsteroids(int lvl) {
 
-	for(int i = 0; i < lvl; ++i) {
+    for(int i = 0; i < lvl; ++i) {
 
-		// choose a random position
-		sf::Vector2f pos;
-		do {
-			pos.x = thor::random(0.0f,float(Game::getResolution().x));
-			pos.y = thor::random(0.0f,float(Game::getResolution().y));
-		} while(saveZone.contains(pos)); // make sure the pos is not in the save zone
+        // choose a random position
+        sf::Vector2f pos;
+        do {
+            pos.x = thor::random(0.0f,float(Game::getResolution().x));
+            pos.y = thor::random(0.0f,float(Game::getResolution().y));
+        } while(saveZone.contains(pos)); // make sure the pos is not in the save zone
 
-		// choose a random velocity
-		float min = Game::config["asteroid.minSpeed"].as<float>();
-		float max = Game::config["asteroid.maxSpeed"].as<float>();
-		sf::Vector2f speed;
-		if(thor::random(0,1) == 1) {
-			speed.x = thor::random(min,max);
-		} else {
-			speed.x = thor::random(-max,-min);
-		}
-		if(thor::random(0,1) == 1) {
-			speed.y = thor::random(min,max);
-		} else {
-			speed.y = thor::random(-max,-min);
-		}
+        // choose a random velocity
+        float min = Game::config["asteroid.minSpeed"].as<float>();
+        float max = Game::config["asteroid.maxSpeed"].as<float>();
+        sf::Vector2f speed;
+        if(thor::random(0,1) == 1) {
+            speed.x = thor::random(min,max);
+        } else {
+            speed.x = thor::random(-max,-min);
+        }
+        if(thor::random(0,1) == 1) {
+            speed.y = thor::random(min,max);
+        } else {
+            speed.y = thor::random(-max,-min);
+        }
 
         entityManager.add(new Asteroid(entityManager, pos, speed, Asteroid::BIG, thor::random(0.0f,360.0f)));
-	}
+    }
 }
 
 void Singleplayer::receiveMessage(unsigned int msg, const std::vector<boost::any>& params) {
-	if(msg == EngineMessages::PLAYER_DIED) {
-		--lifes;
-	}
+    if(msg == EngineMessages::PLAYER_DIED) {
+        --lifes;
+    }
 }

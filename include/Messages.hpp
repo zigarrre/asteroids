@@ -29,13 +29,13 @@ struct Messages {
 * If a message has parameters, these are listet under the description in exact the order in which the should be in the vector.
 **/
 struct EngineMessages {
-	enum {
+    enum {
 
-		/**
-		* The player has died.
-		* no parameters
-		**/
-		PLAYER_DIED = 0
+        /**
+        * The player has died.
+        * no parameters
+        **/
+        PLAYER_DIED = 0
 
-	};
+    };
 };

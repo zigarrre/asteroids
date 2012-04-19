@@ -11,78 +11,78 @@
 using namespace std;
 
 Button::Button(const sf::Vector2f& pos, const std::string& text, boost::function<void ()> onClickCallback, sf::RenderWindow &renderWindow) :
-	renderWindow(renderWindow),
-	enabled(true),
+    renderWindow(renderWindow),
+    enabled(true),
     mouseWasPressed(false)
 {
 
-	// load textures
-	bgNormal = Game::textureManager.acquire(thor::Resources::TextureKey::fromFile("res/buttonNormal.png"));
-	bgActive = Game::textureManager.acquire(thor::Resources::TextureKey::fromFile("res/buttonActive.png"));
-	bgDisabled = Game::textureManager.acquire(thor::Resources::TextureKey::fromFile("res/buttonDisabled.png"));
+    // load textures
+    bgNormal = Game::textureManager.acquire(thor::Resources::TextureKey::fromFile("res/buttonNormal.png"));
+    bgActive = Game::textureManager.acquire(thor::Resources::TextureKey::fromFile("res/buttonActive.png"));
+    bgDisabled = Game::textureManager.acquire(thor::Resources::TextureKey::fromFile("res/buttonDisabled.png"));
 
-	// load font
-	font = Game::fontManager.acquire(thor::Resources::FontKey::fromFile("res/font.ttf"));
+    // load font
+    font = Game::fontManager.acquire(thor::Resources::FontKey::fromFile("res/font.ttf"));
 
-	background.setTexture(*bgNormal);
-	background.setPosition(pos);
+    background.setTexture(*bgNormal);
+    background.setPosition(pos);
 
-	this->text.setFont(*font);
-	this->text.setString(text);
-	this->text.setPosition(pos.x+background.getLocalBounds().width/2-this->text.getLocalBounds().width/2,pos.y+12);
-	this->text.setColor(sf::Color(255,255,255));
+    this->text.setFont(*font);
+    this->text.setString(text);
+    this->text.setPosition(pos.x+background.getLocalBounds().width/2-this->text.getLocalBounds().width/2,pos.y+12);
+    this->text.setColor(sf::Color(255,255,255));
 
-	onClick = onClickCallback;
+    onClick = onClickCallback;
 
 }
 
 void Button::update(float deltaTime) {
 
-	if(enabled) {
+    if(enabled) {
 
         // clicked?
         // only react on button release (check if button was pressed last frame but not this frame)
         if(mouseWasPressed && !sf::Mouse::isButtonPressed(sf::Mouse::Left) && this->isOver(sf::Mouse::getPosition(renderWindow)))
-			onClick();
+            onClick();
         mouseWasPressed = sf::Mouse::isButtonPressed(sf::Mouse::Left);
 
-		// mouse over
-		if(isOver(sf::Mouse::getPosition(renderWindow))) {
-			background.setTexture(*bgActive);
-		} else {
-			background.setTexture(*bgNormal);
-		}
+        // mouse over
+        if(isOver(sf::Mouse::getPosition(renderWindow))) {
+            background.setTexture(*bgActive);
+        } else {
+            background.setTexture(*bgNormal);
+        }
 
-	}
+    }
 
 }
 
 void Button::draw() {
-	renderWindow.draw(background);
-	renderWindow.draw(text);
+    renderWindow.draw(background);
+    renderWindow.draw(text);
 }
 
 bool Button::isOver(sf::Vector2i cord) {
-	if((cord.x > background.getPosition().x && cord.x < (background.getPosition().x+background.getGlobalBounds().width)) && (cord.y > background.getPosition().y && cord.y < (background.getPosition().y+background.getGlobalBounds().height)))
-		return true;
-	else
-		return false;
+    if((cord.x > background.getPosition().x && cord.x < (background.getPosition().x+background.getGlobalBounds().width)) && (cord.y > background.getPosition().y && cord.y < (background.getPosition().y+background.getGlobalBounds().height)))
+        return true;
+    else
+        return false;
 }
 
 void Button::setEnabled(bool enabled) {
-	this->enabled = enabled;
-	if(!enabled) {
-		background.setTexture(*bgDisabled);
-		text.setColor(sf::Color(180,180,180));
-	} else {
-		background.setTexture(*bgNormal);
-		text.setColor(sf::Color(255,255,255));
-	}
+    this->enabled = enabled;
+    if(!enabled) {
+        background.setTexture(*bgDisabled);
+        text.setColor(sf::Color(180,180,180));
+    } else {
+        background.setTexture(*bgNormal);
+        text.setColor(sf::Color(255,255,255));
+    }
 }
 
 sf::Vector2f Button::getSize() {
-	sf::Vector2f rv;
-	rv.x = background.getGlobalBounds().width;
-	rv.y = background.getGlobalBounds().height;
-	return rv;
+    sf::Vector2f rv;
+    rv.x = background.getGlobalBounds().width;
+    rv.y = background.getGlobalBounds().height;
+    return rv;
 }

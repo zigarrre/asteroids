@@ -16,43 +16,43 @@ GamestateManager Game::gamestateManager;
 po::variables_map Game::config;
 
 Game::Game() :
-	renderWindow(sf::VideoMode(resolution.x, resolution.y, 32), "Asteoriden"),
+    renderWindow(sf::VideoMode(resolution.x, resolution.y, 32), "Asteoriden"),
     updateTime(1.0f/120.0f)
 {
 
-	po::options_description confDesc("Config");
-	confDesc.add_options()
-		("spaceship.acceleration", po::value<float>()->default_value(300.0f))
-		("spaceship.rotationSpeed", po::value<float>()->default_value(300.0f))
-		("spaceship.weaponCooldown", po::value<float>()->default_value(0.17f))
-		("spaceship.friction", po::value<float>()->default_value(100.0f))
-		("spaceship.lifes", po::value<unsigned int>()->default_value(3))
-		("spaceship.hp", po::value<int>()->default_value(1))
+    po::options_description confDesc("Config");
+    confDesc.add_options()
+        ("spaceship.acceleration", po::value<float>()->default_value(300.0f))
+        ("spaceship.rotationSpeed", po::value<float>()->default_value(300.0f))
+        ("spaceship.weaponCooldown", po::value<float>()->default_value(0.17f))
+        ("spaceship.friction", po::value<float>()->default_value(100.0f))
+        ("spaceship.lifes", po::value<unsigned int>()->default_value(3))
+        ("spaceship.hp", po::value<int>()->default_value(1))
 
-		("energyBullet.speed", po::value<float>()->default_value(400.0f))
-		("energyBullet.timeToLive", po::value<float>()->default_value(0.85f))
-		("energyBullet.damage", po::value<float>()->default_value(1.0f))
+        ("energyBullet.speed", po::value<float>()->default_value(400.0f))
+        ("energyBullet.timeToLive", po::value<float>()->default_value(0.85f))
+        ("energyBullet.damage", po::value<float>()->default_value(1.0f))
 
-		("asteroid.hp", po::value<int>()->default_value(1))
-		("asteroid.spread", po::value<float>()->default_value(25.0f))
-		("asteroid.minSpeed", po::value<float>()->default_value(50.0f))
-		("asteroid.maxSpeed", po::value<float>()->default_value(150.0f))
-	;
-	
-	ifstream file;
+        ("asteroid.hp", po::value<int>()->default_value(1))
+        ("asteroid.spread", po::value<float>()->default_value(25.0f))
+        ("asteroid.minSpeed", po::value<float>()->default_value(50.0f))
+        ("asteroid.maxSpeed", po::value<float>()->default_value(150.0f))
+    ;
+    
+    ifstream file;
     file.open("config.cfg");
-	po::store(po::parse_config_file(file,confDesc), config);
+    po::store(po::parse_config_file(file,confDesc), config);
     file.close();
-	file.close();
+    file.close();
     po::notify(config);
 
-	renderWindow.setVerticalSyncEnabled(true);
-	renderWindow.setFramerateLimit(60);
+    renderWindow.setVerticalSyncEnabled(true);
+    renderWindow.setFramerateLimit(60);
 
-	gamestateManager.add(new Singleplayer(renderWindow), SINGLEPLAYER);
-	gamestateManager.add(new MainMenu(renderWindow), MAIN_MENU);
-	gamestateManager.add(new GameOver(renderWindow), GAME_OVER);
-	gamestateManager.setActiveState(MAIN_MENU);
+    gamestateManager.add(new Singleplayer(renderWindow), SINGLEPLAYER);
+    gamestateManager.add(new MainMenu(renderWindow), MAIN_MENU);
+    gamestateManager.add(new GameOver(renderWindow), GAME_OVER);
+    gamestateManager.setActiveState(MAIN_MENU);
 }
 
 void Game::startGameLoop() {
@@ -70,17 +70,17 @@ void Game::startGameLoop() {
         // Update
         while(frameTime > 0.0f) {
             delta = min(frameTime, updateTime);
-			gamestateManager.update(delta);
+            gamestateManager.update(delta);
             frameTime -= delta;
         }
 
-		// Draw
+        // Draw
         renderWindow.clear();
-		gamestateManager.getActiveState()->draw();
+        gamestateManager.getActiveState()->draw();
         renderWindow.display();
     }
 }
 
 sf::Vector2i Game::getResolution() {
-	return resolution;
+    return resolution;
 }

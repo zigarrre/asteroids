@@ -18,24 +18,24 @@
 
 class Asteroid : public Entity {
 public:
-	enum Size {SMALL,MEDIUM,BIG};
+    enum Size {SMALL,MEDIUM,BIG};
 
     Asteroid(EntityManager& manager) : Entity(manager) {}
-	Asteroid(EntityManager& manager, const sf::Vector2f& pos, const sf::Vector2f& velocity, unsigned short size, float rotation = 0.0f, float rotationVelocity = 0.0f);
-	~Asteroid() { --asteroidCount; }
-	void update(float deltaTime);
-	void collide(unsigned int id, unsigned int type);
-	void rcvMessage(unsigned int msg, const std::vector<boost::any>& params = std::vector<boost::any>());
-	static int getAsteroidCount() { return asteroidCount; }
-	void reset() {}
+    Asteroid(EntityManager& manager, const sf::Vector2f& pos, const sf::Vector2f& velocity, unsigned short size, float rotation = 0.0f, float rotationVelocity = 0.0f);
+    ~Asteroid() { --asteroidCount; }
+    void update(float deltaTime);
+    void collide(unsigned int id, unsigned int type);
+    void rcvMessage(unsigned int msg, const std::vector<boost::any>& params = std::vector<boost::any>());
+    static int getAsteroidCount() { return asteroidCount; }
+    void reset() {}
     unsigned int getType() const { return EntityTypes::ASTEROID; }
 private:
-	bool running;
-	float rotationVelocity;
-	int hp; // Health Points
-	short size;
-	float spread;
-	thor::ResourcePtr<sf::Texture> texture;
+    bool running;
+    float rotationVelocity;
+    int hp; // Health Points
+    short size;
+    float spread;
+    thor::ResourcePtr<sf::Texture> texture;
 
-	static int asteroidCount;
+    static int asteroidCount;
 };

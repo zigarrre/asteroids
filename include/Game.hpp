@@ -24,25 +24,25 @@ class Game {
         Game();
         //~Game();
         void startGameLoop();
-		static sf::Vector2i getResolution();
+        static sf::Vector2i getResolution();
 
-		static thor::ResourceManager<sf::Texture> textureManager;
-		static thor::ResourceManager<sf::Font> fontManager;
-		
-		static GamestateManager gamestateManager;
+        static thor::ResourceManager<sf::Texture> textureManager;
+        static thor::ResourceManager<sf::Font> fontManager;
+        
+        static GamestateManager gamestateManager;
 
-		static boost::program_options::variables_map config;
+        static boost::program_options::variables_map config;
 
-		enum {
-			SINGLEPLAYER,
-			MAIN_MENU,
-			GAME_OVER
-		};
+        enum {
+            SINGLEPLAYER,
+            MAIN_MENU,
+            GAME_OVER
+        };
 
     protected:
     private:
         sf::RenderWindow renderWindow;
         float updateTime;
 
-		static sf::Vector2i resolution;
+        static sf::Vector2i resolution;
 };
