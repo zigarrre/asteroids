@@ -9,9 +9,8 @@
 GameOver::GameOver(sf::RenderWindow& renderWindow) :
     renderWindow(renderWindow),
     initialized(false),
-    btnRestart(sf::Vector2f(340.0f,400.0f),"Restart",boost::bind(&GameOver::callbackRestart,this),renderWindow),
-    btnMenu(sf::Vector2f(340.0f,500.0f),"Menu",boost::bind(&GameOver::callbackMenu,this),renderWindow)
-
+    btnRestart(sf::Vector2f((Game::getResolution().x / 2) - 343.0f, Game::getResolution().y - 120.f),"Restart",boost::bind(&GameOver::callbackRestart,this),renderWindow),
+    btnMenu(sf::Vector2f((Game::getResolution().x / 2) + 10.0f, Game::getResolution().y - 120.f),"Menu",boost::bind(&GameOver::callbackMenu,this),renderWindow)
 {
     texBackground = Game::textureManager.acquire(thor::Resources::TextureKey::fromFile("res/gameOverBackground.png"));
     init();
