@@ -29,6 +29,7 @@ class Singleplayer : public Gamestate, public MessageReceiver
         virtual void draw();
         int getLevel() const { return level; }
         unsigned int getLifes() const { return lifes; }
+        unsigned int getScore() const { return score; }
         virtual void receiveMessage(unsigned int msg, const std::vector<boost::any>& params);
 
         enum { SPACESHIP };
@@ -45,6 +46,7 @@ class Singleplayer : public Gamestate, public MessageReceiver
         sf::FloatRect saveZone;
         int level;
         unsigned int lifes;
+        unsigned int score;
 
         void spawnAsteroids(int lvl);
 };

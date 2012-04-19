@@ -28,6 +28,7 @@ private:
 	thor::ResourcePtr<sf::Font> font;
 	std::vector<sf::Sprite*> lifes;
 	sf::Text currentLevel;
+    sf::Text score;
 	const Singleplayer& singleplayer;
 
 };

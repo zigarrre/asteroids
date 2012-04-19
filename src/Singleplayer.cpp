@@ -28,6 +28,7 @@ Singleplayer::Singleplayer(sf::RenderWindow& renderWindow) :
 void Singleplayer::init() {
     if(!initialized) {
         level = 1;
+        score = 0;
         lifes = Game::config["spaceship.lifes"].as<unsigned int>();
         MessageSystem::getHandle().registerReceiver(this);
         spawnAsteroids(level);
@@ -105,7 +106,15 @@ void Singleplayer::spawnAsteroids(int lvl) {
 }
 
 void Singleplayer::receiveMessage(unsigned int msg, const std::vector<boost::any>& params) {
-    if(msg == EngineMessages::PLAYER_DIED) {
+    switch(msg) {
+
+    case EngineMessages::PLAYER_DIED:
         --lifes;
+        break;
+        
+    case EngineMessages::ASTEROID_DESTROYED:
+        score += 100;
+        break;
+
     }
 }

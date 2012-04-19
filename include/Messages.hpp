@@ -35,7 +35,13 @@ struct EngineMessages {
         * The player has died.
         * no parameters
         **/
-        PLAYER_DIED = 0
+        PLAYER_DIED = 0,
+
+        /**
+        * A asteroid was destroyed.
+        * no parameters
+        **/
+        ASTEROID_DESTROYED
 
     };
 };

@@ -8,6 +8,7 @@
 #include "Spaceship.hpp"
 #include "Singleplayer.hpp"
 #include "Messages.hpp"
+#include "MessageSystem.hpp"
 
 using namespace std;
 
@@ -49,6 +50,7 @@ void Asteroid::update(float deltaTime) {
     if(running) {
         
         if(hp <= 0) {
+            MessageSystem::getHandle().sendMessage(EngineMessages::ASTEROID_DESTROYED);
             // object destroid
             if(size > SMALL) {
                 sf::Vector2f newVelocity;

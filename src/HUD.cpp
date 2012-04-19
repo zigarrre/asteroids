@@ -17,9 +17,13 @@ HUD::HUD(const Singleplayer& singleplayer) :
 	texLife = Game::textureManager.acquire(thor::Resources::TextureKey::fromFile("res/life.png"));
 	font = Game::fontManager.acquire(thor::Resources::FontKey::fromFile("res/font.ttf"));
 	currentLevel.setFont(*font);
-	currentLevel.setPosition(Game::getResolution().x - 150.0f, 10.0f);
+	currentLevel.setPosition(Game::getResolution().x - 10.0f, 10.0f);
 	currentLevel.setCharacterSize(15);
 	currentLevel.setColor(sf::Color::White);
+    score.setFont(*font);
+	score.setPosition(Game::getResolution().x - 10.0f, 30.0f);
+	score.setCharacterSize(15);
+	score.setColor(sf::Color::White);
 }
 
 void HUD::update(float deltaTime) {
@@ -38,6 +42,9 @@ void HUD::update(float deltaTime) {
 	}
 
 	currentLevel.setString("Level   " + rrr::toString(singleplayer.getLevel()));
+    currentLevel.setOrigin(currentLevel.getLocalBounds().width, 0); // set origin to the right upper corner to right-align the text
+    score.setString(rrr::toString(singleplayer.getScore()));
+    score.setOrigin(score.getLocalBounds().width, 0);
 }
 
 void HUD::draw(sf::RenderTarget& renderTarget) {
@@ -45,4 +52,5 @@ void HUD::draw(sf::RenderTarget& renderTarget) {
 		renderTarget.draw(*lifes[i]);
 	}
 	renderTarget.draw(currentLevel);
+    renderTarget.draw(score);
 }
