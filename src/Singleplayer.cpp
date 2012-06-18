@@ -17,10 +17,10 @@ Singleplayer::Singleplayer(sf::RenderWindow& renderWindow) :
     renderWindow(renderWindow),
     initialized(false),
     hud(*this),
-    saveZone(Game::getResolution().x / 2 - 200.0f,Game::getResolution().y / 2 - 200.0f, 400.0f, 400.0f),
+    saveZone(Game::getHandle().getResolution().x / 2 - 200.0f,Game::getHandle().getResolution().y / 2 - 200.0f, 400.0f, 400.0f),
     level(1)
 {
-    texBackground = Game::textureManager.acquire(thor::Resources::TextureKey::fromFile("res/background.png"));
+    texBackground = Game::getHandle().textureManager.acquire(thor::Resources::TextureKey::fromFile("res/background.png"));
     background.setTexture(*texBackground);
     init();
 }
@@ -29,7 +29,7 @@ void Singleplayer::init() {
     if(!initialized) {
         level = 1;
         score = 0;
-        lifes = Game::config["spaceship.lifes"].as<unsigned int>();
+        lifes = Game::getHandle().config["spaceship.lifes"].as<unsigned int>();
         MessageSystem::getHandle().registerReceiver(this);
         spawnAsteroids(level);
         entityManager.add(new Spaceship(entityManager,sf::Vector2f(20.0f,20.0f)), SPACESHIP);
@@ -82,13 +82,13 @@ void Singleplayer::spawnAsteroids(int lvl) {
         // choose a random position
         sf::Vector2f pos;
         do {
-            pos.x = thor::random(0.0f,float(Game::getResolution().x));
-            pos.y = thor::random(0.0f,float(Game::getResolution().y));
+            pos.x = thor::random(0.0f,float(Game::getHandle().getResolution().x));
+            pos.y = thor::random(0.0f,float(Game::getHandle().getResolution().y));
         } while(saveZone.contains(pos)); // make sure the pos is not in the save zone
 
         // choose a random velocity
-        float min = Game::config["asteroid.minSpeed"].as<float>();
-        float max = Game::config["asteroid.maxSpeed"].as<float>();
+        float min = Game::getHandle().config["asteroid.minSpeed"].as<float>();
+        float max = Game::getHandle().config["asteroid.maxSpeed"].as<float>();
         sf::Vector2f speed;
         if(thor::random(0,1) == 1) {
             speed.x = thor::random(min,max);

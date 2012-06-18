@@ -14,14 +14,14 @@ HUD::HUD(const Singleplayer& singleplayer) :
 	singleplayer(singleplayer)
 {
 
-	texLife = Game::textureManager.acquire(thor::Resources::TextureKey::fromFile("res/life.png"));
-	font = Game::fontManager.acquire(thor::Resources::FontKey::fromFile("res/font.ttf"));
+	texLife = Game::getHandle().textureManager.acquire(thor::Resources::TextureKey::fromFile("res/life.png"));
+	font = Game::getHandle().fontManager.acquire(thor::Resources::FontKey::fromFile("res/font.ttf"));
 	currentLevel.setFont(*font);
-	currentLevel.setPosition(Game::getResolution().x - 10.0f, 10.0f);
+	currentLevel.setPosition(Game::getHandle().getResolution().x - 10.0f, 10.0f);
 	currentLevel.setCharacterSize(15);
 	currentLevel.setColor(sf::Color::White);
     score.setFont(*font);
-	score.setPosition(Game::getResolution().x - 10.0f, 30.0f);
+	score.setPosition(Game::getHandle().getResolution().x - 10.0f, 30.0f);
 	score.setCharacterSize(15);
 	score.setColor(sf::Color::White);
 }

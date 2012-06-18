@@ -15,8 +15,8 @@ MainMenu::MainMenu(sf::RenderWindow& renderWindow) :
     btnExit(sf::Vector2f(340.0f,500.0f),"Exit",boost::bind(&MainMenu::callbackExit,this),renderWindow)
 
 {
-    texBackground = Game::textureManager.acquire(thor::Resources::TextureKey::fromFile("res/menuBackground.png"));
-    font = Game::fontManager.acquire(thor::Resources::FontKey::fromFile("res/font.ttf"));
+    texBackground = Game::getHandle().textureManager.acquire(thor::Resources::TextureKey::fromFile("res/menuBackground.png"));
+    font = Game::getHandle().fontManager.acquire(thor::Resources::FontKey::fromFile("res/font.ttf"));
     init();
 }
 
@@ -32,7 +32,7 @@ void MainMenu::init() {
         version.setFont(*font);
         version.setCharacterSize(10);
         version.setColor(sf::Color::White);
-        version.setPosition(Game::getResolution().x - version.getLocalBounds().width - 20, Game::getResolution().y - version.getLocalBounds().height - 20);
+        version.setPosition(Game::getHandle().getResolution().x - version.getLocalBounds().width - 20, Game::getHandle().getResolution().y - version.getLocalBounds().height - 20);
 
         btnResume.setEnabled(false);
 
@@ -82,7 +82,7 @@ void MainMenu::callbackNewGame() {
         gameStarted = true;
         btnResume.setEnabled(true);
     }
-    Game::gamestateManager.get(Game::SINGLEPLAYER)->reinit();
+    Game::getHandle().gamestateManager.get(Game::SINGLEPLAYER)->reinit();
     newState = Game::SINGLEPLAYER;
 }
 

@@ -12,8 +12,7 @@ using namespace std;
 
 int main() {
 
-    Game game;
-    game.startGameLoop();
+    Game::getHandle().startGameLoop();
 
     return 0;
 }

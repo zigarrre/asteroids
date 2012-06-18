@@ -13,17 +13,17 @@ Spaceship::Spaceship(EntityManager& manager, const sf::Vector2f& pos) :
     spawnMode(0.0f),
     Entity(manager)
 {
-    accelerationToSet = Game::config["spaceship.acceleration"].as<float>();
-    rotationspeed = Game::config["spaceship.rotationSpeed"].as<float>();
-    weaponCooldownToSet = Game::config["spaceship.weaponCooldown"].as<float>();
-    friction = Game::config["spaceship.friction"].as<float>();
-    hp = Game::config["spaceship.hp"].as<int>();
-    bulletSpeed = Game::config["energyBullet.speed"].as<float>();
+    accelerationToSet = Game::getHandle().config["spaceship.acceleration"].as<float>();
+    rotationspeed = Game::getHandle().config["spaceship.rotationSpeed"].as<float>();
+    weaponCooldownToSet = Game::getHandle().config["spaceship.weaponCooldown"].as<float>();
+    friction = Game::getHandle().config["spaceship.friction"].as<float>();
+    hp = Game::getHandle().config["spaceship.hp"].as<int>();
+    bulletSpeed = Game::getHandle().config["energyBullet.speed"].as<float>();
 
     thor::Resources::TextureKey key = thor::Resources::TextureKey::fromFile("res/ship.png"); //TODO needs exeption Handling
-    texture = Game::textureManager.acquire(key);
+    texture = Game::getHandle().textureManager.acquire(key);
     this->setTexture(*texture);
-    this->setPosition(Game::getResolution().x/2.0f, Game::getResolution().y/2.0f);
+    this->setPosition(Game::getHandle().getResolution().x/2.0f, Game::getHandle().getResolution().y/2.0f);
     this->setOrigin(this->getLocalBounds().width/2.0f,this->getLocalBounds().height/2.0f);
 
     hitbox = rrr::loadHitbox("res/ship.col");
@@ -35,12 +35,12 @@ void Spaceship::update(float deltaTime) {
         // TODO destruction animation
         MessageSystem::getHandle().sendMessage(EngineMessages::PLAYER_DIED);
 
-        hp = Game::config["spaceship.hp"].as<int>();
+        hp = Game::getHandle().config["spaceship.hp"].as<int>();
         spawnMode = 2.0f;
         setRotation(0.0f);
         velocity[0] = 0.0f;
         velocity[1] = 0.0f;
-        setPosition(Game::getResolution().x/2.0f,Game::getResolution().y/2.0f);
+        setPosition(Game::getHandle().getResolution().x/2.0f,Game::getHandle().getResolution().y/2.0f);
     }
 
     if(spawnMode > 0.0f) {
@@ -109,13 +109,13 @@ void Spaceship::update(float deltaTime) {
         size.y = this->getGlobalBounds().height;
         sf::Vector2f origin = this->getOrigin();
         if((pos.x + (size.x/2)) < 0) {
-            this->setPosition(Game::getResolution().x + (size.x/2), pos.y);
-        } else if(pos.x - (size.x/2) > Game::getResolution().x) {
+            this->setPosition(Game::getHandle().getResolution().x + (size.x/2), pos.y);
+        } else if(pos.x - (size.x/2) > Game::getHandle().getResolution().x) {
             this->setPosition(-size.x+(size.x/2),pos.y);
         }
         if((pos.y + (size.y/2)) < 0) {
-            this->setPosition(pos.x, Game::getResolution().y + (size.y/2));
-        } else if(pos.y - (size.y/2) > Game::getResolution().y) {
+            this->setPosition(pos.x, Game::getHandle().getResolution().y + (size.y/2));
+        } else if(pos.y - (size.y/2) > Game::getHandle().getResolution().y) {
             this->setPosition(pos.x, -size.y+(size.y/2));
         }
 
@@ -147,6 +147,6 @@ void Spaceship::rcvMessage(unsigned int msg, const std::vector<boost::any>& para
 void Spaceship::reset() {
     velocity[1] = 0;
     velocity[0] = 0;
-    setPosition(Game::getResolution().x/2.0f,Game::getResolution().y/2.0f);
+    setPosition(Game::getHandle().getResolution().x/2.0f,Game::getHandle().getResolution().y/2.0f);
     setRotation(0.0f);
 }

@@ -17,12 +17,12 @@ Button::Button(const sf::Vector2f& pos, const std::string& text, boost::function
 {
 
     // load textures
-    bgNormal = Game::textureManager.acquire(thor::Resources::TextureKey::fromFile("res/buttonNormal.png"));
-    bgActive = Game::textureManager.acquire(thor::Resources::TextureKey::fromFile("res/buttonActive.png"));
-    bgDisabled = Game::textureManager.acquire(thor::Resources::TextureKey::fromFile("res/buttonDisabled.png"));
+    bgNormal = Game::getHandle().textureManager.acquire(thor::Resources::TextureKey::fromFile("res/buttonNormal.png"));
+    bgActive = Game::getHandle().textureManager.acquire(thor::Resources::TextureKey::fromFile("res/buttonActive.png"));
+    bgDisabled = Game::getHandle().textureManager.acquire(thor::Resources::TextureKey::fromFile("res/buttonDisabled.png"));
 
     // load font
-    font = Game::fontManager.acquire(thor::Resources::FontKey::fromFile("res/font.ttf"));
+    font = Game::getHandle().fontManager.acquire(thor::Resources::FontKey::fromFile("res/font.ttf"));
 
     background.setTexture(*bgNormal);
     background.setPosition(pos);

@@ -16,10 +16,10 @@ EnergyBullet::EnergyBullet(EntityManager& manager, const sf::Vector2f& pos, floa
     Entity(manager)
 {
     
-    timeToLive = Game::config["energyBullet.timeToLive"].as<float>();
-    damage = Game::config["energyBullet.damage"].as<float>();
+    timeToLive = Game::getHandle().config["energyBullet.timeToLive"].as<float>();
+    damage = Game::getHandle().config["energyBullet.damage"].as<float>();
 
-    texture = Game::textureManager.acquire(thor::Resources::TextureKey::fromFile("res/bullet1.png")); //TODO needs exeption Handling
+    texture = Game::getHandle().textureManager.acquire(thor::Resources::TextureKey::fromFile("res/bullet1.png")); //TODO needs exeption Handling
     this->setTexture(*texture);
     this->setOrigin(this->getLocalBounds().width/2.0f,this->getLocalBounds().height/2.0f);
     this->setPosition(pos);
@@ -56,13 +56,13 @@ void EnergyBullet::update(float deltaTime) {
         size.y = this->getGlobalBounds().height;
         sf::Vector2f origin = this->getOrigin();
         if((pos.x + (size.x/2)) < 0) {
-            this->setPosition(Game::getResolution().x + (size.x/2), pos.y);
-        } else if(pos.x - (size.x/2) > Game::getResolution().x) {
+            this->setPosition(Game::getHandle().getResolution().x + (size.x/2), pos.y);
+        } else if(pos.x - (size.x/2) > Game::getHandle().getResolution().x) {
             this->setPosition(-size.x+(size.x/2),pos.y);
         }
         if((pos.y + (size.y/2)) < 0) {
-            this->setPosition(pos.x, Game::getResolution().y + (size.y/2));
-        } else if(pos.y - (size.y/2) > Game::getResolution().y) {
+            this->setPosition(pos.x, Game::getHandle().getResolution().y + (size.y/2));
+        } else if(pos.y - (size.y/2) > Game::getHandle().getResolution().y) {
             this->setPosition(pos.x, -size.y+(size.y/2));
         }
     }

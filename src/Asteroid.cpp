@@ -21,19 +21,19 @@ Asteroid::Asteroid(EntityManager& manager, const sf::Vector2f& pos, const sf::Ve
     size(size),
     Entity(manager)
 {
-    hp = Game::config["asteroid.hp"].as<int>();
-    spread = Game::config["asteroid.spread"].as<float>();
+    hp = Game::getHandle().config["asteroid.hp"].as<int>();
+    spread = Game::getHandle().config["asteroid.spread"].as<float>();
     spread *= (PI/180); // convert degree to radian
 
     if(size == BIG) {
         hitbox = rrr::loadHitbox("res/asteroid.col");
-        texture = Game::textureManager.acquire(thor::Resources::TextureKey::fromFile("res/asteroid.png"));
+        texture = Game::getHandle().textureManager.acquire(thor::Resources::TextureKey::fromFile("res/asteroid.png"));
     } else if(size == MEDIUM) {
         hitbox = rrr::loadHitbox("res/asteroidMedium.col");
-        texture = Game::textureManager.acquire(thor::Resources::TextureKey::fromFile("res/asteroidMedium.png"));
+        texture = Game::getHandle().textureManager.acquire(thor::Resources::TextureKey::fromFile("res/asteroidMedium.png"));
     } else if(size == SMALL) {
         hitbox = rrr::loadHitbox("res/asteroidSmall.col");
-        texture = Game::textureManager.acquire(thor::Resources::TextureKey::fromFile("res/asteroidSmall.png"));
+        texture = Game::getHandle().textureManager.acquire(thor::Resources::TextureKey::fromFile("res/asteroidSmall.png"));
     }
     this->setTexture(*texture);
 
@@ -75,13 +75,13 @@ void Asteroid::update(float deltaTime) {
         size.y = this->getGlobalBounds().height;
         sf::Vector2f origin = this->getOrigin();
         if((pos.x + (size.x/2)) < 0) {
-            this->setPosition(Game::getResolution().x + (size.x/2), pos.y);
-        } else if(pos.x - (size.x/2) > Game::getResolution().x) {
+            this->setPosition(Game::getHandle().getResolution().x + (size.x/2), pos.y);
+        } else if(pos.x - (size.x/2) > Game::getHandle().getResolution().x) {
             this->setPosition(-size.x+(size.x/2),pos.y);
         }
         if((pos.y + (size.y/2)) < 0) {
-            this->setPosition(pos.x, Game::getResolution().y + (size.y/2));
-        } else if(pos.y - (size.y/2) > Game::getResolution().y) {
+            this->setPosition(pos.x, Game::getHandle().getResolution().y + (size.y/2));
+        } else if(pos.y - (size.y/2) > Game::getHandle().getResolution().y) {
             this->setPosition(pos.x, -size.y+(size.y/2));
         }
     }

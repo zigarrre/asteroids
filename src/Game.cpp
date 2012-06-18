@@ -9,13 +9,21 @@
 using namespace std;
 namespace po = boost::program_options;
 
+/*
 sf::Vector2i Game::resolution(1000, 750);
 thor::ResourceManager<sf::Texture> Game::textureManager;
 thor::ResourceManager<sf::Font> Game::fontManager;
 GamestateManager Game::gamestateManager;
 po::variables_map Game::config;
+*/
+
+Game& Game::getHandle() {
+    static Game game;
+    return game;
+}
 
 Game::Game() :
+    resolution(1000, 750),
     renderWindow(sf::VideoMode(resolution.x, resolution.y, 32), "Asteoriden"),
     updateTime(1.0f/120.0f)
 {
