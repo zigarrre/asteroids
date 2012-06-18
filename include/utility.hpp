@@ -14,11 +14,26 @@ const float PI = 3.1415926f;
 
 namespace rrr {
 
+	/**
+	* cast objects supporting << to string (in general numbers like int, double, ...)
+	**/
 	template <class T>
-	std::string toString (const T& t) {
+	std::string toString(const T& t) {
 		std::stringstream ss;
 		ss << t;
 		return ss.str();
+	}
+
+	/**
+	* cast from string to objects supporting >> (in general numbers like int, double, ...)
+	**/
+	template <class T>
+	T fromString(const std::string str) {
+		std::istringstream iss;
+		iss.str(str);
+		T out;
+		iss>>out;
+		return out;
 	}
 
 	/// load a hitbox from a file
