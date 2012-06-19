@@ -15,10 +15,10 @@ class BadIndexException : public exception {
 };
 
 Highscore::Highscore() :
-    currentScore(0),
-    scores(new HighscoreEntry[9])
+    currentScore(0)
 {
-    for(unsigned int i = 0; i < 9; ++i) {
+    scores = new HighscoreEntry[10];
+    for(unsigned int i = 0; i < 10; ++i) {
         scores[i].name = "-";
         scores[i].score = 0;
     }
@@ -59,7 +59,9 @@ bool Highscore::saveToFile(const std::string& path) const {
         return false;
 
     for(unsigned int i = 0; i < 10; ++i) {
-        file<<scores[i].name<<';'<<scores[i].score<<'\n';
+        file<<scores[i].name<<';'<<scores[i].score;
+        if(i < 9)
+            file<<'\n';
     }
 
     return true;
