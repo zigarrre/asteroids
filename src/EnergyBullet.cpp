@@ -6,6 +6,7 @@
 
 #include "EnergyBullet.hpp"
 #include "Messages.hpp"
+#include "Singleplayer.hpp"
 
 using namespace std;
 

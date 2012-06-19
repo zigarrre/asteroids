@@ -28,7 +28,7 @@ Singleplayer::Singleplayer(sf::RenderWindow& renderWindow) :
 void Singleplayer::init() {
     if(!initialized) {
         level = 1;
-        score = 0;
+        Game::getHandle().highscore.resetCurrentScore();
         lifes = Game::getHandle().config["spaceship.lifes"].as<unsigned int>();
         MessageSystem::getHandle().registerReceiver(this);
         spawnAsteroids(level);
@@ -113,7 +113,7 @@ void Singleplayer::receiveMessage(unsigned int msg, const std::vector<boost::any
         break;
         
     case EngineMessages::ASTEROID_DESTROYED:
-        score += 100;
+        Game::getHandle().highscore += 100;
         break;
 
     }

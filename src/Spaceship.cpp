@@ -7,6 +7,7 @@
 #include "Spaceship.hpp"
 #include "Messages.hpp"
 #include "MessageSystem.hpp"
+#include "Singleplayer.hpp"
 
 Spaceship::Spaceship(EntityManager& manager, const sf::Vector2f& pos) :
     weaponCooldown(0.0f),

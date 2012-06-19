@@ -43,7 +43,7 @@ void HUD::update(float deltaTime) {
 
 	currentLevel.setString("Level   " + rrr::toString(singleplayer.getLevel()));
     currentLevel.setOrigin(currentLevel.getLocalBounds().width, 0); // set origin to the right upper corner to right-align the text
-    score.setString(rrr::toString(singleplayer.getScore()));
+    score.setString(rrr::toString(Game::getHandle().highscore.getCurrentScore()));
     score.setOrigin(score.getLocalBounds().width, 0);
 }
 

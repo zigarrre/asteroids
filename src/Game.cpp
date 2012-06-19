@@ -5,6 +5,10 @@
 **/
 
 #include "Game.hpp"
+#include "Singleplayer.hpp"
+#include "MainMenu.hpp"
+#include "GameOver.hpp"
+#include "GameOverNewHighscore.hpp"
 
 using namespace std;
 namespace po = boost::program_options;
@@ -53,6 +57,8 @@ Game::Game() :
     file.close();
     file.close();
     po::notify(config);
+
+    highscore.loadFromFile("highscore.csv");
 
     renderWindow.setVerticalSyncEnabled(true);
     renderWindow.setFramerateLimit(60);

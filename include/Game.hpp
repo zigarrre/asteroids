@@ -7,10 +7,8 @@
 #pragma once
 
 #include "Gamestate.hpp"
-#include "Singleplayer.hpp"
-#include "MainMenu.hpp"
 #include "GamestateManager.hpp"
-#include "GameOver.hpp"
+#include "Highscore.hpp"
 #include <SFML/Graphics.hpp>
 #include <Thor/Resources.hpp>
 #include <map>
@@ -43,6 +41,7 @@ class Game {
         thor::ResourceManager<sf::Font> fontManager;
         GamestateManager gamestateManager;
         boost::program_options::variables_map config;
+        Highscore highscore;
 
         // gamesate IDs
         enum {
