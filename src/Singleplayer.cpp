@@ -56,9 +56,11 @@ unsigned short Singleplayer::update(float deltaTime) {
     entityManager.update(deltaTime);
     hud.update(deltaTime);
 
-    if(lifes <= 0) {
-        return Game::GAME_OVER;
-    }
+    if(lifes <= 0)
+        if(Game::getHandle().highscore.newHighscore())
+            return Game::GAME_OVER_NEW_HIGHSCORE;
+        else
+            return Game::GAME_OVER;
 
     if(Asteroid::getAsteroidCount() <= 0) {
         ++level;

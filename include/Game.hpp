@@ -47,7 +47,8 @@ class Game {
         enum {
             SINGLEPLAYER = 0,
             MAIN_MENU,
-            GAME_OVER
+            GAME_OVER,
+            GAME_OVER_NEW_HIGHSCORE
         };
 
     protected:

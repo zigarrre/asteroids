@@ -66,6 +66,7 @@ Game::Game() :
     gamestateManager.add(new Singleplayer(renderWindow), SINGLEPLAYER);
     gamestateManager.add(new MainMenu(renderWindow), MAIN_MENU);
     gamestateManager.add(new GameOver(renderWindow), GAME_OVER);
+    gamestateManager.add(new GameOverNewHighscore(renderWindow), GAME_OVER_NEW_HIGHSCORE);
     gamestateManager.setActiveState(MAIN_MENU);
 }
 

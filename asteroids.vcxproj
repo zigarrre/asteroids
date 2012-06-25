@@ -131,6 +131,7 @@
     <ClInclude Include="include\EntityTypes.hpp" />
     <ClInclude Include="include\Game.hpp" />
     <ClInclude Include="include\GameOver.hpp" />
+    <ClInclude Include="include\GameOverNewHighscore.hpp" />
     <ClInclude Include="include\Gamestate.hpp" />
     <ClInclude Include="include\GamestateManager.hpp" />
     <ClInclude Include="include\Highscore.hpp" />
@@ -152,6 +153,7 @@
     <ClCompile Include="src\EntityManager.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\GameOver.cpp" />
+    <ClCompile Include="src\GameOverNewHighscore.cpp" />
     <ClCompile Include="src\GamestateManager.cpp" />
     <ClCompile Include="src\Highscore.cpp" />
     <ClCompile Include="src\HUD.cpp" />
