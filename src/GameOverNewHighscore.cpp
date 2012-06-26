@@ -12,8 +12,14 @@ GameOverNewHighscore::GameOverNewHighscore(sf::RenderWindow& renderWindow) :
     btnOK(sf::Vector2f((Game::getHandle().getResolution().x / 2) - 166.0f, Game::getHandle().getResolution().y - 120.f),"OK",boost::bind(&GameOverNewHighscore::callbackOK,this),renderWindow),
     maxNameLength(10)
 {
-    texBackground = Game::getHandle().textureManager.acquire(thor::Resources::TextureKey::fromFile("res/gameOverBackground.png"));
+    texBackground = Game::getHandle().textureManager.acquire(thor::Resources::TextureKey::fromFile("res/menuBackground.png"));
     font = Game::getHandle().fontManager.acquire(thor::Resources::FontKey::fromFile("res/font.ttf"));
+
+    txtTitle.setFont(*font);
+    txtTitle.setString("Game Over!");
+    txtTitle.setCharacterSize(60);
+    txtTitle.setColor(sf::Color(244,215,3));
+    txtTitle.setPosition(Game::getHandle().getResolution().x/2 - txtTitle.getGlobalBounds().width/2, 130.0f);
 
     txtNewHighscore.setFont(*font);
     txtNewHighscore.setString("New Highscore!");
@@ -65,6 +71,7 @@ unsigned short GameOverNewHighscore::update(float deltaTime) {
 void GameOverNewHighscore::draw() {
 
     renderWindow.draw(background);
+    renderWindow.draw(txtTitle);
     renderWindow.draw(txtNewHighscore);
     renderWindow.draw(txtName);
 

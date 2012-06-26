@@ -17,6 +17,13 @@ MainMenu::MainMenu(sf::RenderWindow& renderWindow) :
 {
     texBackground = Game::getHandle().textureManager.acquire(thor::Resources::TextureKey::fromFile("res/menuBackground.png"));
     font = Game::getHandle().fontManager.acquire(thor::Resources::FontKey::fromFile("res/font.ttf"));
+
+    txtTitle.setFont(*font);
+    txtTitle.setString("Asteroids");
+    txtTitle.setCharacterSize(60);
+    txtTitle.setColor(sf::Color(244,215,3));
+    txtTitle.setPosition(Game::getHandle().getResolution().x/2 - txtTitle.getGlobalBounds().width/2, 130.0f);
+
     init();
 }
 
@@ -70,6 +77,7 @@ unsigned short MainMenu::update(float deltaTime) {
 void MainMenu::draw() {
 
     renderWindow.draw(background);
+    renderWindow.draw(txtTitle);
     renderWindow.draw(version);
 
     btnResume.draw();

@@ -38,5 +38,6 @@ private:
 	sf::Text version;
 	bool initialized;
 	unsigned short newState;
+    sf::Text txtTitle;
 
 };

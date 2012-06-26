@@ -31,8 +31,10 @@ private:
 	Button btnRestart, btnMenu;
 	sf::RenderWindow& renderWindow;
 	thor::ResourcePtr<sf::Texture> texBackground;
+    thor::ResourcePtr<sf::Font> font;
 	sf::Sprite background;
 	bool initialized;
 	unsigned short newState;
+    sf::Text txtTitle;
 
 };

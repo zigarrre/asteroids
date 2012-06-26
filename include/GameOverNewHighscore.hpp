@@ -35,6 +35,7 @@ private:
     unsigned short newState;
     thor::ResourcePtr<sf::Font> font;
     std::string name;
+    sf::Text txtTitle;
     sf::Text txtNewHighscore;
     sf::Text txtName;
     unsigned short maxNameLength;
