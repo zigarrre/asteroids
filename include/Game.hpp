@@ -37,8 +37,8 @@ class Game {
         void startGameLoop();
 
         sf::Vector2i getResolution();
-        thor::ResourceManager<sf::Texture> textureManager;
-        thor::ResourceManager<sf::Font> fontManager;
+        thor::ResourceCache<sf::Texture> textureManager;
+        thor::ResourceCache<sf::Font> fontManager;
         GamestateManager gamestateManager;
         boost::program_options::variables_map config;
         Highscore highscore;

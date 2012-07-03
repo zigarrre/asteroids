@@ -21,7 +21,7 @@ Spaceship::Spaceship(EntityManager& manager, const sf::Vector2f& pos) :
     hp = Game::getHandle().config["spaceship.hp"].as<int>();
     bulletSpeed = Game::getHandle().config["energyBullet.speed"].as<float>();
 
-    thor::Resources::TextureKey key = thor::Resources::TextureKey::fromFile("res/ship.png"); //TODO needs exeption Handling
+    thor::ResourceKey<sf::Texture> key = thor::Resources::fromFile<sf::Texture>("res/ship.png"); //TODO needs exeption Handling
     texture = Game::getHandle().textureManager.acquire(key);
     this->setTexture(*texture);
     this->setPosition(Game::getHandle().getResolution().x/2.0f, Game::getHandle().getResolution().y/2.0f);

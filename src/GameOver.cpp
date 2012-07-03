@@ -12,8 +12,8 @@ GameOver::GameOver(sf::RenderWindow& renderWindow) :
     btnRestart(sf::Vector2f((Game::getHandle().getResolution().x / 2) - 343.0f, Game::getHandle().getResolution().y - 120.f),"Restart",boost::bind(&GameOver::callbackRestart,this),renderWindow),
     btnMenu(sf::Vector2f((Game::getHandle().getResolution().x / 2) + 10.0f, Game::getHandle().getResolution().y - 120.f),"Menu",boost::bind(&GameOver::callbackMenu,this),renderWindow)
 {
-    texBackground = Game::getHandle().textureManager.acquire(thor::Resources::TextureKey::fromFile("res/menuBackground.png"));
-    font = Game::getHandle().fontManager.acquire(thor::Resources::FontKey::fromFile("res/font.ttf"));
+    texBackground = Game::getHandle().textureManager.acquire(thor::Resources::fromFile<sf::Texture>("res/menuBackground.png"));
+    font = Game::getHandle().fontManager.acquire(thor::Resources::fromFile<sf::Font>("res/font.ttf"));
 
     txtTitle.setFont(*font);
     txtTitle.setString("Game Over!");

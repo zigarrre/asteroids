@@ -24,8 +24,8 @@ public:
 
 private:
 
-	thor::ResourcePtr<sf::Texture> texLife;
-	thor::ResourcePtr<sf::Font> font;
+	std::shared_ptr<sf::Texture> texLife;
+	std::shared_ptr<sf::Font> font;
 	std::vector<sf::Sprite*> lifes;
 	sf::Text currentLevel;
     sf::Text score;

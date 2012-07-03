@@ -38,5 +38,5 @@ class Spaceship : public Entity
         int hp; // health points
         float spawnMode; // remaining time in spawnMode
         float bulletSpeed;
-        thor::ResourcePtr<sf::Texture> texture;
+        std::shared_ptr<sf::Texture> texture;
 };

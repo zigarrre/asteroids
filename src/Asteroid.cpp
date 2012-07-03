@@ -27,13 +27,13 @@ Asteroid::Asteroid(EntityManager& manager, const sf::Vector2f& pos, const sf::Ve
 
     if(size == BIG) {
         hitbox = rrr::loadHitbox("res/asteroid.col");
-        texture = Game::getHandle().textureManager.acquire(thor::Resources::TextureKey::fromFile("res/asteroid.png"));
+        texture = Game::getHandle().textureManager.acquire(thor::Resources::fromFile<sf::Texture>("res/asteroid.png"));
     } else if(size == MEDIUM) {
         hitbox = rrr::loadHitbox("res/asteroidMedium.col");
-        texture = Game::getHandle().textureManager.acquire(thor::Resources::TextureKey::fromFile("res/asteroidMedium.png"));
+        texture = Game::getHandle().textureManager.acquire(thor::Resources::fromFile<sf::Texture>("res/asteroidMedium.png"));
     } else if(size == SMALL) {
         hitbox = rrr::loadHitbox("res/asteroidSmall.col");
-        texture = Game::getHandle().textureManager.acquire(thor::Resources::TextureKey::fromFile("res/asteroidSmall.png"));
+        texture = Game::getHandle().textureManager.acquire(thor::Resources::fromFile<sf::Texture>("res/asteroidSmall.png"));
     }
     this->setTexture(*texture);
 

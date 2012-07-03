@@ -15,8 +15,8 @@ MainMenu::MainMenu(sf::RenderWindow& renderWindow) :
     btnExit(sf::Vector2f(340.0f,500.0f),"Exit",boost::bind(&MainMenu::callbackExit,this),renderWindow)
 
 {
-    texBackground = Game::getHandle().textureManager.acquire(thor::Resources::TextureKey::fromFile("res/menuBackground.png"));
-    font = Game::getHandle().fontManager.acquire(thor::Resources::FontKey::fromFile("res/font.ttf"));
+    texBackground = Game::getHandle().textureManager.acquire(thor::Resources::fromFile<sf::Texture>("res/menuBackground.png"));
+    font = Game::getHandle().fontManager.acquire(thor::Resources::fromFile<sf::Font>("res/font.ttf"));
 
     txtTitle.setFont(*font);
     txtTitle.setString("Asteroids");

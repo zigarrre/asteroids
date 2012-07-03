@@ -14,8 +14,8 @@ To compile asteroids, you need a recent version of SFML 2 (sfml-dev.org), Thor (
 
 Tested versions are:
 
-SFML2: commit 24f8c3535d (https://github.com/LaurentGomila/SFML/zipball/24f8c3535d614b9a2f9cd147142c025f45a68f96)
-Thor: commit e65ab28218 (https://github.com/Bromeon/Thor/zipball/e65ab28218a01766321a398f85f63b7fc4808653)
+SFML2: commit 3c0de3e00e (https://github.com/LaurentGomila/SFML/tarball/3c0de3e00e97d0ca8380b7b361d54c6fb501e74f)
+Thor: commit 5182961751 (https://github.com/Bromeon/Thor/tarball/518296175173eeafda2e59908a3b5d18246244e3)
 
 Use the VS2010 project file and edit the search-paths or create your own.
 

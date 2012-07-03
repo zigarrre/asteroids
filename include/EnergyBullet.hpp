@@ -34,5 +34,5 @@ private:
     float timeToLive;
     bool destroyed;
     float damage;
-    thor::ResourcePtr<sf::Texture> texture;
+    std::shared_ptr<sf::Texture> texture;
 };

@@ -20,7 +20,7 @@ EnergyBullet::EnergyBullet(EntityManager& manager, const sf::Vector2f& pos, floa
     timeToLive = Game::getHandle().config["energyBullet.timeToLive"].as<float>();
     damage = Game::getHandle().config["energyBullet.damage"].as<float>();
 
-    texture = Game::getHandle().textureManager.acquire(thor::Resources::TextureKey::fromFile("res/bullet1.png")); //TODO needs exeption Handling
+    texture = Game::getHandle().textureManager.acquire(thor::Resources::fromFile<sf::Texture>("res/bullet1.png")); //TODO needs exeption Handling
     this->setTexture(*texture);
     this->setOrigin(this->getLocalBounds().width/2.0f,this->getLocalBounds().height/2.0f);
     this->setPosition(pos);

@@ -40,7 +40,7 @@ class Singleplayer : public Gamestate, public MessageReceiver
         sf::RenderWindow& renderWindow;
         bool initialized;
         HUD hud;
-        thor::ResourcePtr<sf::Texture> texBackground;
+        std::shared_ptr<sf::Texture> texBackground;
         sf::Sprite background;
         sf::FloatRect saveZone;
         int level;

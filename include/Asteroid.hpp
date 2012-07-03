@@ -35,7 +35,7 @@ private:
     int hp; // Health Points
     short size;
     float spread;
-    thor::ResourcePtr<sf::Texture> texture;
+    std::shared_ptr<sf::Texture> texture;
 
     static int asteroidCount;
 };

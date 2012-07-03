@@ -12,8 +12,8 @@ GameOverNewHighscore::GameOverNewHighscore(sf::RenderWindow& renderWindow) :
     btnOK(sf::Vector2f((Game::getHandle().getResolution().x / 2) - 166.0f, Game::getHandle().getResolution().y - 120.f),"OK",boost::bind(&GameOverNewHighscore::callbackOK,this),renderWindow),
     maxNameLength(10)
 {
-    texBackground = Game::getHandle().textureManager.acquire(thor::Resources::TextureKey::fromFile("res/menuBackground.png"));
-    font = Game::getHandle().fontManager.acquire(thor::Resources::FontKey::fromFile("res/font.ttf"));
+    texBackground = Game::getHandle().textureManager.acquire(thor::Resources::fromFile<sf::Texture>("res/menuBackground.png"));
+    font = Game::getHandle().fontManager.acquire(thor::Resources::fromFile<sf::Font>("res/font.ttf"));
 
     txtTitle.setFont(*font);
     txtTitle.setString("Game Over!");
@@ -58,7 +58,7 @@ unsigned short GameOverNewHighscore::update(float deltaTime) {
             renderWindow.close();
         else if(event.type == sf::Event::TextEntered && static_cast<char>(event.text.unicode) > 31 && static_cast<char>(event.text.unicode) < 127 && name.length() < maxNameLength)
             name += static_cast<char>(event.text.unicode);
-        else if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Back && name.length() > 0)
+        else if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::BackSpace && name.length() > 0)
             name.erase(name.end()-1);
     }
 

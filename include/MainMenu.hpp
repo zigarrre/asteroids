@@ -32,9 +32,9 @@ private:
 	Button btnResume, btnNewGame, btnExit;
 	sf::RenderWindow& renderWindow;
 	bool gameStarted;
-	thor::ResourcePtr<sf::Texture> texBackground;
+	std::shared_ptr<sf::Texture> texBackground;
 	sf::Sprite background;
-	thor::ResourcePtr<sf::Font> font;
+	std::shared_ptr<sf::Font> font;
 	sf::Text version;
 	bool initialized;
 	unsigned short newState;

@@ -29,11 +29,11 @@ public:
 private:
     Button btnOK;
     sf::RenderWindow& renderWindow;
-    thor::ResourcePtr<sf::Texture> texBackground;
+    std::shared_ptr<sf::Texture> texBackground;
     sf::Sprite background;
     bool initialized;
     unsigned short newState;
-    thor::ResourcePtr<sf::Font> font;
+    std::shared_ptr<sf::Font> font;
     std::string name;
     sf::Text txtTitle;
     sf::Text txtNewHighscore;

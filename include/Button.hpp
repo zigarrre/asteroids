@@ -34,10 +34,10 @@ public:
     sf::Vector2f getSize();
 
 private:
-    thor::ResourcePtr<sf::Texture> bgNormal;
-    thor::ResourcePtr<sf::Texture> bgActive;
-    thor::ResourcePtr<sf::Texture> bgDisabled;
-    thor::ResourcePtr<sf::Font> font;
+    std::shared_ptr<sf::Texture> bgNormal;
+    std::shared_ptr<sf::Texture> bgActive;
+    std::shared_ptr<sf::Texture> bgDisabled;
+    std::shared_ptr<sf::Font> font;
     sf::Sprite background;
     sf::Text text;
     bool enabled;
