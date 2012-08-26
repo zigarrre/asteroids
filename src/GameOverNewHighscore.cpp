@@ -82,5 +82,5 @@ void GameOverNewHighscore::draw() {
 void GameOverNewHighscore::callbackOK() {
     Game::getHandle().highscore.saveCurrentScore(name);
     Game::getHandle().highscore.saveToFile("highscore.csv");
-    newState = Game::MAIN_MENU;
+    newState = Game::HIGHSCORE_VIEW;
 }

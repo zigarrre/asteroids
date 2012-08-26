@@ -135,6 +135,7 @@
     <ClInclude Include="include\Gamestate.hpp" />
     <ClInclude Include="include\GamestateManager.hpp" />
     <ClInclude Include="include\Highscore.hpp" />
+    <ClInclude Include="include\HighscoreView.hpp" />
     <ClInclude Include="include\HUD.hpp" />
     <ClInclude Include="include\MainMenu.hpp" />
     <ClInclude Include="include\MessageReceiver.hpp" />
@@ -156,6 +157,7 @@
     <ClCompile Include="src\GameOverNewHighscore.cpp" />
     <ClCompile Include="src\GamestateManager.cpp" />
     <ClCompile Include="src\Highscore.cpp" />
+    <ClCompile Include="src\HighscoreView.cpp" />
     <ClCompile Include="src\HUD.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\MainMenu.cpp" />

@@ -48,7 +48,8 @@ class Game {
             SINGLEPLAYER = 0,
             MAIN_MENU,
             GAME_OVER,
-            GAME_OVER_NEW_HIGHSCORE
+            GAME_OVER_NEW_HIGHSCORE,
+            HIGHSCORE_VIEW
         };
 
     protected:

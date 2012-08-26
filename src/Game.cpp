@@ -9,6 +9,7 @@
 #include "MainMenu.hpp"
 #include "GameOver.hpp"
 #include "GameOverNewHighscore.hpp"
+#include "HighscoreView.hpp"
 
 using namespace std;
 namespace po = boost::program_options;
@@ -67,6 +68,7 @@ Game::Game() :
     gamestateManager.add(new MainMenu(renderWindow), MAIN_MENU);
     gamestateManager.add(new GameOver(renderWindow), GAME_OVER);
     gamestateManager.add(new GameOverNewHighscore(renderWindow), GAME_OVER_NEW_HIGHSCORE);
+    gamestateManager.add(new HighscoreView(renderWindow), HIGHSCORE_VIEW);
     gamestateManager.setActiveState(MAIN_MENU);
 }
 
