@@ -10,7 +10,7 @@ Please report any bugs to the issue tracker on the project page! Feature request
 Compiling
 ---------
 
-To compile asteroids, you need a recent version of SFML 2 (sfml-dev.org), Thor (developement version) (bromeon.ch/libraries/thor) and Boost (boost.org).
+To compile asteroids, you need a recent version of SFML 2 (sfml-dev.org), Thor (developement version) (bromeon.ch/libraries/thor), Boost (boost.org) and a compiler which supports C++11.
 
 Tested versions are:
 
