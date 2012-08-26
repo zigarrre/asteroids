@@ -51,18 +51,6 @@ void HighscoreView::init() {
     if(!initialized) {
         background.setTexture(*texBackground);
         background.setPosition(0.0f,0.0f);
-
-        // fill table with content
-        string tableNumber = "", tableName = "";
-        for(unsigned int i = 0; i < 10; ++i) {
-            tableNumber += rrr::toString(i+1) + ".\n";
-            tableName += Game::getHandle().highscore[i].name + '\n';
-            txtTableScore[i].setString(rrr::toString(Game::getHandle().highscore[i].score));
-            txtTableScore[i].setOrigin(txtTableScore[i].getLocalBounds().width, 0); // set origin to upper right corner (for right alignment)
-            txtTableScore[i].setPosition(770.0f, 240.0f + (i * txtTableScore[i].getFont().getLineSpacing(txtTableScore[i].getCharacterSize())));
-        }
-        txtTableNumber.setString(tableNumber);
-        txtTableName.setString(tableName);
     }
 }
 
@@ -82,8 +70,27 @@ unsigned short HighscoreView::update(float deltaTime) {
             renderWindow.close();
     }
 
+    static bool tableUpToDate = false;
+    if(!tableUpToDate) { // prevent unneeded updates
+        // fill table with content
+        string tableNumber = "", tableName = "";
+        for(unsigned int i = 0; i < 10; ++i) {
+            tableNumber += rrr::toString(i+1) + ".\n";
+            tableName += Game::getHandle().highscore[i].name + '\n';
+            txtTableScore[i].setString(rrr::toString(Game::getHandle().highscore[i].score));
+            txtTableScore[i].setOrigin(txtTableScore[i].getLocalBounds().width, 0); // set origin to upper right corner (for right alignment)
+            txtTableScore[i].setPosition(770.0f, 240.0f + (i * txtTableScore[i].getFont().getLineSpacing(txtTableScore[i].getCharacterSize())));
+        }
+        txtTableNumber.setString(tableNumber);
+        txtTableName.setString(tableName);
+        tableUpToDate = true;
+    }
+
     btnRestart.update(deltaTime);
     btnMenu.update(deltaTime);
+
+    if(newState != Game::HIGHSCORE_VIEW) // Gamestate changes, highscore-data afterwards maybe changed
+        tableUpToDate = false;
 
     return newState;
 }
