@@ -22,7 +22,7 @@ class Singleplayer : public Gamestate, public MessageReceiver
 {
     public:
         Singleplayer(sf::RenderWindow& renderWindow);
-        //~Singleplayer();
+        ~Singleplayer();
         virtual void init();
         virtual void reinit();
         virtual unsigned short update(float deltaTime);

@@ -22,7 +22,14 @@ Singleplayer::Singleplayer(sf::RenderWindow& renderWindow) :
 {
     texBackground = Game::getHandle().textureManager.acquire(thor::Resources::fromFile<sf::Texture>("res/background.png"));
     background.setTexture(*texBackground);
+
+    MessageSystem::getHandle().registerReceiver(this);
+
     init();
+}
+
+Singleplayer::~Singleplayer() {
+    MessageSystem::getHandle().unregisterReceiver(this);
 }
 
 void Singleplayer::init() {
@@ -30,7 +37,7 @@ void Singleplayer::init() {
         level = 1;
         Game::getHandle().highscore.resetCurrentScore();
         lifes = Game::getHandle().config["spaceship.lifes"].as<unsigned int>();
-        MessageSystem::getHandle().registerReceiver(this);
+        
         spawnAsteroids(level);
         entityManager.add(new Spaceship(entityManager,sf::Vector2f(20.0f,20.0f)), SPACESHIP);
     }
@@ -38,11 +45,18 @@ void Singleplayer::init() {
 
 void Singleplayer::reinit() {
     entityManager.clear();
+    
     initialized = false;
     init();
 }
 
 unsigned short Singleplayer::update(float deltaTime) {
+
+    static bool startMessageSent = false;
+    if(!startMessageSent) { // ensure that the GAME_STARTED message is sent only once per game
+        MessageSystem::getHandle().sendMessage(EngineMessages::GAME_STARTED); // broadcast the start of the game
+        startMessageSent = true;
+    }
 
     sf::Event e;
     while (renderWindow.pollEvent(e)) {
@@ -56,11 +70,14 @@ unsigned short Singleplayer::update(float deltaTime) {
     entityManager.update(deltaTime);
     hud.update(deltaTime);
 
-    if(lifes <= 0)
+    if(lifes <= 0) { // game over
+        MessageSystem::getHandle().sendMessage(EngineMessages::GAME_OVER); // broadcast the end of the game
+        startMessageSent = false; // send GAME_STARTED message on next start again 
         if(Game::getHandle().highscore.newHighscore())
             return Game::GAME_OVER_NEW_HIGHSCORE;
         else
             return Game::GAME_OVER;
+    }
 
     if(Asteroid::getAsteroidCount() <= 0) {
         ++level;

@@ -41,7 +41,19 @@ struct EngineMessages {
         * A asteroid was destroyed.
         * no parameters
         **/
-        ASTEROID_DESTROYED
+        ASTEROID_DESTROYED,
+
+        /**
+        * Game started
+        * no parameters
+        **/
+        GAME_STARTED,
+
+        /**
+        * Game over
+        * no parameters
+        **/
+        GAME_OVER
 
     };
 };
