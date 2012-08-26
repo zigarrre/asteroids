@@ -5,6 +5,8 @@
 **/
 
 #include "MainMenu.hpp"
+#include "MessageSystem.hpp"
+#include "Messages.hpp"
 
 MainMenu::MainMenu(sf::RenderWindow& renderWindow) :
     renderWindow(renderWindow),
@@ -24,7 +26,13 @@ MainMenu::MainMenu(sf::RenderWindow& renderWindow) :
     txtTitle.setColor(sf::Color(244,215,3));
     txtTitle.setPosition(Game::getHandle().getResolution().x/2 - txtTitle.getGlobalBounds().width/2, 130.0f);
 
+    MessageSystem::getHandle().registerReceiver(this);
+
     init();
+}
+
+MainMenu::~MainMenu() {
+    MessageSystem::getHandle().unregisterReceiver(this);
 }
 
 void MainMenu::init() {
@@ -85,6 +93,22 @@ void MainMenu::draw() {
     btnNewGame.draw();
     btnHighscore.draw();
     btnExit.draw();
+}
+
+void MainMenu::receiveMessage(unsigned int msg, const std::vector<boost::any>& params) {
+    switch(msg) {
+    
+    case EngineMessages::GAME_STARTED:
+        gameStarted = true;
+        btnResume.setEnabled(true);
+        break;
+    
+    case EngineMessages::GAME_OVER:
+        gameStarted = false;
+        btnResume.setEnabled(false);
+        break;
+
+    }
 }
 
 void MainMenu::callbackNewGame() {

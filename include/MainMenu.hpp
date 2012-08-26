@@ -10,19 +10,23 @@
 #include "Gamestate.hpp"
 #include "Game.hpp"
 #include "Spaceship.hpp"
+#include "MessageReceiver.hpp"
 #include <SFML/Graphics.hpp>
 #include <Thor/Resources.hpp>
 #include <vector>
 #include <string>
 
-class MainMenu : public Gamestate {
+class MainMenu : public Gamestate, public MessageReceiver {
 
 public:
 	MainMenu(sf::RenderWindow& renderWindow);
+    ~MainMenu();
 	virtual void init();
 	virtual void reinit();
 	virtual unsigned short update(float deltaTime);
 	virtual void draw();
+
+    virtual void receiveMessage(unsigned int msg, const std::vector<boost::any>& params);
 
 	void callbackNewGame();
 	void callbackExit();
