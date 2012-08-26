@@ -10,10 +10,10 @@ MainMenu::MainMenu(sf::RenderWindow& renderWindow) :
     renderWindow(renderWindow),
     gameStarted(false),
     initialized(false),
-    btnResume(sf::Vector2f(340.0f,300.0f),"Resume",boost::bind(&MainMenu::callbackResume,this),renderWindow),
-    btnNewGame(sf::Vector2f(340.0f,400.0f),"New Game",boost::bind(&MainMenu::callbackNewGame,this),renderWindow),
-    btnExit(sf::Vector2f(340.0f,500.0f),"Exit",boost::bind(&MainMenu::callbackExit,this),renderWindow)
-
+    btnResume(sf::Vector2f(340.0f,270.0f),"Resume",boost::bind(&MainMenu::callbackResume,this),renderWindow),
+    btnNewGame(sf::Vector2f(340.0f,350.0f),"New Game",boost::bind(&MainMenu::callbackNewGame,this),renderWindow),
+    btnHighscore(sf::Vector2f(340.0f,430.0f),"Highscore",boost::bind(&MainMenu::callbackHighscore,this),renderWindow),
+    btnExit(sf::Vector2f(340.0f,510.0f),"Exit",boost::bind(&MainMenu::callbackExit,this),renderWindow)
 {
     texBackground = Game::getHandle().textureManager.acquire(thor::Resources::fromFile<sf::Texture>("res/menuBackground.png"));
     font = Game::getHandle().fontManager.acquire(thor::Resources::fromFile<sf::Font>("res/font.ttf"));
@@ -69,6 +69,7 @@ unsigned short MainMenu::update(float deltaTime) {
 
     btnResume.update(deltaTime);
     btnNewGame.update(deltaTime);
+    btnHighscore.update(deltaTime);
     btnExit.update(deltaTime);
 
     return newState;
@@ -82,6 +83,7 @@ void MainMenu::draw() {
 
     btnResume.draw();
     btnNewGame.draw();
+    btnHighscore.draw();
     btnExit.draw();
 }
 
@@ -101,4 +103,8 @@ void MainMenu::callbackExit() {
 void MainMenu::callbackResume() {
     if(gameStarted)
         newState = Game::SINGLEPLAYER;
+}
+
+void MainMenu::callbackHighscore() {
+    newState = Game::HIGHSCORE_VIEW;
 }

@@ -27,9 +27,10 @@ public:
 	void callbackNewGame();
 	void callbackExit();
 	void callbackResume();
+    void callbackHighscore();
 
 private:
-	Button btnResume, btnNewGame, btnExit;
+	Button btnResume, btnNewGame, btnExit, btnHighscore;
 	sf::RenderWindow& renderWindow;
 	bool gameStarted;
 	std::shared_ptr<sf::Texture> texBackground;
