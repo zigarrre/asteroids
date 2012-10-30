@@ -28,10 +28,16 @@ Game& Game::getHandle() {
 }
 
 Game::Game() :
+    initialized(false),
     resolution(1000, 750),
     renderWindow(sf::VideoMode(resolution.x, resolution.y, 32), "Asteoriden"),
     updateTime(1.0f/120.0f)
 {
+}
+
+void Game::init() {
+    if(initialized) // allready initialized
+        return;
 
     po::options_description confDesc("Config");
     confDesc.add_options()
@@ -70,9 +76,13 @@ Game::Game() :
     gamestateManager.add(new GameOverNewHighscore(renderWindow), GAME_OVER_NEW_HIGHSCORE);
     gamestateManager.add(new HighscoreView(renderWindow), HIGHSCORE_VIEW);
     gamestateManager.setActiveState(MAIN_MENU);
+    
+    initialized = true;
 }
 
 void Game::startGameLoop() {
+    if(!initialized)
+        return;
 
     float frameTime;
     float delta;

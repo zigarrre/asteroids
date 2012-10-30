@@ -32,6 +32,12 @@ class Game {
         static Game& getHandle();
 
         /**
+        * Initialise Game
+        * Must be called before startGameLoop()
+        **/
+        void init();
+
+        /**
         * starts the game, returns when the game is closed
         **/
         void startGameLoop();
@@ -57,6 +63,7 @@ class Game {
         Game();
         //~Game();
 
+        bool initialized;
         sf::Vector2i resolution;
         sf::RenderWindow renderWindow;
         float updateTime;
