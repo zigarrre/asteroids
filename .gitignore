@@ -9,8 +9,8 @@
 Debug/*
 ipch/*
 Release/*
-
 release_noConsole
 *.filters
 *.user
 highscore.csv
+build/*
