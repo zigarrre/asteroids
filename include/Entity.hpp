@@ -11,6 +11,8 @@
 #include <boost/any.hpp>
 #include <vector>
 
+class EntityManager;
+
 class Entity : public sf::Sprite
 {
     friend class EntityManager;
