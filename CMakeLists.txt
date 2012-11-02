@@ -26,9 +26,14 @@ if(WIN32)
 	endif()
 endif()
 
-# C++11 support
+
+# GCC specific
 if(CMAKE_COMPILER_IS_GNUCXX)
+    # C++11 support
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
+	if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+	    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -pedantic")
+	endif()
 endif()
 
 include_directories(${CMAKE_SOURCE_DIR}/include)
