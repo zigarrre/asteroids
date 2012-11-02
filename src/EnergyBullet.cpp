@@ -11,10 +11,10 @@
 using namespace std;
 
 EnergyBullet::EnergyBullet(EntityManager& manager, const sf::Vector2f& pos, float velocity, float angle) :
+    Entity(manager),
     running(true),
     timeToLive(3.0f),
-    destroyed(false),
-    Entity(manager)
+    destroyed(false)
 {
     
     timeToLive = Game::getHandle().config["energyBullet.timeToLive"].as<float>();

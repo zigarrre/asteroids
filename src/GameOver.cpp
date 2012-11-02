@@ -7,8 +7,8 @@
 #include "GameOver.hpp"
 
 GameOver::GameOver(sf::RenderWindow& renderWindow) :
-    renderWindow(renderWindow),
     initialized(false),
+    renderWindow(renderWindow),
     btnRestart(sf::Vector2f((Game::getHandle().getResolution().x / 2) - 343.0f, Game::getHandle().getResolution().y - 120.f),"Restart",boost::bind(&GameOver::callbackRestart,this),renderWindow),
     btnMenu(sf::Vector2f((Game::getHandle().getResolution().x / 2) + 10.0f, Game::getHandle().getResolution().y - 120.f),"Menu",boost::bind(&GameOver::callbackMenu,this),renderWindow)
 {

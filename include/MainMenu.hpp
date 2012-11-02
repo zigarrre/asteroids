@@ -34,15 +34,15 @@ public:
     void callbackHighscore();
 
 private:
-	Button btnResume, btnNewGame, btnExit, btnHighscore;
-	sf::RenderWindow& renderWindow;
-	bool gameStarted;
+    bool initialized;
+    unsigned short newState;
+    bool gameStarted;
+    sf::RenderWindow& renderWindow;
+	Button btnResume, btnNewGame, btnHighscore, btnExit;
 	std::shared_ptr<sf::Texture> texBackground;
 	sf::Sprite background;
 	std::shared_ptr<sf::Font> font;
 	sf::Text version;
-	bool initialized;
-	unsigned short newState;
     sf::Text txtTitle;
 
 };

@@ -15,11 +15,11 @@ using namespace std;
 int Asteroid::asteroidCount = 0;
 
 Asteroid::Asteroid(EntityManager& manager, const sf::Vector2f& pos, const sf::Vector2f& velocity, unsigned short size, float rotation, float rotationVelocity) :
-    rotationVelocity(rotationVelocity),
+    Entity(manager),
     running(true),
+    rotationVelocity(rotationVelocity),
     hp(1),
-    size(size),
-    Entity(manager)
+    size(size)
 {
     hp = Game::getHandle().config["asteroid.hp"].as<int>();
     spread = Game::getHandle().config["asteroid.spread"].as<float>();

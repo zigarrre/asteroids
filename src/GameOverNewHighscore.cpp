@@ -7,8 +7,8 @@
 #include "GameOverNewHighscore.hpp"
 
 GameOverNewHighscore::GameOverNewHighscore(sf::RenderWindow& renderWindow) :
-    renderWindow(renderWindow),
     initialized(false),
+    renderWindow(renderWindow),
     btnOK(sf::Vector2f((Game::getHandle().getResolution().x / 2) - 166.0f, Game::getHandle().getResolution().y - 120.f),"OK",boost::bind(&GameOverNewHighscore::callbackOK,this),renderWindow),
     maxNameLength(10)
 {

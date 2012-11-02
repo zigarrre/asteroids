@@ -10,9 +10,9 @@
 #include "Singleplayer.hpp"
 
 Spaceship::Spaceship(EntityManager& manager, const sf::Vector2f& pos) :
+    Entity(manager),
     weaponCooldown(0.0f),
-    spawnMode(0.0f),
-    Entity(manager)
+    spawnMode(0.0f)
 {
     accelerationToSet = Game::getHandle().config["spaceship.acceleration"].as<float>();
     rotationspeed = Game::getHandle().config["spaceship.rotationSpeed"].as<float>();

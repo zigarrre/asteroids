@@ -27,12 +27,12 @@ public:
     void callbackOK();
 
 private:
-    Button btnOK;
-    sf::RenderWindow& renderWindow;
-    std::shared_ptr<sf::Texture> texBackground;
-    sf::Sprite background;
     bool initialized;
     unsigned short newState;
+    sf::RenderWindow& renderWindow;
+    Button btnOK;
+    std::shared_ptr<sf::Texture> texBackground;
+    sf::Sprite background;
     std::shared_ptr<sf::Font> font;
     std::string name;
     sf::Text txtTitle;

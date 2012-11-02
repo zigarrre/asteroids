@@ -9,9 +9,9 @@
 #include "Messages.hpp"
 
 MainMenu::MainMenu(sf::RenderWindow& renderWindow) :
-    renderWindow(renderWindow),
-    gameStarted(false),
     initialized(false),
+    gameStarted(false),
+    renderWindow(renderWindow),
     btnResume(sf::Vector2f(340.0f,270.0f),"Resume",boost::bind(&MainMenu::callbackResume,this),renderWindow),
     btnNewGame(sf::Vector2f(340.0f,350.0f),"New Game",boost::bind(&MainMenu::callbackNewGame,this),renderWindow),
     btnHighscore(sf::Vector2f(340.0f,430.0f),"Highscore",boost::bind(&MainMenu::callbackHighscore,this),renderWindow),

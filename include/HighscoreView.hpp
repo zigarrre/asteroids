@@ -27,12 +27,12 @@ public:
     void callbackMenu();
 
 private:
-    Button btnRestart, btnMenu;
-    sf::RenderWindow& renderWindow;
-    std::shared_ptr<sf::Texture> texBackground;
-    sf::Sprite background;
     bool initialized;
     unsigned short newState;
+    sf::RenderWindow& renderWindow;
+    Button btnRestart, btnMenu;
+    std::shared_ptr<sf::Texture> texBackground;
+    sf::Sprite background;
     std::shared_ptr<sf::Font> font;
     sf::Text txtTitle;
 

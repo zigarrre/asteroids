@@ -28,13 +28,13 @@ public:
 	void callbackMenu();
 
 private:
-	Button btnRestart, btnMenu;
+    bool initialized;
+	unsigned short newState;
 	sf::RenderWindow& renderWindow;
+	Button btnRestart, btnMenu;
 	std::shared_ptr<sf::Texture> texBackground;
     std::shared_ptr<sf::Font> font;
 	sf::Sprite background;
-	bool initialized;
-	unsigned short newState;
     sf::Text txtTitle;
 
 };

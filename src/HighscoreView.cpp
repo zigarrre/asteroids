@@ -13,8 +13,8 @@
 using namespace std;
 
 HighscoreView::HighscoreView(sf::RenderWindow& renderWindow) :
-    renderWindow(renderWindow),
     initialized(false),
+    renderWindow(renderWindow),
     btnRestart(sf::Vector2f((Game::getHandle().getResolution().x / 2) - 343.0f, Game::getHandle().getResolution().y - 120.f),"Restart",boost::bind(&HighscoreView::callbackRestart,this),renderWindow),
     btnMenu(sf::Vector2f((Game::getHandle().getResolution().x / 2) + 10.0f, Game::getHandle().getResolution().y - 120.f),"Menu",boost::bind(&HighscoreView::callbackMenu,this),renderWindow),
     txtTableScore(10) // put 10 elements into vector

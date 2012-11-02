@@ -11,8 +11,8 @@
 using namespace std;
 
 Button::Button(const sf::Vector2f& pos, const std::string& text, boost::function<void ()> onClickCallback, sf::RenderWindow &renderWindow) :
-    renderWindow(renderWindow),
     enabled(true),
+    renderWindow(renderWindow),
     mouseWasPressed(false)
 {
 
