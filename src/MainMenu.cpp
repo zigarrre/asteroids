@@ -68,11 +68,12 @@ unsigned short MainMenu::update(float deltaTime) {
     while (renderWindow.pollEvent(Event)) {
         if (Event.type == sf::Event::Closed)
             renderWindow.close();
-        else if (Event.type == sf::Event::KeyPressed && Event.key.code == sf::Keyboard::Escape)
+        else if (Event.type == sf::Event::KeyPressed && Event.key.code == sf::Keyboard::Escape) {
             if(gameStarted)
                 newState = Game::SINGLEPLAYER;
             else
                 renderWindow.close();
+        }
     }
 
     btnResume.update(deltaTime);
