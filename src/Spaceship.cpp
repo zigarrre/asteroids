@@ -108,7 +108,6 @@ void Spaceship::update(float deltaTime) {
         sf::Vector2f size;
         size.x = this->getGlobalBounds().width;
         size.y = this->getGlobalBounds().height;
-        sf::Vector2f origin = this->getOrigin();
         if((pos.x + (size.x/2)) < 0) {
             this->setPosition(Game::getHandle().getResolution().x + (size.x/2), pos.y);
         } else if(pos.x - (size.x/2) > Game::getHandle().getResolution().x) {
