@@ -91,6 +91,7 @@ endif()
 set(SRC
     src/Asteroid.cpp
 	src/Button.cpp
+	src/DebrisChunk.cpp
 	src/EnergyBullet.cpp
 	src/Entity.cpp
 	src/EntityManager.cpp

@@ -14,7 +14,8 @@ struct EntityTypes {
     enum {
         SPACESHIP = 0,
         ASTEROID,
-        ENERGY_BULLET
+        ENERGY_BULLET,
+        DEBRIS
     };
 
 };
