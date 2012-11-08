@@ -9,6 +9,7 @@
 #include "Singleplayer.hpp"
 #include "Messages.hpp"
 #include "MessageSystem.hpp"
+#include "DebrisChunk.hpp"
 
 using namespace std;
 
@@ -36,6 +37,8 @@ Asteroid::Asteroid(EntityManager& manager, const sf::Vector2f& pos, const sf::Ve
         texture = Game::getHandle().textureManager.acquire(thor::Resources::fromFile<sf::Texture>("res/asteroidSmall.png"));
     }
     this->setTexture(*texture);
+    
+    debrisTexture = Game::getHandle().textureManager.acquire(thor::Resources::fromFile<sf::Texture>("res/asteroidDebrisChunk.png"));
 
     setOrigin(getLocalBounds().width/2,getLocalBounds().height/2);
     setPosition(pos);
@@ -61,6 +64,7 @@ void Asteroid::update(float deltaTime) {
                 newVelocity.y = velocity[1] * cos(spread) - velocity[0] * sin(spread);
                 Singleplayer::entityManager.add(new Asteroid(manager, getPosition(),newVelocity,size-1,getRotation(),rotationVelocity));
             }
+            DebrisChunk::spawnDebris(manager, getPosition(), debrisTexture);
             Singleplayer::entityManager.remove(getID());
             return;
         }

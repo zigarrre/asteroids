@@ -36,6 +36,7 @@ private:
     short size;
     float spread;
     std::shared_ptr<sf::Texture> texture;
+    std::shared_ptr<sf::Texture> debrisTexture;
 
     static int asteroidCount;
 };
