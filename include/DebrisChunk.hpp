@@ -11,6 +11,7 @@
 #include <boost/any.hpp>
 #include <SFML/System.hpp>
 #include <Thor/Resources.hpp>
+#include <random>
 
 class DebrisChunk : public Entity {
 
@@ -18,6 +19,8 @@ public:
     DebrisChunk(EntityManager& manager, const std::shared_ptr<sf::Texture>& texture);
     
     DebrisChunk(EntityManager& manager, const sf::Vector2f& pos, const sf::Vector2f& velocity, const std::shared_ptr<sf::Texture>& texture);
+    
+    static void spawnDebris(EntityManager& manager, const sf::Vector2f& pos, const std::shared_ptr<sf::Texture>& texture, unsigned int amount = 40);
     
     void update(float deltaTime);
     
@@ -42,5 +45,4 @@ private:
     float alpha;
     float fadeSpeed;
     std::shared_ptr<sf::Texture> texture;
-    
 };
