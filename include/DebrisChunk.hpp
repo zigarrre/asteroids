@@ -20,7 +20,7 @@ public:
     
     DebrisChunk(EntityManager& manager, const sf::Vector2f& pos, const sf::Vector2f& velocity, const std::shared_ptr<sf::Texture>& texture);
     
-    static void spawnDebris(EntityManager& manager, const sf::Vector2f& pos, const std::shared_ptr<sf::Texture>& texture, unsigned int amount = 40);
+    static void spawnDebris(EntityManager& manager, const sf::Vector2f& pos, const std::shared_ptr<sf::Texture>& texture, unsigned int amount = 30);
     
     void update(float deltaTime);
     
