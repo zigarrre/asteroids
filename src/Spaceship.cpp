@@ -8,6 +8,7 @@
 #include "Messages.hpp"
 #include "MessageSystem.hpp"
 #include "Singleplayer.hpp"
+#include "DebrisChunk.hpp"
 
 Spaceship::Spaceship(EntityManager& manager, const sf::Vector2f& pos) :
     Entity(manager),
@@ -22,6 +23,8 @@ Spaceship::Spaceship(EntityManager& manager, const sf::Vector2f& pos) :
     bulletSpeed = Game::getHandle().config["energyBullet.speed"].as<float>();
 
     texture = Game::getHandle().textureManager.acquire(thor::Resources::fromFile<sf::Texture>("res/ship.png")); //TODO needs exeption Handling
+    debrisTexture = Game::getHandle().textureManager.acquire(thor::Resources::fromFile<sf::Texture>("res/shipDebrisChunk.png"));
+    
     this->setTexture(*texture);
     this->setPosition(Game::getHandle().getResolution().x/2.0f, Game::getHandle().getResolution().y/2.0f);
     this->setOrigin(this->getLocalBounds().width/2.0f,this->getLocalBounds().height/2.0f);
@@ -32,7 +35,8 @@ Spaceship::Spaceship(EntityManager& manager, const sf::Vector2f& pos) :
 void Spaceship::update(float deltaTime) {
 
     if(hp <= 0) {
-        // TODO destruction animation
+        DebrisChunk::spawnDebris(manager, getPosition(), debrisTexture, 50);
+
         MessageSystem::getHandle().sendMessage(EngineMessages::PLAYER_DIED);
 
         hp = Game::getHandle().config["spaceship.hp"].as<int>();

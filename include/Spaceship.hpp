@@ -39,4 +39,5 @@ class Spaceship : public Entity
         float spawnMode; // remaining time in spawnMode
         float bulletSpeed;
         std::shared_ptr<sf::Texture> texture;
+        std::shared_ptr<sf::Texture> debrisTexture;
 };
