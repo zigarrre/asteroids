@@ -31,12 +31,14 @@ DebrisChunk::DebrisChunk(EntityManager& manager, const sf::Vector2f& pos, const 
 }
 
 void DebrisChunk::update(float deltaTime) {
-    move(velocity[0]*deltaTime, velocity[1]*deltaTime);
-    if(alpha > 0.0f) {
-        alpha -= fadeSpeed * deltaTime;
-        setColor(sf::Color(255,255,255,round(alpha)));
-    } else {
-        manager.remove(getID());
+    if(running) {
+        move(velocity[0]*deltaTime, velocity[1]*deltaTime);
+        if(alpha > 0.0f) {
+            alpha -= fadeSpeed * deltaTime;
+            setColor(sf::Color(255,255,255,round(alpha)));
+        } else {
+            manager.remove(getID());
+        }
     }
 }
 
@@ -47,7 +49,9 @@ void DebrisChunk::spawnDebris(EntityManager& manager, const sf::Vector2f& pos, c
     for(; amount > 0; --amount) {
         uint32_t angle = randAngle(randEngine);
         uint32_t velocity = randVelocity(randEngine);
-        manager.add(new DebrisChunk(manager, pos, sf::Vector2f(-sin(angle*(PI/180))*velocity, cos(angle*(PI/180))*velocity), texture));
+        DebrisChunk* debrisChunk = new DebrisChunk(manager, pos, sf::Vector2f(-sin(angle*(PI/180))*velocity, cos(angle*(PI/180))*velocity), texture);
+        manager.add(debrisChunk);
+        debrisChunk->setRunning(true);
     }
 }
 
