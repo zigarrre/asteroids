@@ -119,3 +119,5 @@ add_executable (asteroids ${SRC})
 target_link_libraries(asteroids ${SFML_LIBRARIES})
 target_link_libraries(asteroids ${THOR_LIBRARY})
 target_link_libraries(asteroids ${Boost_LIBRARIES})
+
+file(COPY res config.cfg DESTINATION ./)
