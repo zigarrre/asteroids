@@ -79,7 +79,7 @@ unsigned short HighscoreView::update(float deltaTime) {
             tableName += Game::getHandle().highscore[i].name + '\n';
             txtTableScore[i].setString(rrr::toString(Game::getHandle().highscore[i].score));
             txtTableScore[i].setOrigin(txtTableScore[i].getLocalBounds().width, 0); // set origin to upper right corner (for right alignment)
-            txtTableScore[i].setPosition(770.0f, 240.0f + (i * txtTableScore[i].getFont().getLineSpacing(txtTableScore[i].getCharacterSize())));
+            txtTableScore[i].setPosition(770.0f, 240.0f + (i * txtTableScore[i].getFont()->getLineSpacing(txtTableScore[i].getCharacterSize())));
         }
         txtTableNumber.setString(tableNumber);
         txtTableName.setString(tableName);
