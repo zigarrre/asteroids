@@ -91,6 +91,7 @@ endif()
 set(SRC
     src/Asteroid.cpp
 	src/Button.cpp
+	src/ButtonManager.cpp
 	src/DebrisChunk.cpp
 	src/EnergyBullet.cpp
 	src/Entity.cpp
@@ -104,6 +105,7 @@ set(SRC
 	src/HUD.cpp
 	src/main.cpp
 	src/MainMenu.cpp
+	src/ManagedButton.cpp
 	src/MessageSystem.cpp
 	src/Singleplayer.cpp
 	src/Spaceship.cpp
