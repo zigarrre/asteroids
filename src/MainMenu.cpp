@@ -7,15 +7,13 @@
 #include "MainMenu.hpp"
 #include "MessageSystem.hpp"
 #include "Messages.hpp"
+#include <boost/bind.hpp>
 
 MainMenu::MainMenu(sf::RenderWindow& renderWindow) :
     initialized(false),
     gameStarted(false),
     renderWindow(renderWindow),
-    btnResume(sf::Vector2f(340.0f,270.0f),"Resume",boost::bind(&MainMenu::callbackResume,this),renderWindow),
-    btnNewGame(sf::Vector2f(340.0f,350.0f),"New Game",boost::bind(&MainMenu::callbackNewGame,this),renderWindow),
-    btnHighscore(sf::Vector2f(340.0f,430.0f),"Highscore",boost::bind(&MainMenu::callbackHighscore,this),renderWindow),
-    btnExit(sf::Vector2f(340.0f,510.0f),"Exit",boost::bind(&MainMenu::callbackExit,this),renderWindow)
+    btnManager(sf::Vector2f(340.0f,270.0f), renderWindow)
 {
     texBackground = Game::getHandle().textureManager.acquire(thor::Resources::fromFile<sf::Texture>("res/menuBackground.png"));
     font = Game::getHandle().fontManager.acquire(thor::Resources::fromFile<sf::Font>("res/font.ttf"));
@@ -27,6 +25,13 @@ MainMenu::MainMenu(sf::RenderWindow& renderWindow) :
     txtTitle.setPosition(Game::getHandle().getResolution().x/2 - txtTitle.getGlobalBounds().width/2, 130.0f);
 
     MessageSystem::getHandle().registerReceiver(this);
+
+    btnResume = std::make_shared<ManagedButton>("Resume", boost::bind(&MainMenu::callbackResume,this));
+    btnResume->setEnabled(false);
+    btnManager.addButton(btnResume);
+    btnManager.addButton("New Game",boost::bind(&MainMenu::callbackNewGame,this));
+    btnManager.addButton("Highscore",boost::bind(&MainMenu::callbackHighscore,this));
+    btnManager.addButton("Exit",boost::bind(&MainMenu::callbackExit,this));
 
     init();
 }
@@ -49,7 +54,7 @@ void MainMenu::init() {
         version.setColor(sf::Color::White);
         version.setPosition(Game::getHandle().getResolution().x - version.getLocalBounds().width - 20, Game::getHandle().getResolution().y - version.getLocalBounds().height - 20);
 
-        btnResume.setEnabled(false);
+        btnResume->setEnabled(false);
 
     }
 }
@@ -76,10 +81,7 @@ unsigned short MainMenu::update(float deltaTime) {
         }
     }
 
-    btnResume.update(deltaTime);
-    btnNewGame.update(deltaTime);
-    btnHighscore.update(deltaTime);
-    btnExit.update(deltaTime);
+    btnManager.update(deltaTime);
 
     return newState;
 }
@@ -90,10 +92,7 @@ void MainMenu::draw() {
     renderWindow.draw(txtTitle);
     renderWindow.draw(version);
 
-    btnResume.draw();
-    btnNewGame.draw();
-    btnHighscore.draw();
-    btnExit.draw();
+    btnManager.draw();
 }
 
 void MainMenu::receiveMessage(unsigned int msg, const std::vector<boost::any>& params) {
@@ -101,12 +100,12 @@ void MainMenu::receiveMessage(unsigned int msg, const std::vector<boost::any>& p
     
     case EngineMessages::GAME_STARTED:
         gameStarted = true;
-        btnResume.setEnabled(true);
+        btnResume->setEnabled(true);
         break;
     
     case EngineMessages::GAME_OVER:
         gameStarted = false;
-        btnResume.setEnabled(false);
+        btnResume->setEnabled(false);
         break;
 
     }
@@ -115,7 +114,7 @@ void MainMenu::receiveMessage(unsigned int msg, const std::vector<boost::any>& p
 void MainMenu::callbackNewGame() {
     if(!gameStarted) {
         gameStarted = true;
-        btnResume.setEnabled(true);
+        btnResume->setEnabled(true);
     }
     Game::getHandle().gamestateManager.get(Game::SINGLEPLAYER)->reinit();
     newState = Game::SINGLEPLAYER;

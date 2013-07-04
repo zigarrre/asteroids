@@ -6,11 +6,12 @@
 
 #pragma once
 
-#include "Button.hpp"
 #include "Gamestate.hpp"
 #include "Game.hpp"
 #include "Spaceship.hpp"
 #include "MessageReceiver.hpp"
+#include "ButtonManager.hpp"
+#include "ManagedButton.hpp"
 #include <SFML/Graphics.hpp>
 #include <Thor/Resources.hpp>
 #include <vector>
@@ -38,7 +39,8 @@ private:
     unsigned short newState;
     bool gameStarted;
     sf::RenderWindow& renderWindow;
-	Button btnResume, btnNewGame, btnHighscore, btnExit;
+	std::shared_ptr<ManagedButton> btnResume;
+	ButtonManager btnManager;
 	std::shared_ptr<sf::Texture> texBackground;
 	sf::Sprite background;
 	std::shared_ptr<sf::Font> font;
