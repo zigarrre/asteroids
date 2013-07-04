@@ -5,8 +5,6 @@
 **/
 
 #include "ButtonManager.hpp"
-//#include <SFML/System.hpp>
-#include <iostream>
 
 using namespace std;
 
@@ -95,23 +93,12 @@ void ButtonManager::draw() {
         button->draw(renderWindow);
 }
 
-std::shared_ptr<ManagedButton> ButtonManager::createButton(const std::string& text, boost::function<void ()> onClickCallback) {
-    sf::Vector2f position = {0,0};
-    if(buttons.size() == 0) {
-        position = pos;
-    } else if(layout == VERTICALLY){
-        position = {pos.x, buttons[buttons.size()-1]->getPosition().y + buttons[buttons.size()-1]->getSize().y + space};
-    } else if(layout == HORIZONTALLY) {
-        position = {buttons[buttons.size()-1]->getPosition().x + buttons[buttons.size()-1]->getSize().x + space, pos.y};
-    }
-    return std::shared_ptr<ManagedButton>(new ManagedButton(position, text, onClickCallback));
-}
-
 void ButtonManager::addButton(const std::string& text, boost::function<void ()> onClickCallback) {
-    buttons.push_back(createButton(text, onClickCallback));
+    buttons.push_back(std::shared_ptr<ManagedButton>(new ManagedButton(calculateButtonPos(buttons.size(), layout), text, onClickCallback)));
 }
 
 void ButtonManager::addButton(std::shared_ptr<ManagedButton> button) {
+    button->setPosition(calculateButtonPos(buttons.size(), layout));
     buttons.push_back(button);
 }
 
@@ -121,4 +108,24 @@ void ButtonManager::removeButton(size_t index) {
 
 void ButtonManager::setLayout(unsigned int layout) {
     this->layout = layout;
+}
+
+sf::Vector2f ButtonManager::calculateButtonPos(size_t index, unsigned int layout) {
+    if(index == 0)
+        return pos;
+
+    shared_ptr<ManagedButton> btn;
+    if(buttons.size() > 0) {
+        btn = buttons[0];
+    } else {
+        btn = make_shared<ManagedButton>(pos, "", boost::function<void ()>(0));
+    }
+    
+    if(layout == VERTICALLY){
+        return sf::Vector2f(pos.x, pos.y + (btn->getSize().y + space) * index);
+    } else if(layout == HORIZONTALLY) {
+        return sf::Vector2f(pos.x + (btn->getSize().x + space) * index, pos.y);
+    } else {
+        return pos; // not supported layout
+    }
 }

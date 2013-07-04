@@ -13,10 +13,10 @@
 class ButtonManager {
 
 public:
+
     ButtonManager(const sf::Vector2f& pos, sf::RenderWindow& renderWindow);
     void update(float deltaTime);
     void draw();
-    std::shared_ptr<ManagedButton> createButton(const std::string& text, boost::function<void ()> onClickCallback);
     void addButton(const std::string& text, boost::function<void ()> onClickCallback);
     void addButton(std::shared_ptr<ManagedButton> button);
     void removeButton(size_t index);
@@ -25,6 +25,9 @@ public:
     enum { VERTICALLY = 0, HORIZONTALLY };
     
 private:
+
+    sf::Vector2f calculateButtonPos(size_t index, unsigned int layout);
+
     std::vector<std::shared_ptr<ManagedButton>> buttons;
     sf::RenderWindow& renderWindow;
     size_t activeButton;
