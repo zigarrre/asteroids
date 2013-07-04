@@ -31,6 +31,11 @@ ManagedButton::ManagedButton(const sf::Vector2f& pos, const std::string& text, b
 
 }
 
+ManagedButton::ManagedButton(const std::string& text, boost::function<void ()> onClickCallback) :
+    ManagedButton(sf::Vector2f(0.0f, 0.0f), text, onClickCallback)
+{
+}
+
 void ManagedButton::setActive(bool active) {
     if(this->active != active && enabled) {
         this->active = active;
@@ -72,4 +77,9 @@ sf::Vector2f ManagedButton::getSize() {
     rv.x = background.getGlobalBounds().width;
     rv.y = background.getGlobalBounds().height;
     return rv;
+}
+
+void ManagedButton::setPosition(const sf::Vector2f& pos) {
+    background.setPosition(pos);
+    this->text.setPosition(pos.x+background.getLocalBounds().width/2-this->text.getLocalBounds().width/2,pos.y+12);
 }
