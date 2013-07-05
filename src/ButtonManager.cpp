@@ -15,9 +15,10 @@ ButtonManager::ButtonManager(const sf::Vector2f& pos, sf::RenderWindow& renderWi
     space(20),
     pos(pos),
     mouseWasPressed(false),
-    buttonDelay(0.15f),
-    cooldownBtnUp(0.0f),
-    cooldownBtnDown(0.0f)
+    returnWasPressed(true), // asume true (in the first frame) to prevent accidentialy skipping through menus
+    buttonDelay(0.2f),
+    cooldownBtnUp(0.4f), // non zero to prevent input through still held down keys from the last menu
+    cooldownBtnDown(0.4f)
 {
 }
 
@@ -29,54 +30,67 @@ void ButtonManager::update(float deltaTime) {
             if(mouseWasPressed && !sf::Mouse::isButtonPressed(sf::Mouse::Left))
                 buttons[i]->click();
         } else if(i == activeButton) {
-        
+            // ensure that the button is displayed as active
+            if(!buttons[i]->getActive())
+                buttons[i]->setActive(true);
         } else {
             buttons[i]->setActive(false);
         }
     }
     
     
-    if(layout == VERTICALLY) {
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && cooldownBtnDown <= 0.0f && activeButton < buttons.size()-1) {
-            // find the next enabled button
-            unsigned int i = activeButton+1;
-            bool validButtonFound = false;
-            while((i < buttons.size()) && !validButtonFound) {
-                if(buttons[i]->getEnabled())
-                    validButtonFound = true;
-                else
-                    ++i;
-            }
-            
-            if(validButtonFound) {
-                buttons[activeButton]->setActive(false);
-                activeButton = i;
-                buttons[activeButton]->setActive(true);
-            }
-            
-            cooldownBtnDown = buttonDelay;
-        } else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && cooldownBtnUp <= 0.0f && activeButton > 0) {
-            // find the next enabled button
-            int i = activeButton-1;
-            bool validButtonFound = false;
-            while((i >= 0) && !validButtonFound) {
-                if(buttons[i]->getEnabled())
-                    validButtonFound = true;
-                else
-                    --i;
-            }
-            
-            if(validButtonFound) {
-                buttons[activeButton]->setActive(false);
-                activeButton = i;
-                buttons[activeButton]->setActive(true);
-            }
-            
-            cooldownBtnUp = buttonDelay;
+    if( (
+            (layout == VERTICALLY && sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) ||
+            (layout == HORIZONTALLY && sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+        ) &&
+        cooldownBtnDown <= 0.0f && activeButton < buttons.size()-1)
+    {
+        // find the next enabled button
+        unsigned int i = activeButton+1;
+        bool validButtonFound = false;
+        while((i < buttons.size()) && !validButtonFound) {
+            if(buttons[i]->getEnabled())
+                validButtonFound = true;
+            else
+                ++i;
         }
-    }
-    
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Return) && activeButton >= 0 && activeButton < buttons.size()) {
+        
+        if(validButtonFound) {
+            buttons[activeButton]->setActive(false);
+            activeButton = i;
+            buttons[activeButton]->setActive(true);
+        }
+        
+        cooldownBtnDown = buttonDelay;
+    } else if( (
+                    (layout == VERTICALLY && sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) ||
+                    (layout == HORIZONTALLY && sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+               ) &&
+               cooldownBtnUp <= 0.0f && activeButton > 0)
+    {
+               
+        // find the next enabled button
+        int i = activeButton-1;
+        bool validButtonFound = false;
+        while((i >= 0) && !validButtonFound) {
+            if(buttons[i]->getEnabled())
+                validButtonFound = true;
+            else
+                --i;
+        }
+        
+        if(validButtonFound) {
+            buttons[activeButton]->setActive(false);
+            activeButton = i;
+            buttons[activeButton]->setActive(true);
+        }
+        
+        cooldownBtnUp = buttonDelay;
+    } else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Return) &&
+        !returnWasPressed &&
+        activeButton >= 0 &&
+        activeButton < buttons.size())
+    {
         buttons[activeButton]->click();
     }
     
@@ -86,6 +100,7 @@ void ButtonManager::update(float deltaTime) {
         cooldownBtnDown -= deltaTime;
     
     mouseWasPressed = sf::Mouse::isButtonPressed(sf::Mouse::Left);
+    returnWasPressed = sf::Keyboard::isKeyPressed(sf::Keyboard::Return);
 }
 
 void ButtonManager::draw() {

@@ -70,7 +70,8 @@ private:
     int space;
     sf::Vector2f pos;
     bool mouseWasPressed; // state of the left mouse button in the last frame
-    float buttonDelay;
+    bool returnWasPressed;
+    float buttonDelay; // aka button repeat delay
     float cooldownBtnUp, cooldownBtnDown;
     
 };
