@@ -94,11 +94,11 @@ void ButtonManager::draw() {
 }
 
 void ButtonManager::addButton(const std::string& text, boost::function<void ()> onClickCallback) {
-    buttons.push_back(std::shared_ptr<ManagedButton>(new ManagedButton(calculateButtonPos(buttons.size(), layout), text, onClickCallback)));
+    buttons.push_back(std::shared_ptr<ManagedButton>(new ManagedButton(calculateButtonPos(buttons.size()), text, onClickCallback)));
 }
 
 void ButtonManager::addButton(std::shared_ptr<ManagedButton> button) {
-    button->setPosition(calculateButtonPos(buttons.size(), layout));
+    button->setPosition(calculateButtonPos(buttons.size()));
     buttons.push_back(button);
 }
 
@@ -110,7 +110,7 @@ void ButtonManager::setLayout(unsigned int layout) {
     this->layout = layout;
 }
 
-sf::Vector2f ButtonManager::calculateButtonPos(size_t index, unsigned int layout) {
+sf::Vector2f ButtonManager::calculateButtonPos(size_t index) {
     if(index == 0)
         return pos;
 

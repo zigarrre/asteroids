@@ -57,7 +57,11 @@ public:
     
 private:
 
-    sf::Vector2f calculateButtonPos(size_t index, unsigned int layout);
+    /**
+    * Calculate the position of the button on the specified position.
+    * Respects the current layout.
+    **/
+    sf::Vector2f calculateButtonPos(size_t index);
 
     std::vector<std::shared_ptr<ManagedButton>> buttons;
     sf::RenderWindow& renderWindow;
