@@ -90,7 +90,6 @@ endif()
 # all source files
 set(SRC
     src/Asteroid.cpp
-	src/Button.cpp
 	src/ButtonManager.cpp
 	src/DebrisChunk.cpp
 	src/EnergyBullet.cpp
