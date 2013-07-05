@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include "Button.hpp"
+#include "ButtonManager.hpp"
 #include "Gamestate.hpp"
 #include "Game.hpp"
 #include "Spaceship.hpp"
@@ -30,7 +30,7 @@ private:
     bool initialized;
     unsigned short newState;
     sf::RenderWindow& renderWindow;
-    Button btnOK;
+    ButtonManager btnManager;
     std::shared_ptr<sf::Texture> texBackground;
     sf::Sprite background;
     std::shared_ptr<sf::Font> font;

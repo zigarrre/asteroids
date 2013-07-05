@@ -9,14 +9,14 @@
 #include <string>
 #include <sstream>
 #include <iomanip>
+#include <boost/bind.hpp>
 
 using namespace std;
 
 HighscoreView::HighscoreView(sf::RenderWindow& renderWindow) :
     initialized(false),
     renderWindow(renderWindow),
-    btnRestart(sf::Vector2f((Game::getHandle().getResolution().x / 2) - 343.0f, Game::getHandle().getResolution().y - 120.f),"Restart",boost::bind(&HighscoreView::callbackRestart,this),renderWindow),
-    btnMenu(sf::Vector2f((Game::getHandle().getResolution().x / 2) + 10.0f, Game::getHandle().getResolution().y - 120.f),"Menu",boost::bind(&HighscoreView::callbackMenu,this),renderWindow),
+    btnManager(sf::Vector2f((Game::getHandle().getResolution().x / 2) - 343.0f, Game::getHandle().getResolution().y - 120.f), renderWindow),
     txtTableScore(10) // put 10 elements into vector
 {
     texBackground = Game::getHandle().textureManager.acquire(thor::Resources::fromFile<sf::Texture>("res/menuBackground.png"));
@@ -43,6 +43,10 @@ HighscoreView::HighscoreView(sf::RenderWindow& renderWindow) :
         txtTableScore[i].setCharacterSize(25);
         txtTableScore[i].setColor(sf::Color(244,215,3));
     }
+    
+    btnManager.setLayout(ButtonManager::HORIZONTALLY);
+    btnManager.addButton("Restart", boost::bind(&HighscoreView::callbackRestart, this));
+    btnManager.addButton("Menu", boost::bind(&HighscoreView::callbackMenu, this));
 
     init();
 }
@@ -86,8 +90,7 @@ unsigned short HighscoreView::update(float deltaTime) {
         tableUpToDate = true;
     }
 
-    btnRestart.update(deltaTime);
-    btnMenu.update(deltaTime);
+    btnManager.update(deltaTime);
 
     if(newState != Game::HIGHSCORE_VIEW) // Gamestate changes, highscore-data afterwards maybe changed
         tableUpToDate = false;
@@ -104,8 +107,7 @@ void HighscoreView::draw() {
     for(unsigned int i = 0; i < txtTableScore.size(); ++i)
         renderWindow.draw(txtTableScore[i]);
 
-    btnRestart.draw();
-    btnMenu.draw();
+    btnManager.draw();
 
 }
 

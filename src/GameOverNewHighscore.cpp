@@ -5,11 +5,12 @@
 **/
 
 #include "GameOverNewHighscore.hpp"
+#include <boost/bind.hpp>
 
 GameOverNewHighscore::GameOverNewHighscore(sf::RenderWindow& renderWindow) :
     initialized(false),
     renderWindow(renderWindow),
-    btnOK(sf::Vector2f((Game::getHandle().getResolution().x / 2) - 166.0f, Game::getHandle().getResolution().y - 120.f),"OK",boost::bind(&GameOverNewHighscore::callbackOK,this),renderWindow),
+    btnManager(sf::Vector2f((Game::getHandle().getResolution().x / 2) - 166.0f, Game::getHandle().getResolution().y - 120.f), renderWindow),
     maxNameLength(10)
 {
     texBackground = Game::getHandle().textureManager.acquire(thor::Resources::fromFile<sf::Texture>("res/menuBackground.png"));
@@ -31,6 +32,8 @@ GameOverNewHighscore::GameOverNewHighscore(sf::RenderWindow& renderWindow) :
     txtName.setPosition(50.0f, 400.0f);
     txtName.setCharacterSize(30);
     txtName.setColor(sf::Color(244,215,3));
+    
+    btnManager.addButton("OK", boost::bind(&GameOverNewHighscore::callbackOK, this));
 
     init();
 }
@@ -62,7 +65,8 @@ unsigned short GameOverNewHighscore::update(float deltaTime) {
             name.erase(name.end()-1);
     }
 
-    btnOK.update(deltaTime);
+    btnManager.update(deltaTime);
+    
     txtName.setString("Enter name: " + name);
 
     return newState;
@@ -75,7 +79,7 @@ void GameOverNewHighscore::draw() {
     renderWindow.draw(txtNewHighscore);
     renderWindow.draw(txtName);
 
-    btnOK.draw();
+    btnManager.draw();
 
 }
 

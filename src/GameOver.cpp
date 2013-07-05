@@ -5,12 +5,12 @@
 **/
 
 #include "GameOver.hpp"
+#include <boost/bind.hpp>
 
 GameOver::GameOver(sf::RenderWindow& renderWindow) :
     initialized(false),
     renderWindow(renderWindow),
-    btnRestart(sf::Vector2f((Game::getHandle().getResolution().x / 2) - 343.0f, Game::getHandle().getResolution().y - 120.f),"Restart",boost::bind(&GameOver::callbackRestart,this),renderWindow),
-    btnMenu(sf::Vector2f((Game::getHandle().getResolution().x / 2) + 10.0f, Game::getHandle().getResolution().y - 120.f),"Menu",boost::bind(&GameOver::callbackMenu,this),renderWindow)
+    btnManager(sf::Vector2f((Game::getHandle().getResolution().x / 2) - 343.0f, Game::getHandle().getResolution().y - 120.f), renderWindow)
 {
     texBackground = Game::getHandle().textureManager.acquire(thor::Resources::fromFile<sf::Texture>("res/menuBackground.png"));
     font = Game::getHandle().fontManager.acquire(thor::Resources::fromFile<sf::Font>("res/font.ttf"));
@@ -20,6 +20,10 @@ GameOver::GameOver(sf::RenderWindow& renderWindow) :
     txtTitle.setCharacterSize(60);
     txtTitle.setColor(sf::Color(244,215,3));
     txtTitle.setPosition(Game::getHandle().getResolution().x/2 - txtTitle.getGlobalBounds().width/2, 130.0f);
+    
+    btnManager.setLayout(ButtonManager::HORIZONTALLY);
+    btnManager.addButton("Restart", boost::bind(&GameOver::callbackRestart, this));
+    btnManager.addButton("Menu", boost::bind(&GameOver::callbackMenu, this));
 
     init();
 }
@@ -47,8 +51,7 @@ unsigned short GameOver::update(float deltaTime) {
             renderWindow.close();
     }
 
-    btnRestart.update(deltaTime);
-    btnMenu.update(deltaTime);
+    btnManager.update(deltaTime);
 
     return newState;
 }
@@ -58,8 +61,7 @@ void GameOver::draw() {
     renderWindow.draw(background);
     renderWindow.draw(txtTitle);
 
-    btnRestart.draw();
-    btnMenu.draw();
+    btnManager.draw();
 
 }
 
