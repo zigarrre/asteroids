@@ -82,9 +82,9 @@ bool Highscore::newHighscore() const{
 }
 
 bool Highscore::saveCurrentScore(const std::string& name) {
+    // find out where to insert new score
     unsigned int pos = 10;
-    while(currentScore > scores[pos-1].score && pos > 0) // find out where to insert new score
-        --pos;
+    for(; pos > 0 && currentScore > scores[pos-1].score; --pos); // note the order of the conditions, the other way around would produce a segfault (this is standard compliant)
     
     if(pos > 9) // no new highscore
         return false;
