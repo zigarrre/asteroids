@@ -103,7 +103,11 @@ void ButtonManager::addButton(std::shared_ptr<ManagedButton> button) {
 }
 
 void ButtonManager::removeButton(size_t index) {
-    
+    if(index < buttons.size()) {
+        buttons.erase(buttons.begin() + index);
+        for(size_t i = index; i < buttons.size(); ++i)
+            buttons[i]->setPosition(calculateButtonPos(index));
+    }
 }
 
 void ButtonManager::setLayout(unsigned int layout) {
