@@ -33,7 +33,7 @@ DebrisChunk::DebrisChunk(EntityManager& manager, const sf::Vector2f& pos, const 
 void DebrisChunk::update(float deltaTime) {
     if(running) {
         move(velocity[0]*deltaTime, velocity[1]*deltaTime);
-        if(alpha > 0.0f) {
+        if ((alpha - fadeSpeed * deltaTime) > 0.0f) { // don't let alpha get negativ, could cause graphic bugs on some plattforms
             alpha -= fadeSpeed * deltaTime;
             setColor(sf::Color(255,255,255,round(alpha)));
         } else {
