@@ -30,7 +30,7 @@ Game& Game::getHandle() {
 Game::Game() :
     initialized(false),
     resolution(1000, 750),
-    renderWindow(sf::VideoMode(resolution.x, resolution.y, 32), "Asteoriden"),
+    renderWindow(sf::VideoMode(resolution.x, resolution.y, 32), "asteroids"),
     updateTime(1.0f/120.0f)
 {
 }
