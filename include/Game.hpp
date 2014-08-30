@@ -9,6 +9,8 @@
 #include "Gamestate.hpp"
 #include "GamestateManager.hpp"
 #include "Highscore.hpp"
+#include "SoundService.hpp"
+
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include <Thor/Resources.hpp>
@@ -69,5 +71,6 @@ class Game {
         sf::Vector2i resolution;
         sf::RenderWindow renderWindow;
         float updateTime;
+        SoundService soundService;
 
 };

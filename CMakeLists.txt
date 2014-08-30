@@ -109,6 +109,7 @@ set(SRC
 	src/Singleplayer.cpp
 	src/Spaceship.cpp
 	src/utility.cpp
+        src/SoundService.cpp
 )
 
 if(NOT ASTEROIDS_SHARED_LIBS)

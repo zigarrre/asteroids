@@ -22,10 +22,12 @@ Asteroid::Asteroid(EntityManager& manager, const sf::Vector2f& pos, const sf::Ve
     hp(1),
     size(size)
 {
+    // set config parameters
     hp = Game::getHandle().config["asteroid.hp"].as<int>();
     spread = Game::getHandle().config["asteroid.spread"].as<float>();
     spread *= (PI/180); // convert degree to radian
 
+    // load resources
     if(size == BIG) {
         hitbox = rrr::loadHitbox("res/asteroid.col");
         texture = Game::getHandle().textureManager.acquire(thor::Resources::fromFile<sf::Texture>("res/asteroid.png"));
@@ -36,10 +38,10 @@ Asteroid::Asteroid(EntityManager& manager, const sf::Vector2f& pos, const sf::Ve
         hitbox = rrr::loadHitbox("res/asteroidSmall.col");
         texture = Game::getHandle().textureManager.acquire(thor::Resources::fromFile<sf::Texture>("res/asteroidSmall.png"));
     }
-    this->setTexture(*texture);
-    
     debrisTexture = Game::getHandle().textureManager.acquire(thor::Resources::fromFile<sf::Texture>("res/asteroidDebrisChunk.png"));
 
+    // configure sprites and position
+    this->setTexture(*texture);
     setOrigin(getLocalBounds().width/2,getLocalBounds().height/2);
     setPosition(pos);
     setRotation(rotation);
