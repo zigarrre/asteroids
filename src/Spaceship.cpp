@@ -15,6 +15,7 @@ Spaceship::Spaceship(EntityManager& manager, const sf::Vector2f& pos) :
     weaponCooldown(0.0f),
     spawnMode(0.0f)
 {
+    // set config parameters
     accelerationToSet = Game::getHandle().config["spaceship.acceleration"].as<float>();
     rotationspeed = Game::getHandle().config["spaceship.rotationSpeed"].as<float>();
     weaponCooldownToSet = Game::getHandle().config["spaceship.weaponCooldown"].as<float>();
@@ -22,12 +23,18 @@ Spaceship::Spaceship(EntityManager& manager, const sf::Vector2f& pos) :
     hp = Game::getHandle().config["spaceship.hp"].as<int>();
     bulletSpeed = Game::getHandle().config["energyBullet.speed"].as<float>();
 
+    // acquire resources
     texture = Game::getHandle().textureManager.acquire(thor::Resources::fromFile<sf::Texture>("res/ship.png")); //TODO needs exeption Handling
     debrisTexture = Game::getHandle().textureManager.acquire(thor::Resources::fromFile<sf::Texture>("res/shipDebrisChunk.png"));
+    laserSoundBuffer = Game::getHandle().soundManager.acquire(thor::Resources::fromFile<sf::SoundBuffer>("res/laser.ogg"));
     
+    // configure sprites
     this->setTexture(*texture);
     this->setPosition(Game::getHandle().getResolution().x/2.0f, Game::getHandle().getResolution().y/2.0f);
     this->setOrigin(this->getLocalBounds().width/2.0f,this->getLocalBounds().height/2.0f);
+
+    // configure sounds
+    laserSound.setBuffer(*laserSoundBuffer);
 
     hitbox = rrr::loadHitbox("res/ship.col");
 }
@@ -132,6 +139,7 @@ void Spaceship::update(float deltaTime) {
                 sqrt((velocity[0]*velocity[0])+(velocity[1]*velocity[1])) + bulletSpeed,
                 this->getRotation()));
             weaponCooldown = weaponCooldownToSet;
+            laserSound.play();
         }
         weaponCooldown -= deltaTime;
     }

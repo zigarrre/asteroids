@@ -13,6 +13,7 @@
 #include "EntityTypes.hpp"
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
+#include <SFML/Audio.hpp>
 #include <Thor/Resources.hpp>
 #include <vector>
 #include <algorithm>
@@ -40,4 +41,6 @@ class Spaceship : public Entity
         float bulletSpeed;
         std::shared_ptr<sf::Texture> texture;
         std::shared_ptr<sf::Texture> debrisTexture;
+        std::shared_ptr<sf::SoundBuffer> laserSoundBuffer;
+        sf::Sound laserSound;
 };
