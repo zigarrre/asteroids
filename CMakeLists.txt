@@ -63,7 +63,7 @@ endif()
 if(NOT ASTEROIDS_SHARED_LIBS)
 	set(SFML_STATIC_LIBRARIES TRUE)
 endif()
-find_package(SFML 2 COMPONENTS graphics window system)
+find_package(SFML 2 COMPONENTS graphics window audio system)
 
 if(SFML_FOUND)
 	include_directories(${SFML_INCLUDE_DIR})

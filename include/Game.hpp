@@ -10,6 +10,7 @@
 #include "GamestateManager.hpp"
 #include "Highscore.hpp"
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include <Thor/Resources.hpp>
 #include <map>
 #include <algorithm>
@@ -45,6 +46,7 @@ class Game {
         sf::Vector2i getResolution();
         thor::ResourceCache<sf::Texture> textureManager;
         thor::ResourceCache<sf::Font> fontManager;
+        thor::ResourceCache<sf::SoundBuffer> soundManager;
         GamestateManager gamestateManager;
         boost::program_options::variables_map config;
         Highscore highscore;
