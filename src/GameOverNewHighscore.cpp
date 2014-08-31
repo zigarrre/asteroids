@@ -6,6 +6,7 @@
 
 #include "GameOverNewHighscore.hpp"
 #include <boost/bind.hpp>
+#include <boost/algorithm/string/trim.hpp>
 
 GameOverNewHighscore::GameOverNewHighscore(sf::RenderWindow& renderWindow) :
     initialized(false),
@@ -86,6 +87,7 @@ void GameOverNewHighscore::draw() {
 }
 
 void GameOverNewHighscore::callbackOK() {
+    boost::algorithm::trim(name);
     Game::getHandle().highscore.saveCurrentScore(name);
     Game::getHandle().highscore.saveToFile("highscore.csv");
     newState = Game::HIGHSCORE_VIEW;
