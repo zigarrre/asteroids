@@ -63,6 +63,8 @@ unsigned short GameOverNewHighscore::update(float deltaTime) {
             name += static_cast<char>(event.text.unicode);
         else if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::BackSpace && name.length() > 0)
             name.erase(name.end()-1);
+        else if (event.type == sf::Event::LostFocus)
+            Game::getHandle().waitForFocus();
     }
 
     btnManager.update(deltaTime);

@@ -66,6 +66,8 @@ unsigned short Singleplayer::update(float deltaTime) {
             return Game::MAIN_MENU;
         else if (e.type == sf::Event::KeyPressed && e.key.code == sf::Keyboard::H)
             entityManager.showHitBox = !entityManager.showHitBox;
+        else if (e.type == sf::Event::LostFocus)
+            Game::getHandle().waitForFocus();
     }
     entityManager.update(deltaTime);
     hud.update(deltaTime);

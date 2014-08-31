@@ -49,6 +49,8 @@ unsigned short GameOver::update(float deltaTime) {
     while (renderWindow.pollEvent(Event)) {
         if (Event.type == sf::Event::Closed)
             renderWindow.close();
+        else if (Event.type == sf::Event::LostFocus)
+            Game::getHandle().waitForFocus();
     }
 
     btnManager.update(deltaTime);

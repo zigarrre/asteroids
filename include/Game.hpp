@@ -45,6 +45,15 @@ class Game {
         **/
         void startGameLoop();
 
+        /**
+        * \brief Wait till the game window gains focus.
+        *
+        * Waits for the FocusGained event from SFML.
+        * Resets the frame clock so that gamestates won't notice from the delta time that any time passed.
+        * Should only be called if the window has allready lost focus or it will block till it loses and regains focus again.
+        **/
+        void waitForFocus();
+
         sf::Vector2i getResolution();
         thor::ResourceCache<sf::Texture> textureManager;
         thor::ResourceCache<sf::Font> fontManager;
@@ -72,5 +81,6 @@ class Game {
         sf::RenderWindow renderWindow;
         float updateTime;
         SoundService soundService;
+        sf::Clock frameClock;
 
 };

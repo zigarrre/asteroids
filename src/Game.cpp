@@ -14,14 +14,6 @@
 using namespace std;
 namespace po = boost::program_options;
 
-/*
-sf::Vector2i Game::resolution(1000, 750);
-thor::ResourceManager<sf::Texture> Game::textureManager;
-thor::ResourceManager<sf::Font> Game::fontManager;
-GamestateManager Game::gamestateManager;
-po::variables_map Game::config;
-*/
-
 Game& Game::getHandle() {
     static Game game;
     return game;
@@ -86,8 +78,8 @@ void Game::startGameLoop() {
 
     float frameTime;
     float delta;
-    sf::Clock frameClock;
 
+    frameClock.restart();
     while(renderWindow.isOpen()) {
 
         frameTime = frameClock.getElapsedTime().asSeconds();
@@ -106,6 +98,16 @@ void Game::startGameLoop() {
         gamestateManager.getActiveState()->draw();
         renderWindow.display();
     }
+}
+
+void Game::waitForFocus() {
+    sf::Event e;
+    while (renderWindow.waitEvent(e)) {
+        if (e.type == sf::Event::GainedFocus) {
+            break;
+        }
+    }
+    frameClock.restart();
 }
 
 sf::Vector2i Game::getResolution() {

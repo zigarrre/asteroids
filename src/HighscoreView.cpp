@@ -72,6 +72,8 @@ unsigned short HighscoreView::update(float deltaTime) {
     while(renderWindow.pollEvent(event)) {
         if(event.type == sf::Event::Closed)
             renderWindow.close();
+        else if (event.type == sf::Event::LostFocus)
+            Game::getHandle().waitForFocus();
     }
 
     static bool tableUpToDate = false;
