@@ -1,6 +1,6 @@
 # asteroids
 
-This is a remake of the game 'asteroids' in C++.
+This is a remake of the arcade game asteroids in C++.
 
 http://github.com/zigarrre/asteroids
 
@@ -14,9 +14,9 @@ To compile asteroids, you need SFML 2.1 (sfml-dev.org), Thor (SFML 2.1 compatibl
 
 Tested versions are:
 
-SFML: 2.1
-Thor: commit f57666d (https://github.com/Bromeon/Thor/tree/f57666db6f187eb57bbc0947456cce2159a9b617)
-Boost: 1.56.0 (older versions should work too)
+* **SFML:** 2.1
+* **Thor:** commit f57666d (https://github.com/Bromeon/Thor/tree/f57666db6f187eb57bbc0947456cce2159a9b617)
+* **Boost:** 1.56.0 (older versions should work too)
 
 Use cmake to generate a makefile/projectfile for the compiler/IDE of your choice.
 
