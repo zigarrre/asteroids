@@ -39,6 +39,7 @@ class Spaceship : public Entity
         int hp; // health points
         float spawnMode; // remaining time in spawnMode
         float bulletSpeed;
+        bool weaponKeyLastState; // holds the state of the weapon fire key from the last frame
         std::shared_ptr<sf::Texture> texture;
         std::shared_ptr<sf::Texture> debrisTexture;
         std::shared_ptr<sf::SoundBuffer> laserSoundBuffer;

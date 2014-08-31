@@ -13,7 +13,8 @@
 Spaceship::Spaceship(EntityManager& manager, const sf::Vector2f& pos) :
     Entity(manager),
     weaponCooldown(0.0f),
-    spawnMode(0.0f)
+    spawnMode(0.0f),
+    weaponKeyLastState(false)
 {
     // set config parameters
     accelerationToSet = Game::getHandle().config["spaceship.acceleration"].as<float>();
@@ -127,7 +128,7 @@ void Spaceship::update(float deltaTime) {
         }
 
         // fire
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && (weaponCooldown <= 0)) {
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && (weaponCooldown <= 0) && !weaponKeyLastState) {
             Singleplayer::entityManager.add(new EnergyBullet(
                 manager,
                 sf::Vector2f(
@@ -139,6 +140,7 @@ void Spaceship::update(float deltaTime) {
             laserSound.play();
         }
         weaponCooldown -= deltaTime;
+        weaponKeyLastState = sf::Keyboard::isKeyPressed(sf::Keyboard::Space);
     }
 }
 
