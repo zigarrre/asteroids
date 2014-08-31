@@ -132,8 +132,8 @@ void Spaceship::update(float deltaTime) {
             Singleplayer::entityManager.add(new EnergyBullet(
                 manager,
                 sf::Vector2f(
-                    this->getPosition().x+sin(this->getRotation()*(PI/180))*this->getLocalBounds().width/2, // spawn the bullet in front of the shipt instead in the middle to prevent unwanted collisions
-                    this->getPosition().y-cos(this->getRotation()*(PI/180))*this->getLocalBounds().height/2),
+                    this->getPosition().x+sin(this->getRotation()*(PI/180))*this->getLocalBounds().width, // spawn the bullet in front of the shipt instead in the middle to prevent unwanted collisions
+                    this->getPosition().y-cos(this->getRotation()*(PI/180))*this->getLocalBounds().height),
                 sqrt((velocity[0]*velocity[0])+(velocity[1]*velocity[1])) + bulletSpeed,
                 this->getRotation()));
             weaponCooldown = weaponCooldownToSet;
