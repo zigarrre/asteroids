@@ -91,9 +91,6 @@ void Spaceship::update(float deltaTime) {
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
             acceleration[0] = -sin(this->getRotation()*(PI/180)) * -accelerationToSet;
             acceleration[1] = cos(this->getRotation()*(PI/180)) * -accelerationToSet;
-        } else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-            acceleration[0] = -sin(this->getRotation()*(PI/180)) * accelerationToSet;
-            acceleration[1] = cos(this->getRotation()*(PI/180)) * accelerationToSet;
         } else {
             // apply friction
             if(velocity[0] > 0) 
