@@ -114,7 +114,6 @@ void HighscoreView::draw() {
 }
 
 void HighscoreView::callbackMenu() {
-    Game::getHandle().gamestateManager.get(Game::MAIN_MENU)->reinit();
     newState = Game::MAIN_MENU;
 }
 

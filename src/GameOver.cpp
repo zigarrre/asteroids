@@ -68,7 +68,6 @@ void GameOver::draw() {
 }
 
 void GameOver::callbackMenu() {
-    Game::getHandle().gamestateManager.get(Game::MAIN_MENU)->reinit();
     newState = Game::MAIN_MENU;
 }
 
