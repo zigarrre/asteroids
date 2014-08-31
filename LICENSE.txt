@@ -38,11 +38,12 @@ External libraries used by asteroids:
 3rd-party Graphics/Fonts used by asteroids:
 -------------------------------------------
 
-* res/background.png a modification of 3 photos by NASA, ESA and Orsola De Marco (Macquarie University)
-  under the Creatives Commons Attribution 2.0 License
+* res/background.png a modification of 3 photos by NASA, ESA and Orsola De Marco (Macquarie University) under the Creatives Commons Attribution 2.0 License
 * res/buttonActive.png and res/buttonNormal.png by ironstarmedia.co.uk under the Creative Commons Attribution Licence
 * res/menuBackground.png by psdGraphics.com as non-profit freeware (with small modifications)
 * res/font.ttf ("Gunship") by Iconian Fonts (iconian.com) as noncommercial freeware
-
+* res/ship.png and res/life.png are based on "Basic Airship" (http://opengameart.org/content/basic-airship) from Alex Pineda under CC-BY 3.0 (http://creativecommons.org/licenses/by/3.0/)
 
 All other Graphics are my own work, and released under the Creativ Commons Attribution 3.0 License (http://creativecommons.org/licenses/by/3.0/).
+
+The sound files are also my own work and released under the Creativ Commons Attribution 3.0 License. They are created with Bfxr (http://www.bfxr.net/).
