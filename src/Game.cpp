@@ -68,6 +68,8 @@ void Game::init() {
     gamestateManager.add(new GameOverNewHighscore(renderWindow), GAME_OVER_NEW_HIGHSCORE);
     gamestateManager.add(new HighscoreView(renderWindow), HIGHSCORE_VIEW);
     gamestateManager.setActiveState(MAIN_MENU);
+
+    soundService.init();
     
     initialized = true;
 }

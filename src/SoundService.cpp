@@ -7,6 +7,9 @@
 #include <Thor/Resources.hpp>
 
 SoundService::SoundService() {
+}
+
+void SoundService::init() {
     // load sound buffers
     explosionSoundBuffer = Game::getHandle().soundManager.acquire(thor::Resources::fromFile<sf::SoundBuffer>("res/explosion.ogg"));
 

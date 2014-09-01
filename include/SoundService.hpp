@@ -14,6 +14,8 @@ public:
 
     SoundService();
 
+    void init();
+
     virtual void receiveMessage(unsigned int msg, const std::vector<boost::any>& params);
 
 private:
