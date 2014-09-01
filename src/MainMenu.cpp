@@ -7,6 +7,7 @@
 #include "MainMenu.hpp"
 #include "MessageSystem.hpp"
 #include "Messages.hpp"
+#include "config.h"
 #include <boost/bind.hpp>
 
 MainMenu::MainMenu(sf::RenderWindow& renderWindow) :
@@ -15,8 +16,8 @@ MainMenu::MainMenu(sf::RenderWindow& renderWindow) :
     renderWindow(renderWindow),
     btnManager(sf::Vector2f(340.0f,270.0f), renderWindow)
 {
-    texBackground = Game::getHandle().textureManager.acquire(thor::Resources::fromFile<sf::Texture>("res/menuBackground.png"));
-    font = Game::getHandle().fontManager.acquire(thor::Resources::fromFile<sf::Font>("res/font.ttf"));
+    texBackground = Game::getHandle().textureManager.acquire(thor::Resources::fromFile<sf::Texture>(Game::getHandle().config["paths.res"].as<std::string>() + "/menuBackground.png"));
+    font = Game::getHandle().fontManager.acquire(thor::Resources::fromFile<sf::Font>(Game::getHandle().config["paths.res"].as<std::string>() + "/font.ttf"));
 
     txtTitle.setFont(*font);
     txtTitle.setString("Asteroids");
@@ -48,7 +49,7 @@ void MainMenu::init() {
         background.setTexture(*texBackground);
         background.setPosition(0.0f,0.0f);
 
-        version.setString("vO.1.7 alpha"); // 'O' because it looks much better than a real '0' in the used game font
+        version.setString(ASTEROIDS_VERSION_DESC); // 'O' because it looks much better than a real '0' in the used game font
         version.setFont(*font);
         version.setCharacterSize(10);
         version.setColor(sf::Color::White);

@@ -1,5 +1,5 @@
 /**
-* Copyright (c) 2012, Jens Mölzer
+* Copyright (c) 2012, Jens MÃ¶lzer
 * This file is part of the asteroids project and is realeased under the BSD 2-Clause License.
 * For more Details on licensing, see 'LICENCE.txt'.
 **/
@@ -14,8 +14,8 @@ GameOverNewHighscore::GameOverNewHighscore(sf::RenderWindow& renderWindow) :
     btnManager(sf::Vector2f((Game::getHandle().getResolution().x / 2) - 166.0f, Game::getHandle().getResolution().y - 120.f), renderWindow),
     maxNameLength(10)
 {
-    texBackground = Game::getHandle().textureManager.acquire(thor::Resources::fromFile<sf::Texture>("res/menuBackground.png"));
-    font = Game::getHandle().fontManager.acquire(thor::Resources::fromFile<sf::Font>("res/font.ttf"));
+    texBackground = Game::getHandle().textureManager.acquire(thor::Resources::fromFile<sf::Texture>(Game::getHandle().config["paths.res"].as<std::string>() + "/menuBackground.png"));
+    font = Game::getHandle().fontManager.acquire(thor::Resources::fromFile<sf::Font>(Game::getHandle().config["paths.res"].as<std::string>() + "/font.ttf"));
 
     txtTitle.setFont(*font);
     txtTitle.setString("Game Over!");
@@ -89,6 +89,6 @@ void GameOverNewHighscore::draw() {
 void GameOverNewHighscore::callbackOK() {
     boost::algorithm::trim(name);
     Game::getHandle().highscore.saveCurrentScore(name);
-    Game::getHandle().highscore.saveToFile("highscore.csv");
+    Game::getHandle().highscore.saveToFile(Game::getHandle().config["paths.highscore"].as<std::string>());
     newState = Game::HIGHSCORE_VIEW;
 }

@@ -8,6 +8,10 @@ project(asteroids)
 
 set(ASTEROIDS_SHARED_LIBS TRUE CACHE BOOL "Use shared libraries")
 
+############################################
+# Compiler specific settings
+############################################
+
 # Windows: Choose to link CRT libraries statically or dynamically
 if(WIN32)
     set(ASTEROIDS_STATIC_STD_LIBS FALSE CACHE BOOL "Use statically linked standard libraries? This option must match the one used for SFML and Thor.")
@@ -37,6 +41,10 @@ if(CMAKE_COMPILER_IS_GNUCXX)
 endif()
 
 include_directories(${CMAKE_SOURCE_DIR}/include)
+
+############################################
+# Find libs
+############################################
 
 # Add the directory containing the Find-scripts to module path
 set (CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/Modules/;${CMAKE_MODULE_PATH}")
@@ -86,6 +94,23 @@ else()
 	message("\n-> Thor directory not found. Set THOR_ROOT to Thor's top-level path (containing \"include\" and \"lib\" directories).")
 	message("-> Make sure the Thor libraries with the same configuration (Release/Debug, Static/Dynamic) exist.\n")
 endif()
+
+############################################
+# Generate config.h
+############################################
+
+include(GetGitRevisionDescription)
+git_describe(ASTEROIDS_VERSION_DESC --tag)
+set(ASTEROIDS_PATHS_RES "res" CACHE PATH "Path to the resources folder")
+set(ASTEROIDS_PATHS_CONFIG "config.cfg" CACHE FILEPATH "Path to the config file")
+set(ASTEROIDS_PATHS_HIGHSCORE "highscore.csv" CACHE FILEPATH "path to the highscore file")
+
+configure_file(${CMAKE_SOURCE_DIR}/include/config.h.in ${CMAKE_BINARY_DIR}/generated/config.h)
+include_directories(${CMAKE_BINARY_DIR}/generated)
+
+############################################
+# Specify source files and lining
+############################################
 
 # all source files
 set(SRC

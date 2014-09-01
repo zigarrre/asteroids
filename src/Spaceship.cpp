@@ -25,9 +25,9 @@ Spaceship::Spaceship(EntityManager& manager, const sf::Vector2f& pos) :
     bulletSpeed = Game::getHandle().config["energyBullet.speed"].as<float>();
 
     // acquire resources
-    texture = Game::getHandle().textureManager.acquire(thor::Resources::fromFile<sf::Texture>("res/ship.png")); //TODO needs exeption Handling
-    debrisTexture = Game::getHandle().textureManager.acquire(thor::Resources::fromFile<sf::Texture>("res/shipDebrisChunk.png"));
-    laserSoundBuffer = Game::getHandle().soundManager.acquire(thor::Resources::fromFile<sf::SoundBuffer>("res/laser.ogg"));
+    texture = Game::getHandle().textureManager.acquire(thor::Resources::fromFile<sf::Texture>(Game::getHandle().config["paths.res"].as<std::string>() + "/ship.png")); //TODO needs exeption Handling
+    debrisTexture = Game::getHandle().textureManager.acquire(thor::Resources::fromFile<sf::Texture>(Game::getHandle().config["paths.res"].as<std::string>() + "/shipDebrisChunk.png"));
+    laserSoundBuffer = Game::getHandle().soundManager.acquire(thor::Resources::fromFile<sf::SoundBuffer>(Game::getHandle().config["paths.res"].as<std::string>() + "/laser.ogg"));
     
     // configure sprites
     this->setTexture(*texture);
@@ -37,7 +37,7 @@ Spaceship::Spaceship(EntityManager& manager, const sf::Vector2f& pos) :
     // configure sounds
     laserSound.setBuffer(*laserSoundBuffer);
 
-    hitbox = rrr::loadHitbox("res/ship.col");
+    hitbox = rrr::loadHitbox(Game::getHandle().config["paths.res"].as<std::string>() + "/ship.col");
 }
 
 void Spaceship::update(float deltaTime) {

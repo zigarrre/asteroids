@@ -19,8 +19,8 @@ HighscoreView::HighscoreView(sf::RenderWindow& renderWindow) :
     btnManager(sf::Vector2f((Game::getHandle().getResolution().x / 2) - 343.0f, Game::getHandle().getResolution().y - 120.f), renderWindow),
     txtTableScore(10) // put 10 elements into vector
 {
-    texBackground = Game::getHandle().textureManager.acquire(thor::Resources::fromFile<sf::Texture>("res/menuBackground.png"));
-    font = Game::getHandle().fontManager.acquire(thor::Resources::fromFile<sf::Font>("res/font.ttf"));
+    texBackground = Game::getHandle().textureManager.acquire(thor::Resources::fromFile<sf::Texture>(Game::getHandle().config["paths.res"].as<std::string>() + "/menuBackground.png"));
+    font = Game::getHandle().fontManager.acquire(thor::Resources::fromFile<sf::Font>(Game::getHandle().config["paths.res"].as<std::string>() + "/font.ttf"));
 
     txtTitle.setFont(*font);
     txtTitle.setString("Highscores");

@@ -20,7 +20,7 @@ Singleplayer::Singleplayer(sf::RenderWindow& renderWindow) :
     saveZone(Game::getHandle().getResolution().x / 2 - 200.0f,Game::getHandle().getResolution().y / 2 - 200.0f, 400.0f, 400.0f),
     level(1)
 {
-    texBackground = Game::getHandle().textureManager.acquire(thor::Resources::fromFile<sf::Texture>("res/background.png"));
+    texBackground = Game::getHandle().textureManager.acquire(thor::Resources::fromFile<sf::Texture>(Game::getHandle().config["paths.res"].as<std::string>() + "/background.png"));
     background.setTexture(*texBackground);
 
     MessageSystem::getHandle().registerReceiver(this);

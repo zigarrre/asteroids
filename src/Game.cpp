@@ -10,6 +10,7 @@
 #include "GameOver.hpp"
 #include "GameOverNewHighscore.hpp"
 #include "HighscoreView.hpp"
+#include "config.h"
 
 using namespace std;
 namespace po = boost::program_options;
@@ -33,6 +34,9 @@ void Game::init() {
 
     po::options_description confDesc("Config");
     confDesc.add_options()
+        ("paths.res", po::value<string>()->default_value(ASTEROIDS_PATHS_RES))
+        ("paths.highscore", po::value<string>()->default_value(ASTEROIDS_PATHS_HIGHSCORE))
+
         ("spaceship.acceleration", po::value<float>()->default_value(300.0f))
         ("spaceship.rotationSpeed", po::value<float>()->default_value(300.0f))
         ("spaceship.weaponCooldown", po::value<float>()->default_value(0.17f))
@@ -51,13 +55,13 @@ void Game::init() {
     ;
     
     ifstream file;
-    file.open("config.cfg");
+    file.open(ASTEROIDS_PATHS_CONFIG);
     po::store(po::parse_config_file(file,confDesc), config);
     file.close();
     file.close();
     po::notify(config);
 
-    highscore.loadFromFile("highscore.csv");
+    highscore.loadFromFile(config["paths.highscore"].as<string>());
 
     renderWindow.setVerticalSyncEnabled(true);
     renderWindow.setFramerateLimit(60);

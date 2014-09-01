@@ -14,12 +14,12 @@ ManagedButton::ManagedButton(const sf::Vector2f& pos, const std::string& text, b
     onClick(onClickCallback)
 {
     // load textures
-    bgNormal = Game::getHandle().textureManager.acquire(thor::Resources::fromFile<sf::Texture>("res/buttonNormal.png"));
-    bgActive = Game::getHandle().textureManager.acquire(thor::Resources::fromFile<sf::Texture>("res/buttonActive.png"));
-    bgDisabled = Game::getHandle().textureManager.acquire(thor::Resources::fromFile<sf::Texture>("res/buttonDisabled.png"));
+    bgNormal = Game::getHandle().textureManager.acquire(thor::Resources::fromFile<sf::Texture>(Game::getHandle().config["paths.res"].as<std::string>() + "/buttonNormal.png"));
+    bgActive = Game::getHandle().textureManager.acquire(thor::Resources::fromFile<sf::Texture>(Game::getHandle().config["paths.res"].as<std::string>() + "/buttonActive.png"));
+    bgDisabled = Game::getHandle().textureManager.acquire(thor::Resources::fromFile<sf::Texture>(Game::getHandle().config["paths.res"].as<std::string>() + "/buttonDisabled.png"));
 
     // load font
-    font = Game::getHandle().fontManager.acquire(thor::Resources::fromFile<sf::Font>("res/font.ttf"));
+    font = Game::getHandle().fontManager.acquire(thor::Resources::fromFile<sf::Font>(Game::getHandle().config["paths.res"].as<std::string>() + "/font.ttf"));
 
     background.setTexture(*bgNormal);
     background.setPosition(pos);

@@ -11,7 +11,7 @@ SoundService::SoundService() {
 
 void SoundService::init() {
     // load sound buffers
-    explosionSoundBuffer = Game::getHandle().soundManager.acquire(thor::Resources::fromFile<sf::SoundBuffer>("res/explosion.ogg"));
+    explosionSoundBuffer = Game::getHandle().soundManager.acquire(thor::Resources::fromFile<sf::SoundBuffer>(Game::getHandle().config["paths.res"].as<std::string>() + "/explosion.ogg"));
 
     // configure sounds
     explosionSound.setBuffer(*explosionSoundBuffer);

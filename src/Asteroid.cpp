@@ -29,16 +29,16 @@ Asteroid::Asteroid(EntityManager& manager, const sf::Vector2f& pos, const sf::Ve
 
     // load resources
     if(size == BIG) {
-        hitbox = rrr::loadHitbox("res/asteroid.col");
-        texture = Game::getHandle().textureManager.acquire(thor::Resources::fromFile<sf::Texture>("res/asteroid.png"));
+        hitbox = rrr::loadHitbox(Game::getHandle().config["paths.res"].as<std::string>() + "/asteroid.col");
+        texture = Game::getHandle().textureManager.acquire(thor::Resources::fromFile<sf::Texture>(Game::getHandle().config["paths.res"].as<std::string>() + "/asteroid.png"));
     } else if(size == MEDIUM) {
-        hitbox = rrr::loadHitbox("res/asteroidMedium.col");
-        texture = Game::getHandle().textureManager.acquire(thor::Resources::fromFile<sf::Texture>("res/asteroidMedium.png"));
+        hitbox = rrr::loadHitbox(Game::getHandle().config["paths.res"].as<std::string>() + "/asteroidMedium.col");
+        texture = Game::getHandle().textureManager.acquire(thor::Resources::fromFile<sf::Texture>(Game::getHandle().config["paths.res"].as<std::string>() + "/asteroidMedium.png"));
     } else if(size == SMALL) {
-        hitbox = rrr::loadHitbox("res/asteroidSmall.col");
-        texture = Game::getHandle().textureManager.acquire(thor::Resources::fromFile<sf::Texture>("res/asteroidSmall.png"));
+        hitbox = rrr::loadHitbox(Game::getHandle().config["paths.res"].as<std::string>() + "/asteroidSmall.col");
+        texture = Game::getHandle().textureManager.acquire(thor::Resources::fromFile<sf::Texture>(Game::getHandle().config["paths.res"].as<std::string>() + "/asteroidSmall.png"));
     }
-    debrisTexture = Game::getHandle().textureManager.acquire(thor::Resources::fromFile<sf::Texture>("res/asteroidDebrisChunk.png"));
+    debrisTexture = Game::getHandle().textureManager.acquire(thor::Resources::fromFile<sf::Texture>(Game::getHandle().config["paths.res"].as<std::string>() + "/asteroidDebrisChunk.png"));
 
     // configure sprites and position
     this->setTexture(*texture);

@@ -14,8 +14,8 @@ HUD::HUD(const Singleplayer& singleplayer) :
 	singleplayer(singleplayer)
 {
 
-	texLife = Game::getHandle().textureManager.acquire(thor::Resources::fromFile<sf::Texture>("res/life.png"));
-	font = Game::getHandle().fontManager.acquire(thor::Resources::fromFile<sf::Font>("res/font.ttf"));
+	texLife = Game::getHandle().textureManager.acquire(thor::Resources::fromFile<sf::Texture>(Game::getHandle().config["paths.res"].as<std::string>() + "/life.png"));
+	font = Game::getHandle().fontManager.acquire(thor::Resources::fromFile<sf::Font>(Game::getHandle().config["paths.res"].as<std::string>() + "/font.ttf"));
 	currentLevel.setFont(*font);
 	currentLevel.setPosition(Game::getHandle().getResolution().x - 10.0f, 10.0f);
 	currentLevel.setCharacterSize(15);

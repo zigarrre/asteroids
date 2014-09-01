@@ -1,0 +1,19 @@
+/**
+* Copyright (c) 2014, Jens Mölzer
+* This file is part of the asteroids project and is realeased under the BSD 2-Clause License.
+* For more Details on licensing, see 'LICENCE.txt'.
+**/
+
+/**
+ * Build configuration file.
+ * Used to configure various settings via CMake at build time.
+ * See CMakeLists.txt for documentation of the settings.
+ */
+
+/// Version
+#define ASTEROIDS_VERSION_DESC "@ASTEROIDS_VERSION_DESC@"
+
+/// Paths
+#define ASTEROIDS_PATHS_RES "@ASTEROIDS_PATHS_RES@"
+#define ASTEROIDS_PATHS_CONFIG "@ASTEROIDS_PATHS_CONFIG@"
+#define ASTEROIDS_PATHS_HIGHSCORE "@ASTEROIDS_PATHS_HIGHSCORE@"
