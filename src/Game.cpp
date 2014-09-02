@@ -36,6 +36,7 @@ void Game::init() {
     confDesc.add_options()
         ("paths.res", po::value<string>()->default_value(ASTEROIDS_PATHS_RES))
         ("paths.highscore", po::value<string>()->default_value(ASTEROIDS_PATHS_HIGHSCORE))
+        ("paths.highscoreHome", po::value<bool>()->default_value(ASTEROIDS_PATHS_HIGHSCORE_HOME))
 
         ("spaceship.acceleration", po::value<float>()->default_value(300.0f))
         ("spaceship.rotationSpeed", po::value<float>()->default_value(300.0f))
@@ -61,7 +62,12 @@ void Game::init() {
     file.close();
     po::notify(config);
 
-    highscore.loadFromFile(config["paths.highscore"].as<string>());
+    string highscorePath;
+    if (config["paths.highscoreHome"].as<bool>())
+        highscorePath = rrr::getHomePath() + "/" + config["paths.highscore"].as<string>();
+    else
+        highscorePath = config["paths.highscore"].as<string>();
+    highscore.loadFromFile(highscorePath);
 
     renderWindow.setVerticalSyncEnabled(true);
     renderWindow.setFramerateLimit(60);
@@ -69,7 +75,7 @@ void Game::init() {
     gamestateManager.add(new Singleplayer(renderWindow), SINGLEPLAYER);
     gamestateManager.add(new MainMenu(renderWindow), MAIN_MENU);
     gamestateManager.add(new GameOver(renderWindow), GAME_OVER);
-    gamestateManager.add(new GameOverNewHighscore(renderWindow), GAME_OVER_NEW_HIGHSCORE);
+    gamestateManager.add(new GameOverNewHighscore(renderWindow, highscorePath), GAME_OVER_NEW_HIGHSCORE);
     gamestateManager.add(new HighscoreView(renderWindow), HIGHSCORE_VIEW);
     gamestateManager.setActiveState(MAIN_MENU);
 

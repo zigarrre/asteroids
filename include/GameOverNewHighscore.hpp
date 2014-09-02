@@ -18,7 +18,7 @@
 class GameOverNewHighscore : public Gamestate {
 
 public:
-    GameOverNewHighscore(sf::RenderWindow& renderWindow);
+    GameOverNewHighscore(sf::RenderWindow& renderWindow, const std::string& highscorePath);
     virtual void init();
     virtual void reinit();
     virtual unsigned short update(float deltaTime);
@@ -39,5 +39,6 @@ private:
     sf::Text txtNewHighscore;
     sf::Text txtName;
     unsigned short maxNameLength;
+    std::string highscorePath;
 
 };

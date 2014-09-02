@@ -8,11 +8,12 @@
 #include <boost/bind.hpp>
 #include <boost/algorithm/string/trim.hpp>
 
-GameOverNewHighscore::GameOverNewHighscore(sf::RenderWindow& renderWindow) :
+GameOverNewHighscore::GameOverNewHighscore(sf::RenderWindow& renderWindow, const std::string& highscorePath) :
     initialized(false),
     renderWindow(renderWindow),
     btnManager(sf::Vector2f((Game::getHandle().getResolution().x / 2) - 166.0f, Game::getHandle().getResolution().y - 120.f), renderWindow),
-    maxNameLength(10)
+    maxNameLength(10),
+    highscorePath(highscorePath)
 {
     texBackground = Game::getHandle().textureManager.acquire(thor::Resources::fromFile<sf::Texture>(Game::getHandle().config["paths.res"].as<std::string>() + "/menuBackground.png"));
     font = Game::getHandle().fontManager.acquire(thor::Resources::fromFile<sf::Font>(Game::getHandle().config["paths.res"].as<std::string>() + "/font.ttf"));
@@ -89,6 +90,6 @@ void GameOverNewHighscore::draw() {
 void GameOverNewHighscore::callbackOK() {
     boost::algorithm::trim(name);
     Game::getHandle().highscore.saveCurrentScore(name);
-    Game::getHandle().highscore.saveToFile(Game::getHandle().config["paths.highscore"].as<std::string>());
+    Game::getHandle().highscore.saveToFile(highscorePath);
     newState = Game::HIGHSCORE_VIEW;
 }

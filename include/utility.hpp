@@ -9,6 +9,7 @@
 #include <SFML/Graphics.hpp>
 #include <sstream>
 #include <fstream>
+#include <string>
 
 const float PI = 3.1415926f;
 
@@ -42,5 +43,10 @@ namespace rrr {
 	/// x2 y2
 	/// ...
 	sf::ConvexShape loadHitbox(const std::string& path);
+
+    /**
+    * \brief Returns $HOME under UNIX and %APPDATA% under Windows.
+    **/
+    std::string getHomePath();
 
 }

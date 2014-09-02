@@ -4,6 +4,12 @@
 * For more Details on licensing, see 'LICENCE.txt'.
 **/
 
+#if !defined(_WIN32) && (defined(__unix__) || defined(__unix) || (defined(__APPLE__) && defined(__MACH__)))
+    #define UNIX
+#elif defined(_WIN64) || defined(_WIN32)
+    #define WIN
+#endif
+
 #include "utility.hpp"
 
 using namespace std;
@@ -39,5 +45,13 @@ namespace rrr {
 
 		return hitbox;
 	}
+
+    std::string getHomePath() {
+        #if defined(WIN)
+            return std::getenv("APPDATA");
+        #elif defined(UNIX)
+            return std::getenv("HOME");
+        #endif
+    }
 
 }
