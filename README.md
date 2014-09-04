@@ -6,11 +6,23 @@ http://github.com/zigarrre/asteroids
 
 Please report any bugs to the issue tracker on the project page! Feature requests and improvements are also welcome!
 
+## Installation
+
+### Linux
+
+For Arch Linux there is a package in the AUR: https://aur.archlinux.org/packages/asteroids
+
+Just compile it from source for other distributions. See also section Compiling.
+
+### Windows
+
+You can find compiled binaries here: https://github.com/zigarrre/asteroids/releases
+
 ## Compiling
 
-Asteroids is tested under Arch Linux (GCC) and Windows 7 (VS 2013). MinGW should also work but is not tested. Older versions of Visual Studio (e.g. 2010/2012) aren't supported because they lack proper C++11 support.
-
 To compile asteroids, you need SFML 2.1 (sfml-dev.org), Thor (SFML 2.1 compatible version) (bromeon.ch/libraries/thor), Boost (boost.org) and a compiler which supports C++11.
+
+Asteroids is tested under Arch Linux (GCC) and Windows 7 (VS 2013). MinGW should also work but is not tested. Older versions of Visual Studio (e.g. 2010/2012) aren't supported because they lack proper C++11 support.
 
 Tested versions are:
 
@@ -20,13 +32,14 @@ Tested versions are:
 
 Use cmake to generate a makefile/projectfile for the compiler/IDE of your choice.
 
-The compiled binary depends on the 'res' folder to be in the same directory.
+You can configure the path to the res folder, config file and highscore file via CMake settings.
 
 ### Linux
 
 ```
-mkdir build
-cd build
+git checkout git@github.com:zigarrre/asteroids.git
+mkdir asteroids/build
+cd asteroids/build
 cmake ../
 make
 ./asteroids
